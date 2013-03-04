@@ -1,0 +1,460 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{951C9988-D9F1-492B-A4E1-FE5ACB95F212}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Carbinet</RootNamespace>
+    <AssemblyName>智能教学互动</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>发布\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BarChart, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dll\BarChart.dll</HintPath>
+    </Reference>
+    <Reference Include="Community.CsharpSqlite, Version=3.7.7.1, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dll\Community.CsharpSqlite.dll</HintPath>
+    </Reference>
+    <Reference Include="Community.CsharpSqlite.SQLiteClient, Version=3.7.7.1, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dll\Community.CsharpSqlite.SQLiteClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="carbinet\ClassRoomConfig.cs" />
+    <Compile Include="carbinet\DocumentFileState.cs" />
+    <Compile Include="miniForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="miniForm.Designer.cs">
+      <DependentUpon>miniForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\about.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\about.Designer.cs">
+      <DependentUpon>about.cs</DependentUpon>
+    </Compile>
+    <Compile Include="carbinet\Cabinet.cs" />
+    <Compile Include="carbinet\CarbinetFloor.cs" />
+    <Compile Include="frmClassRoom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmClassRoom.Designer.cs">
+      <DependentUpon>frmClassRoom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="课堂测验\frmQuestionTestStatics.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="课堂测验\frmQuestionTestStatics.Designer.cs">
+      <DependentUpon>frmQuestionTestStatics.cs</DependentUpon>
+    </Compile>
+    <Compile Include="考勤\frmCheckStatics.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="考勤\frmCheckStatics.Designer.cs">
+      <DependentUpon>frmCheckStatics.cs</DependentUpon>
+    </Compile>
+    <Compile Include="考勤\frmCheckInit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="考勤\frmCheckInit.Designer.cs">
+      <DependentUpon>frmCheckInit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Middleware\IntelligentEvent.cs" />
+    <Compile Include="Middleware\MiddleWareCore.cs" />
+    <Compile Include="Middleware\ProtocolHelper.cs" />
+    <Compile Include="Middleware\StaticDataPort.cs" />
+    <Compile Include="public\Configures.cs" />
+    <Compile Include="考勤\frmCheckInitctl.cs" />
+    <Compile Include="课堂测验\frmQuestionMng.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="课堂测验\frmQuestionMng.Designer.cs">
+      <DependentUpon>frmQuestionMng.cs</DependentUpon>
+    </Compile>
+    <Compile Include="课堂测验\frmQuestionMngCtl.cs" />
+    <Compile Include="系统设置\FrmRfidCheck_StudentManage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="系统设置\FrmRfidCheck_StudentManage.Designer.cs">
+      <DependentUpon>FrmRfidCheck_StudentManage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmRTTestStudent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmRTTestStudent.Designer.cs">
+      <DependentUpon>frmRTTestStudent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="系统设置\frmSerialPortConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="系统设置\frmSerialPortConfig.Designer.cs">
+      <DependentUpon>frmSerialPortConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmInfo4Student.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmInfo4Student.Designer.cs">
+      <DependentUpon>frmInfo4Student.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="课堂测验\frmRTTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="课堂测验\frmRTTest.Designer.cs">
+      <DependentUpon>frmRTTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="public\Editor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="public\Editor.designer.cs">
+      <DependentUpon>Editor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="public\MemoryTable.cs" />
+    <Compile Include="public\person.cs" />
+    <Compile Include="public\commonSocket.cs" />
+    <Compile Include="public\Data.cs" />
+    <Compile Include="carbinet\DocumentChair.cs" />
+    <Compile Include="carbinet\DocumentFile.cs" />
+    <Compile Include="系统设置\EquipmentConfigCtl.cs" />
+    <Compile Include="考勤\frmCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="考勤\frmCheck.Designer.cs">
+      <DependentUpon>frmCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="系统设置\frmEquipmentConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="系统设置\frmEquipmentConfig.Designer.cs">
+      <DependentUpon>frmEquipmentConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmShowStudentInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmShowStudentInfo.Designer.cs">
+      <DependentUpon>frmShowStudentInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="miniForm.resx">
+      <DependentUpon>miniForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\about.resx">
+      <DependentUpon>about.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmClassRoom.resx">
+      <DependentUpon>frmClassRoom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="课堂测验\frmQuestionTestStatics.resx">
+      <DependentUpon>frmQuestionTestStatics.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="考勤\frmCheckInit.resx">
+      <DependentUpon>frmCheckInit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="考勤\frmCheckStatics.resx">
+      <DependentUpon>frmCheckStatics.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="课堂测验\frmQuestionMng.resx">
+      <DependentUpon>frmQuestionMng.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="系统设置\FrmRfidCheck_StudentManage.resx">
+      <DependentUpon>FrmRfidCheck_StudentManage.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmRTTestStudent.resx">
+      <DependentUpon>frmRTTestStudent.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="系统设置\frmSerialPortConfig.resx">
+      <DependentUpon>frmSerialPortConfig.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="考勤\frmCheck.resx">
+      <DependentUpon>frmCheck.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="系统设置\frmEquipmentConfig.resx">
+      <DependentUpon>frmEquipmentConfig.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmInfo4Student.resx">
+      <DependentUpon>frmInfo4Student.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="课堂测验\frmRTTest.resx">
+      <DependentUpon>frmRTTest.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmShowStudentInfo.resx">
+      <DependentUpon>frmShowStudentInfo.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSelect.resx">
+      <DependentUpon>frmSelect.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="public\Editor.resx">
+      <DependentUpon>Editor.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="public\NotifyIconChart.resx">
+      <DependentUpon>NotifyIconChart.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMainFloat.resx">
+      <DependentUpon>frmMainFloat.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="public\NotifyIconChart.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="public\PubDelegate.cs" />
+    <Compile Include="frmSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSelect.Designer.cs">
+      <DependentUpon>frmSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="public\CsharpSQLiteHelper.cs" />
+    <Compile Include="考勤\rfidCheck_CheckOn.cs" />
+    <Compile Include="系统设置\serialPortConfig.cs" />
+    <Compile Include="系统设置\studentInfoCtl.cs" />
+    <Compile Include="系统设置\roomConfigCtl.cs" />
+    <Compile Include="frmMainFloat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMainFloat.Designer.cs">
+      <DependentUpon>frmMainFloat.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\MetroFramework\MetroFramework.csproj">
+      <Project>{bb41ac8b-cbed-4387-a7e0-4567edb3f57f}</Project>
+      <Name>MetroFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PieChart\PieChart.csproj">
+      <Project>{696E929A-6A4A-4C6D-A8B2-C4F25F781940}</Project>
+      <Name>PieChart</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\灰色透明.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AxShockwaveFlashObjects">
+      <Guid>{D27CDB6B-AE6D-11CF-96B8-444553540000}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\backcolor.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bold.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cj.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\color.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fj.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\indent.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\italic.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\link.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lj.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ol.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\outdent.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\right_arrow.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rj.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\underscore.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uol.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="5.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\close.png" />
+    <Content Include="Resources\Groups.png" />
+    <Content Include="Resources\Libraries alt.png" />
+    <Content Include="Resources\Live Sync.png" />
+    <Content Include="Resources\MB_tasks.png" />
+    <Content Include="Resources\MB_clock1.png" />
+    <Content Include="Resources\MB_Hand.png" />
+    <Content Include="Resources\MB_shut-down.png" />
+    <Content Include="Resources\MB_touch.png" />
+    <Content Include="Resources\PowerRestart.png" />
+    <Content Include="Resources\PowerShut Down.png" />
+    <None Include="Resources\htc11.png" />
+    <Content Include="Resources\IconsLand_002_left.png" />
+    <Content Include="Resources\IconsLand_002_right.png" />
+    <None Include="Resources\8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
