@@ -9,7 +9,7 @@ namespace intelligentMiddleWare
     public enum MiddleWareMode
     {
         考勤,
-        即时互动,
+        实时互动,
         课堂测验,
         设备绑定,
         学生卡绑定
@@ -28,10 +28,6 @@ namespace intelligentMiddleWare
         static List<IntelligentEvent> event_list = new List<IntelligentEvent>();
         public static ManualResetEvent MRE_data_block = new ManualResetEvent(true);
         public static ManualResetEvent MRE_event_block = new ManualResetEvent(true);
-
-        //public static DataTable studentInfoTable = null;
-        //public static DataTable mapConfigsTable = null;
-        //public static DataTable dtDataReceived = null;
 
         public static void Set_new_data(ProtocolHelper helper)
         {
@@ -74,12 +70,10 @@ namespace intelligentMiddleWare
                                 {
                                     evt.event_unit_list.Remove(IntelligentEventUnit.new_epc);
                                     evt.event_unit_list.Add(IntelligentEventUnit.repeat_epc);
-                                    //evt.name = IntelligentEvent.check_repeat_epc;
                                     //可能同一个卡在不同的终端重复考勤
                                     if (p.remoteDeviceID != helper.remoteDeviceID)
                                     {
                                         evt.event_unit_list.Add(IntelligentEventUnit.epc_on_another_device);
-                                        //evt.name = IntelligentEvent.check_repeat_epc_on_another_device;
                                     }
                                     break;
                                 }
@@ -90,32 +84,34 @@ namespace intelligentMiddleWare
                     }
 
                     break;
-                case MiddleWareMode.即时互动:
+                case MiddleWareMode.实时互动:
                     if (helper.epcID == null || helper.epcID.Length <= 0)
                     {
                         evt.name = IntelligentEvent.event_empty;
                     }
                     else
                     {
-                        //evt.name = IntelligentEvent.realtime_question_new_epc;
                         evt.event_unit_list.Add(IntelligentEventUnit.new_epc);
                         iCount = 0;
                         for (int i = data_list.Count - 1; i >= 0; i--)
                         {
                             ProtocolHelper p = data_list[i];
-                            if (p.epcID == helper.epcID)//
+                            if (p.epcID == helper.epcID)//找到了同一个人
                             {
                                 iCount++;
                                 if (iCount >= 1)
                                 {
-                                    //evt.name = IntelligentEvent.realtime_question_repeat_epc;
                                     evt.event_unit_list.Remove(IntelligentEventUnit.new_epc);
                                     evt.event_unit_list.Add(IntelligentEventUnit.repeat_epc);
                                     //可能同一个卡在不同的终端重复
                                     if (p.remoteDeviceID != helper.remoteDeviceID)
                                     {
-                                        //evt.name = IntelligentEvent.realtime_question_repeat_epc_on_another_device;
                                         evt.event_unit_list.Add(IntelligentEventUnit.epc_on_another_device);
+                                    }
+                                    if (helper.questionValue != string.Empty && helper.questionValue.Length > 0 &&
+                                        helper.questionValue != p.questionValue)
+                                    {
+                                        evt.event_unit_list.Add(IntelligentEventUnit.change_answer);
                                     }
                                     break;
                                 }
@@ -246,29 +242,6 @@ namespace intelligentMiddleWare
             data_list.Clear();
             event_list.Clear();
         }
-        //public static void initializeTabes()
-        //{
-        //dtRoomConfig = configCtl.getAllRoomConfigInfo();
-        //dtRoomConfig.Columns.Add("totalColumn", typeof(int));
-        //dtRoomConfig.Columns["totalColumn"].Expression = "Sum(ICOLUMN)";
-        //dtRoomConfig.Columns.Add("maxGroup", typeof(int));
-        //dtRoomConfig.Columns["maxGroup"].Expression = "Max(IGROUP)";
-
-        //studentInfoTable = stuCtl.getAllStudentInfo();
-        //studentInfoTable.CaseSensitive = false;
-        //studentInfoTable.Columns.Add("status", typeof(string));
-        //studentInfoTable.Columns.Add("answer", typeof(string));
-        //studentInfoTable.Columns.Add("checkTime", typeof(string));
-        //for (int i = 0; i < studentInfoTable.Rows.Count; i++)
-        //{
-        //    DataRow dr = studentInfoTable.Rows[i];
-        //    dr["status"] = "0";
-        //    dr["answer"] = "";
-        //    dr["checkTime"] = "";
-        //}
-
-        //isInitialized = true;
-        //}
 
     }
 }

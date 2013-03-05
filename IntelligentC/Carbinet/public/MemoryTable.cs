@@ -14,18 +14,18 @@ namespace Carbinet
         public static DataTable mapConfigsTable = null;
         public static DataTable dtRoomConfig = null;
 
-        static studentInfoCtl stuCtl = new studentInfoCtl();
-        static EquipmentConfigCtl ctl = new EquipmentConfigCtl();
-        static roomConfigCtl configCtl = new roomConfigCtl();
 
         public static void initializeTabes()
         {
-            dtRoomConfig = configCtl.getAllRoomConfigInfo();
+            if (isInitialized) return;
+            //教室座位
+            dtRoomConfig = roomConfigCtl.getAllRoomConfigInfo();
             dtRoomConfig.Columns.Add("totalColumn", typeof(int));
             dtRoomConfig.Columns["totalColumn"].Expression = "Sum(ICOLUMN)";
             dtRoomConfig.Columns.Add("maxGroup", typeof(int));
             dtRoomConfig.Columns["maxGroup"].Expression = "Max(IGROUP)";
 
+            //学生信息
             studentInfoTable = studentInfoCtl.getAllStudentInfo();
             studentInfoTable.CaseSensitive = false;
             studentInfoTable.Columns.Add("status", typeof(string));
@@ -40,7 +40,7 @@ namespace Carbinet
             }
 
             //获取设备和位置的对应数据
-            mapConfigsTable = ctl.getAllMapConfigs();
+            mapConfigsTable = EquipmentConfigCtl.getAllMapConfigs();
             mapConfigsTable.Columns.Add("studenID", typeof(string));
             for (int i = 0; i < mapConfigsTable.Rows.Count; i++)
             {

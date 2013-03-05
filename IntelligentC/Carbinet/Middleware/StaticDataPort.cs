@@ -41,34 +41,6 @@ namespace intelligentMiddleWare
         //public static delevoid_ProtocolHelper evtParseReceivedData;
         static byte[] byteData = new byte[1024];
 
-        //public static void AddParser(delevoid_Data parser)
-        //{
-        //    if (!StaticDataPort.delegateDataList.Contains(parser))
-        //    {
-        //        StaticDataPort.delegateDataList.Add(parser);
-        //    }
-        //}
-        //public static void AddParser(delevoid_bytes parser)
-        //{
-        //    if (!StaticDataPort.delegateList.Contains(parser))
-        //    {
-        //        StaticDataPort.delegateList.Add(parser);
-        //    }
-        //}
-        //public static void removeParser(delevoid_Data parser)
-        //{
-        //    if (StaticDataPort.delegateDataList.Contains(parser))
-        //    {
-        //        StaticDataPort.delegateDataList.Remove(parser);
-        //    }
-        //}
-        //public static void removeParser(delevoid_bytes parser)
-        //{
-        //    if (StaticDataPort.delegateList.Contains(parser))
-        //    {
-        //        StaticDataPort.delegateList.Remove(parser);
-        //    }
-        //}
         public static void openDataPort(string port_name, int baud_rate)
         {
             if (bDataPortOpen == true)
@@ -212,7 +184,10 @@ namespace intelligentMiddleWare
                         sbuilder.Remove(0, indexRight + 1);
                         ProtocolHelper p = ProtocolHelper.getProtocolHelper(data);
                         BackgroundWorker backgroundWorker1 = new BackgroundWorker();
-                        backgroundWorker1.DoWork += new DoWorkEventHandler(BackgroundThreadWork);
+                        backgroundWorker1.DoWork += (s, _e) =>
+                        {
+                            MiddleWareCore.Set_new_data((ProtocolHelper)_e.Argument);
+                        };
                         backgroundWorker1.RunWorkerAsync(p);
                     }
                 }
@@ -262,7 +237,11 @@ namespace intelligentMiddleWare
                         //Data dataTemp = new Data(data);
                         ProtocolHelper p = ProtocolHelper.getProtocolHelper(data);
                         BackgroundWorker backgroundWorker1 = new BackgroundWorker();
-                        backgroundWorker1.DoWork += new DoWorkEventHandler(BackgroundThreadWork);
+                        //backgroundWorker1.DoWork += new DoWorkEventHandler(BackgroundThreadWork);
+                        backgroundWorker1.DoWork += (s, _e) =>
+                        {
+                            MiddleWareCore.Set_new_data((ProtocolHelper)_e.Argument);
+                        };
                         backgroundWorker1.RunWorkerAsync(p);
                     }
                 }
@@ -272,10 +251,6 @@ namespace intelligentMiddleWare
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-        static void BackgroundThreadWork(object sender, DoWorkEventArgs e)
-        {
-            MiddleWareCore.Set_new_data((ProtocolHelper)e.Argument);
         }
         #endregion
 

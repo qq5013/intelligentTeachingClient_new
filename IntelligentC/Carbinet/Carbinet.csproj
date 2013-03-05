@@ -81,6 +81,12 @@
   <ItemGroup>
     <Compile Include="carbinet\ClassRoomConfig.cs" />
     <Compile Include="carbinet\DocumentFileState.cs" />
+    <Compile Include="frmTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTest.Designer.cs">
+      <DependentUpon>frmTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="miniForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -207,6 +213,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmTest.resx">
+      <DependentUpon>frmTest.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="miniForm.resx">
       <DependentUpon>miniForm.cs</DependentUpon>
     </EmbeddedResource>

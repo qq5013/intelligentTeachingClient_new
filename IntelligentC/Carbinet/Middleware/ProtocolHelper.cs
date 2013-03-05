@@ -40,9 +40,9 @@ namespace intelligentMiddleWare
             }
             else
             {
-                Debug.WriteLine(
-                	string.Format("ProtocolHelper.getProtocolHelper  ->  = {0}"
-                	, data));
+                //Debug.WriteLine(
+                //    string.Format("ProtocolHelper.getProtocolHelper  ->  = {0}"
+                //    , data));
 
                 int indexLeft = data.IndexOf("[");
                 int indexRight = data.IndexOf("]");

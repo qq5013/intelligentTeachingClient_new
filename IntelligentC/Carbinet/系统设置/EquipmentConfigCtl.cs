@@ -36,7 +36,7 @@ namespace Carbinet
             @"select VVALUE from T_CONFIG where VKEY= 'column'";
 
 
-        public DataTable getAllMapConfigs()
+        public static DataTable getAllMapConfigs()
         {
             DataSet ds = null;
             try

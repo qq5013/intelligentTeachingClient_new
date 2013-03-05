@@ -59,7 +59,7 @@ namespace Carbinet
             try
             {
                 DataTable dt = CsharpSQLiteHelper.ExecuteTable(sqlSelect_SpecifiedRoomConfig, new object[1] { group });
-                if (dt.Rows.Count>0)
+                if (dt.Rows.Count > 0)
                 {
                     return true;
                 }
@@ -135,7 +135,7 @@ namespace Carbinet
             return false;
         }
 
-        public DataTable getAllRoomConfigInfo()
+        public static DataTable getAllRoomConfigInfo()
         {
             DataSet ds = null;
             try

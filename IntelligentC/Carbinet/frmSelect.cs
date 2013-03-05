@@ -98,7 +98,7 @@ namespace Carbinet
             this.FormClosing += new FormClosingEventHandler(Form1_FormClosing);
             this.VisibleChanged += new EventHandler(frmSelect_VisibleChanged);
             MiddleWareCore.event_receiver = this;
-            MiddleWareCore.set_mode(MiddleWareMode.即时互动);
+            MiddleWareCore.set_mode(MiddleWareMode.实时互动);
         }
 
 

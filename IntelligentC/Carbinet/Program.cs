@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Diagnostics;
+using intelligentMiddleWare;
 
 namespace Carbinet
 {
@@ -22,14 +23,15 @@ namespace Carbinet
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //frmMain = new frmMain();
-            frmClassRoom = new frmClassRoom();
-            frmSelect = new frmSelect();
-            //frmMainFloat frmStart = new frmMainFloat();
-            frmFloat = new frmFloat();
-            //Application.Run(frmStart);
-            Application.Run(frmFloat);
+            //frmClassRoom = new frmClassRoom();
+            //frmSelect = new frmSelect();
+            //frmFloat = new frmFloat();
+            //StaticDataPort.openDataPort();
+            //Application.Run(frmFloat);
 
+            Application.Run(new frmTest());
+            //frmMainFloat frmStart = new frmMainFloat();
+            //Application.Run(frmStart);
             //frmCheckInit frmStart = new frmCheckInit();
             //frmCheckStatics frmStart = new frmCheckStatics();
             //Application.Run(frmMain);

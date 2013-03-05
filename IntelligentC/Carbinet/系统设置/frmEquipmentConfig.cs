@@ -92,7 +92,7 @@ namespace Carbinet
                 return;
             }
             //获取设备和位置的对应数据
-            DataTable dt = this.ctl.getAllMapConfigs();
+            DataTable dt = EquipmentConfigCtl.getAllMapConfigs();
 
             int numberOfGroup = dtRoomConfig.Rows.Count;
             int widthOfRoom = this.pictureBox1.Width;

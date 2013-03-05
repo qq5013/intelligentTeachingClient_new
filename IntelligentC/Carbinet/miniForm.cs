@@ -74,7 +74,7 @@ namespace Carbinet
                 Program.frmSelect.Visible = !Program.frmSelect.Visible;
 
             };
-            this.initial_popup_menu();
+            //this.initial_popup_menu();
         }
 
         private void Form1_Move(object sender, EventArgs e)

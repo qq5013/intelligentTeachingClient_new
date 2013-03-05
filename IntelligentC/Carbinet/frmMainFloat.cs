@@ -133,7 +133,7 @@ namespace Carbinet
             this.MouseUp += new MouseEventHandler(Form1_MouseUp);
 
             this.FormClosing += new FormClosingEventHandler(frmMainFloat_FormClosing);
-            StaticDataPort.openDataPort();
+            //StaticDataPort.openDataPort();
 
         }
 
