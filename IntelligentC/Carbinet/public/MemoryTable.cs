@@ -14,8 +14,8 @@ namespace Carbinet
         public static DataTable mapConfigsTable = null;
         public static DataTable dtRoomConfig = null;
 
-        //static studentInfoCtl stuCtl = new studentInfoCtl();
-        //static EquipmentConfigCtl ctl = new EquipmentConfigCtl();
+        static studentInfoCtl stuCtl = new studentInfoCtl();
+        static EquipmentConfigCtl ctl = new EquipmentConfigCtl();
         static roomConfigCtl configCtl = new roomConfigCtl();
 
         public static void initializeTabes()
