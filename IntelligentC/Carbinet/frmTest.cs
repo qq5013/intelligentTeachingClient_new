@@ -22,12 +22,12 @@ namespace Carbinet
         {
             //接收到一个标签数据
             MiddleWareCore.set_mode(MiddleWareMode.实时互动);
-            string cmd1 = "[select,master_node,subnode1,rfid01,01,A]";
+            string cmd1 = "[select,master_node,equip000001,stu000001,01,A]";
             MiddleWareCore.Set_new_data(ProtocolHelper.getProtocolHelper(cmd1));
             IntelligentEvent evt1 = MiddleWareCore.get_a_event();
-            if (evt1.epcID == "rfid01"
+            if (evt1.epcID == "stu000001"
                 && evt1.localDeviceID == "master_node"
-                && evt1.remoteDeviceID == "subnode1"
+                && evt1.remoteDeviceID == "equip000001"
                 && evt1.questionID == "01"
                 && evt1.questionValue == "A"
                 && evt1.event_unit_list[0] == IntelligentEventUnit.new_epc)
@@ -39,7 +39,16 @@ namespace Carbinet
                 Debug.WriteLine("False");
             }
             //找到该学生的信息，包括学生姓名、位置、选择
-
+            //查找学生信息
+            Person person = MemoryTable.getPersonByEpc(evt1.epcID);
+            if (person.id_num == "CE4D9397871")
+            {
+                Debug.WriteLine("True");
+            }
+            else
+            {
+                Debug.WriteLine("False");
+            }
         }
         void test_实时互动2()
         {

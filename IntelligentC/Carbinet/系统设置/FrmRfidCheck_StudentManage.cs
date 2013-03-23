@@ -113,7 +113,7 @@ namespace Carbinet
                                                         int.Parse(this.txtAge.Text),
                                                         txtMail.Text,
                                                         txtbj.Text,
-                                                        txtDevice.Text
+                                                        txtEpc.Text
                                                         ));
 
                 MessageBox.Show("学号为" + txtId.Text +
@@ -135,7 +135,7 @@ namespace Carbinet
                                                         int.Parse(this.txtAge.Text),
                                                         txtMail.Text,
                                                         txtbj.Text,
-                                                        txtDevice.Text
+                                                        txtEpc.Text
                                                         ));
             if (bUpdated)
             {
@@ -168,7 +168,7 @@ namespace Carbinet
                                                         int.Parse(this.txtAge.Text),
                                                         txtMail.Text,
                                                         txtbj.Text,
-                                                        txtDevice.Text
+                                                        txtEpc.Text
                                                         ));
                 if (bDeleted)
                 {
@@ -204,7 +204,7 @@ namespace Carbinet
                 txtAge.Text = null;
                 txtMail.Text = null;
                 txtbj.Text = null;
-                txtDevice.Text = null;
+                txtEpc.Text = null;
             }
         }
 

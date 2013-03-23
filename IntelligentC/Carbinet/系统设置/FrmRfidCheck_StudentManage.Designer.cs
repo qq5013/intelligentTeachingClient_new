@@ -43,7 +43,7 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.txtDevice = new System.Windows.Forms.TextBox();
+            this.txtEpc = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtbj = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -186,11 +186,11 @@
             // 
             // txtDevice
             // 
-            this.txtDevice.Location = new System.Drawing.Point(25, 127);
-            this.txtDevice.Name = "txtDevice";
-            this.txtDevice.Size = new System.Drawing.Size(660, 21);
-            this.txtDevice.TabIndex = 14;
-            this.txtDevice.Visible = false;
+            this.txtEpc.Location = new System.Drawing.Point(25, 127);
+            this.txtEpc.Name = "txtDevice";
+            this.txtEpc.Size = new System.Drawing.Size(660, 21);
+            this.txtEpc.TabIndex = 14;
+            this.txtEpc.Visible = false;
             // 
             // groupBox1
             // 
@@ -198,7 +198,7 @@
             this.groupBox1.Controls.Add(this.txtbj);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.txtDevice);
+            this.groupBox1.Controls.Add(this.txtEpc);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label2);
@@ -316,7 +316,7 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtDevice;
+        private System.Windows.Forms.TextBox txtEpc;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtbj;
         private System.Windows.Forms.Label label7;

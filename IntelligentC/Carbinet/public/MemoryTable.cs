@@ -14,7 +14,22 @@ namespace Carbinet
         public static DataTable mapConfigsTable = null;
         public static DataTable dtRoomConfig = null;
 
+        public static Person getPersonByEpc(string _epc)
+        {
+            DataRow[] rows = studentInfoTable.Select(string.Format("epc = '{0}'", _epc));
+            if (rows.Length > 0)
+            {
+                DataRow dr = rows[0];
+                return new Person(dr["STUDENTID"] as string, dr["NAME"] as string,
+                    dr["SEX"] as string, (int)dr["AGE"], dr["EMAIL"] as string,
+                    dr["CLASS_NAME"] as string, _epc);
 
+            }
+            else
+            {
+                return null;
+            }
+        }
         public static void initializeTabes()
         {
             if (isInitialized) return;

@@ -24,7 +24,7 @@ namespace Carbinet
         private System.Windows.Forms.MenuItem menuItemStudentMng;
         private System.Windows.Forms.MenuItem menuItemAbout;
 
-
+        List<PictureBox> pblst = new List<PictureBox>();
         public frmFloat()
         {
             InitializeComponent();
@@ -42,7 +42,10 @@ namespace Carbinet
                     this.Top = (int)(rect.Height * 0.0);
                 }
             }
-
+            pblst.Add(pictureBox1);
+            pblst.Add(pictureBox2);
+            pblst.Add(pictureBox3);
+            pblst.Add(pictureBox4);
             int gap = 3;
             this.pictureBox3.Left = this.pictureBox4.Left + pictureBox4.Width + gap;
             this.pictureBox2.Left = this.pictureBox3.Left + pictureBox3.Width + gap;
@@ -53,11 +56,21 @@ namespace Carbinet
             this.pictureBox2.Image = (Image)global::Carbinet.Properties.Resources.MB_tasks;//课堂测验
             this.pictureBox1.Image = (Image)global::Carbinet.Properties.Resources.MB_shut_down;//退出
 
+
+            foreach (PictureBox pb in pblst)
+            {
+                pb.MouseHover += pictureBox_mouse_hover;
+                pb.MouseLeave += pictureBox_mouse_leave;
+            }
+
             pictureBox4.Click += (sender, e) =>
             {
                 frmCheckInit startCheck = new frmCheckInit();
                 startCheck.ShowDialog();
             };
+
+
+
             pictureBox1.Click += (sender, e) =>
             {
                 Program.closeAllForms();
@@ -77,6 +90,15 @@ namespace Carbinet
             //this.initial_popup_menu();
         }
 
+        void pictureBox_mouse_hover(object sender, EventArgs e)
+        {
+            ((PictureBox)sender).BackColor = Color.YellowGreen;
+
+        }
+        void pictureBox_mouse_leave(object sender, EventArgs e)
+        {
+            ((PictureBox)sender).BackColor = Color.White;
+        }
         private void Form1_Move(object sender, EventArgs e)
         {
             Program.frmSelect.Left = this.Left;

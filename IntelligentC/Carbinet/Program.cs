@@ -23,6 +23,7 @@ namespace Carbinet
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
             //frmClassRoom = new frmClassRoom();
             //frmSelect = new frmSelect();
             //frmFloat = new frmFloat();
@@ -30,6 +31,7 @@ namespace Carbinet
             //Application.Run(frmFloat);
 
             Application.Run(new frmTest());
+
             //frmMainFloat frmStart = new frmMainFloat();
             //Application.Run(frmStart);
             //frmCheckInit frmStart = new frmCheckInit();

@@ -18,7 +18,7 @@ namespace Carbinet
     public class studentInfoCtl
     {
         public static string sqlSelect_allGetStudentInfo =
-            @"select STUDENTID,NAME,SEX,AGE,CLASS_NAME ,EMAIL from T_STUDENTINFO ";
+            @"select STUDENTID,NAME,SEX,AGE,CLASS_NAME ,EMAIL,DEVICEID epc  from T_STUDENTINFO;";
         public static string sqlSelect_GetSpecifiedStudentInfo =
             @"select STUDENTID,NAME,SEX,AGE,CLASS_NAME ,EMAIL from T_STUDENTINFO where STUDENTID = '{0}'";
         public static string sqlInsert_AddCheckInfo =
