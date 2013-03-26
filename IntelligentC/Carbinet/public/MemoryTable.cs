@@ -16,7 +16,7 @@ namespace Carbinet
 
         public static Person getPersonByEpc(string _epc)
         {
-            DataRow[] rows = studentInfoTable.Select(string.Format("epc = '{0}'", _epc));
+            DataRow[] rows = studentInfoTable.Select(string.Format("STUDENTID = '{0}'", _epc));
             if (rows.Length > 0)
             {
                 DataRow dr = rows[0];
@@ -29,6 +29,78 @@ namespace Carbinet
             {
                 return null;
             }
+        }
+        public static void setPersonAnswer(string id, string answer)
+        {
+            DataRow[] rows = studentInfoTable.Select("STUDENTID = '" + id + "'");
+            if (rows.Length > 0)
+            {
+                rows[0]["answer"] = answer;
+            }
+        }
+        public static void resetAllPersonAnswer(string answer)
+        {
+            int total = studentInfoTable.Rows.Count;
+            for (int i = 0; i < total; i++)
+            {
+                DataRow dr = studentInfoTable.Rows[i];
+                dr["answer"] = answer;
+            }
+        }
+        public static void clearEquipmentAndStudentCombining(string id)
+        {
+            DataRow[] rowsMap = mapConfigsTable.Select("studenID = '" + id + "'");
+            if (rowsMap.Length > 0)
+            {
+                for (int i = 0; i < rowsMap.Length; i++)
+                {
+                    DataRow dr = rowsMap[i];
+                    dr["studenID"] = "";
+                }
+            }
+        }
+        public static string getPersonIDByPosition(int group, int row, int column)
+        {
+            string id = null;
+            DataRow[] rowsMap = mapConfigsTable.Select(string.Format("IGROUP = {0} and IROW = {1} and ICOLUMN = {2}", group, row, column));
+            if (rowsMap.Length > 0)
+            {
+                DataRow dr = rowsMap[0];
+                id = (string)dr["studenID"];
+            }
+            return id;
+        }
+
+        public static void setEquipmentInfoCombineStudentID(equipmentPosition pos, string id)
+        {
+            DataRow[] rowsMap = mapConfigsTable.Select(string.Format("IGROUP = {0} and IROW = {1} and ICOLUMN = {2}", pos.group, pos.row, pos.column));
+            if (rowsMap.Length > 0)
+            {
+                DataRow dr = rowsMap[0];
+                dr["studenID"] = id;
+            }
+        }
+        public static equipmentPosition getEquipmentInfoByStudentID(string id)
+        {
+            DataRow[] rowsMap = mapConfigsTable.Select("studenID = '" + id + "'");
+            if (rowsMap.Length > 0)
+            {
+                DataRow dr = rowsMap[0];
+                equipmentPosition ep = new equipmentPosition((string)dr["EQUIPEMNTID"], (int)dr["IGROUP"], (int)dr["IROW"], (int)dr["ICOLUMN"]);
+                return ep;
+            }
+            return null;
+        }
+        public static equipmentPosition getEquipmentConfigMapInfo(string remoteDeviceID)
+        {
+            DataRow[] rowsMap = mapConfigsTable.Select("EQUIPEMNTID = '" + remoteDeviceID + "'");
+            if (rowsMap.Length > 0)
+            {
+                DataRow dr = rowsMap[0];
+                equipmentPosition ep = new equipmentPosition(remoteDeviceID, (int)dr["IGROUP"], (int)dr["IROW"], (int)dr["ICOLUMN"]);
+                return ep;
+            }
+            return null;
         }
         public static void initializeTabes()
         {

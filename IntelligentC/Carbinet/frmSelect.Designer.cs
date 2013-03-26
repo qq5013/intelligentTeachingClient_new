@@ -32,6 +32,10 @@ namespace Carbinet
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSelect));
             this.btnQuit = new System.Windows.Forms.Button();
             this.groupPie = new System.Windows.Forms.GroupBox();
+            this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.metroTile4 = new MetroFramework.Controls.MetroTile();
             this.metroTile3 = new MetroFramework.Controls.MetroTile();
             this.metroTile2 = new MetroFramework.Controls.MetroTile();
@@ -39,10 +43,6 @@ namespace Carbinet
             this.m_panelDrawing = new System.Drawing.PieChart.PieChartControl();
             this.btnClearState = new System.Windows.Forms.Button();
             this.btnHideSeat = new System.Windows.Forms.Button();
-            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.groupPie.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,9 +52,9 @@ namespace Carbinet
             this.btnQuit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnQuit.FlatAppearance.BorderSize = 0;
             this.btnQuit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnQuit.Location = new System.Drawing.Point(179, 437);
+            this.btnQuit.Location = new System.Drawing.Point(171, 441);
             this.btnQuit.Name = "btnQuit";
-            this.btnQuit.Size = new System.Drawing.Size(56, 53);
+            this.btnQuit.Size = new System.Drawing.Size(49, 49);
             this.btnQuit.TabIndex = 25;
             this.btnQuit.UseVisualStyleBackColor = true;
             this.btnQuit.Click += new System.EventHandler(this.button4_Click);
@@ -75,6 +75,74 @@ namespace Carbinet
             this.groupPie.Size = new System.Drawing.Size(243, 414);
             this.groupPie.TabIndex = 32;
             this.groupPie.TabStop = false;
+            // 
+            // metroLabel4
+            // 
+            this.metroLabel4.AutoSize = true;
+            this.metroLabel4.CustomBackground = false;
+            this.metroLabel4.FontSize = MetroFramework.MetroLabelSize.Medium;
+            this.metroLabel4.FontWeight = MetroFramework.MetroLabelWeight.Light;
+            this.metroLabel4.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
+            this.metroLabel4.Location = new System.Drawing.Point(114, 364);
+            this.metroLabel4.Name = "metroLabel4";
+            this.metroLabel4.Size = new System.Drawing.Size(64, 19);
+            this.metroLabel4.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroLabel4.StyleManager = null;
+            this.metroLabel4.TabIndex = 29;
+            this.metroLabel4.Text = "D 不选择";
+            this.metroLabel4.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroLabel4.UseStyleColors = false;
+            // 
+            // metroLabel3
+            // 
+            this.metroLabel3.AutoSize = true;
+            this.metroLabel3.CustomBackground = false;
+            this.metroLabel3.FontSize = MetroFramework.MetroLabelSize.Medium;
+            this.metroLabel3.FontWeight = MetroFramework.MetroLabelWeight.Light;
+            this.metroLabel3.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
+            this.metroLabel3.Location = new System.Drawing.Point(114, 323);
+            this.metroLabel3.Name = "metroLabel3";
+            this.metroLabel3.Size = new System.Drawing.Size(78, 19);
+            this.metroLabel3.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroLabel3.StyleManager = null;
+            this.metroLabel3.TabIndex = 28;
+            this.metroLabel3.Text = "C 不知所云";
+            this.metroLabel3.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroLabel3.UseStyleColors = false;
+            // 
+            // metroLabel2
+            // 
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.CustomBackground = false;
+            this.metroLabel2.FontSize = MetroFramework.MetroLabelSize.Medium;
+            this.metroLabel2.FontWeight = MetroFramework.MetroLabelWeight.Light;
+            this.metroLabel2.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
+            this.metroLabel2.Location = new System.Drawing.Point(114, 282);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(77, 19);
+            this.metroLabel2.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroLabel2.StyleManager = null;
+            this.metroLabel2.TabIndex = 27;
+            this.metroLabel2.Text = "B 一知半解";
+            this.metroLabel2.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroLabel2.UseStyleColors = false;
+            // 
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.CustomBackground = false;
+            this.metroLabel1.FontSize = MetroFramework.MetroLabelSize.Medium;
+            this.metroLabel1.FontWeight = MetroFramework.MetroLabelWeight.Light;
+            this.metroLabel1.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
+            this.metroLabel1.Location = new System.Drawing.Point(114, 242);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(78, 19);
+            this.metroLabel1.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroLabel1.StyleManager = null;
+            this.metroLabel1.TabIndex = 26;
+            this.metroLabel1.Text = "A 完全明白";
+            this.metroLabel1.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroLabel1.UseStyleColors = false;
             // 
             // metroTile4
             // 
@@ -142,9 +210,9 @@ namespace Carbinet
             this.btnClearState.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnClearState.FlatAppearance.BorderSize = 0;
             this.btnClearState.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClearState.Location = new System.Drawing.Point(93, 437);
+            this.btnClearState.Location = new System.Drawing.Point(94, 441);
             this.btnClearState.Name = "btnClearState";
-            this.btnClearState.Size = new System.Drawing.Size(56, 53);
+            this.btnClearState.Size = new System.Drawing.Size(49, 49);
             this.btnClearState.TabIndex = 33;
             this.btnClearState.UseVisualStyleBackColor = true;
             this.btnClearState.Click += new System.EventHandler(this.btnClearState_Click);
@@ -155,80 +223,12 @@ namespace Carbinet
             this.btnHideSeat.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnHideSeat.FlatAppearance.BorderSize = 0;
             this.btnHideSeat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnHideSeat.Location = new System.Drawing.Point(7, 437);
+            this.btnHideSeat.Location = new System.Drawing.Point(17, 441);
             this.btnHideSeat.Name = "btnHideSeat";
-            this.btnHideSeat.Size = new System.Drawing.Size(56, 53);
+            this.btnHideSeat.Size = new System.Drawing.Size(49, 49);
             this.btnHideSeat.TabIndex = 34;
             this.btnHideSeat.UseVisualStyleBackColor = true;
             this.btnHideSeat.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // metroLabel1
-            // 
-            this.metroLabel1.AutoSize = true;
-            this.metroLabel1.CustomBackground = false;
-            this.metroLabel1.FontSize = MetroFramework.MetroLabelSize.Medium;
-            this.metroLabel1.FontWeight = MetroFramework.MetroLabelWeight.Light;
-            this.metroLabel1.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
-            this.metroLabel1.Location = new System.Drawing.Point(114, 242);
-            this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(78, 19);
-            this.metroLabel1.Style = MetroFramework.MetroColorStyle.Blue;
-            this.metroLabel1.StyleManager = null;
-            this.metroLabel1.TabIndex = 26;
-            this.metroLabel1.Text = "A 完全明白";
-            this.metroLabel1.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.metroLabel1.UseStyleColors = false;
-            // 
-            // metroLabel2
-            // 
-            this.metroLabel2.AutoSize = true;
-            this.metroLabel2.CustomBackground = false;
-            this.metroLabel2.FontSize = MetroFramework.MetroLabelSize.Medium;
-            this.metroLabel2.FontWeight = MetroFramework.MetroLabelWeight.Light;
-            this.metroLabel2.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
-            this.metroLabel2.Location = new System.Drawing.Point(114, 282);
-            this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(77, 19);
-            this.metroLabel2.Style = MetroFramework.MetroColorStyle.Blue;
-            this.metroLabel2.StyleManager = null;
-            this.metroLabel2.TabIndex = 27;
-            this.metroLabel2.Text = "B 一知半解";
-            this.metroLabel2.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.metroLabel2.UseStyleColors = false;
-            // 
-            // metroLabel3
-            // 
-            this.metroLabel3.AutoSize = true;
-            this.metroLabel3.CustomBackground = false;
-            this.metroLabel3.FontSize = MetroFramework.MetroLabelSize.Medium;
-            this.metroLabel3.FontWeight = MetroFramework.MetroLabelWeight.Light;
-            this.metroLabel3.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
-            this.metroLabel3.Location = new System.Drawing.Point(114, 323);
-            this.metroLabel3.Name = "metroLabel3";
-            this.metroLabel3.Size = new System.Drawing.Size(78, 19);
-            this.metroLabel3.Style = MetroFramework.MetroColorStyle.Blue;
-            this.metroLabel3.StyleManager = null;
-            this.metroLabel3.TabIndex = 28;
-            this.metroLabel3.Text = "C 不知所云";
-            this.metroLabel3.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.metroLabel3.UseStyleColors = false;
-            // 
-            // metroLabel4
-            // 
-            this.metroLabel4.AutoSize = true;
-            this.metroLabel4.CustomBackground = false;
-            this.metroLabel4.FontSize = MetroFramework.MetroLabelSize.Medium;
-            this.metroLabel4.FontWeight = MetroFramework.MetroLabelWeight.Light;
-            this.metroLabel4.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
-            this.metroLabel4.Location = new System.Drawing.Point(114, 364);
-            this.metroLabel4.Name = "metroLabel4";
-            this.metroLabel4.Size = new System.Drawing.Size(64, 19);
-            this.metroLabel4.Style = MetroFramework.MetroColorStyle.Blue;
-            this.metroLabel4.StyleManager = null;
-            this.metroLabel4.TabIndex = 29;
-            this.metroLabel4.Text = "D 不选择";
-            this.metroLabel4.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.metroLabel4.UseStyleColors = false;
             // 
             // frmSelect
             // 

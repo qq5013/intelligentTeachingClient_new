@@ -41,6 +41,7 @@ namespace Carbinet
             {
                 c.resetAllDocState();
             }
+            this.Refresh();
         }
         void frmSelect_Shown(object sender, EventArgs e)
         {
@@ -108,7 +109,7 @@ namespace Carbinet
                     for (int columnIndex = 1; columnIndex <= countOfColumnInGroup; columnIndex++)
                     {
                         string _equipmentID = string.Format("{0},{1},{2}", groupIndex, iFloorIndex, columnIndex);
-                        group.AddDocFile(this.initialDocumentFile(_equipmentID, iFloorIndex, widthOfUnit, heightOfDocumentFile, groupIndex, iFloorIndex, columnIndex, null));
+                        group.AddDocFile(this.initialDocumentFile(_equipmentID, iFloorIndex, widthOfUnit, heightOfDocumentFile, groupIndex, iFloorIndex, columnIndex, df_Click));
                     }
                 }
                 _firstGroupLeft += currentGroupWidth + _groupGap;
@@ -136,7 +137,18 @@ namespace Carbinet
             df.Click += handler;
             return df;
         }
-
+        void df_Click(object sender, EventArgs e)
+        {
+            DocumentFile df = (DocumentFile)sender;
+            string studentID = null;
+            studentID = MemoryTable.getPersonIDByPosition(df.carbinetIndex, df.floorNumber, df.columnNumber);
+            if (studentID == null || studentID.Length <= 0)
+            {
+                return;
+            }
+            frmShowStudentInfo frm = new frmShowStudentInfo(studentID);
+            frm.ShowDialog();
+        }
         #endregion
     }
 }

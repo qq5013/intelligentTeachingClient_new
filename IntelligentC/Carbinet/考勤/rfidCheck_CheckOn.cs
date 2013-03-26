@@ -379,7 +379,7 @@ namespace Carbinet
                                 p.age,
                                 p.bj,
                                 p.email,
-                                 p.deviceID,
+                                 p.epc,
 	                            p.id_num
 	                    };
 
@@ -441,7 +441,7 @@ namespace Carbinet
                     pars[3] = p.age;
                     pars[4] = p.bj;
                     pars[5] = p.email;
-                    pars[6] = p.deviceID;
+                    pars[6] = p.epc;
 
                     result = int.Parse(CsharpSQLiteHelper.ExecuteNonQuery(SqlInsertPerson, pars).ToString());
                     if (result >= 1)

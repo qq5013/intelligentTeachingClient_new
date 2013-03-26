@@ -24,13 +24,13 @@ namespace Carbinet
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            //frmClassRoom = new frmClassRoom();
-            //frmSelect = new frmSelect();
-            //frmFloat = new frmFloat();
-            //StaticDataPort.openDataPort();
-            //Application.Run(frmFloat);
+            frmClassRoom = new frmClassRoom();
+            frmSelect = new frmSelect();
+            frmFloat = new frmFloat();
+            StaticDataPort.openDataPort();
+            Application.Run(frmFloat);
 
-            Application.Run(new frmTest());
+            //Application.Run(new frmTest());
 
             //frmMainFloat frmStart = new frmMainFloat();
             //Application.Run(frmStart);

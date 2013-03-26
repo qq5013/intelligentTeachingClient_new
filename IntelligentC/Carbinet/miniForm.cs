@@ -87,7 +87,7 @@ namespace Carbinet
                 Program.frmSelect.Visible = !Program.frmSelect.Visible;
 
             };
-            //this.initial_popup_menu();
+            this.initial_popup_menu();
         }
 
         void pictureBox_mouse_hover(object sender, EventArgs e)

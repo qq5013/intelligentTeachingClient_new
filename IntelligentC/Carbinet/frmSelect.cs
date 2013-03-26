@@ -14,11 +14,11 @@ namespace Carbinet
     public partial class frmSelect : MetroForm, I_event_notify
     {
         #region 成员
-        public Form previousForm = null;
-        frmInfo4Student frmStudent = null;
-        bool teachingState = false;
-        string path = null;
-        bool showPPT = true;
+        //public Form previousForm = null;
+        //frmInfo4Student frmStudent = null;
+        //bool teachingState = false;
+        //string path = null;
+        //bool showPPT = true;
         // 物资大小 50*32
         // 位置 159,158
         // 层大小 113 * 38
@@ -28,17 +28,25 @@ namespace Carbinet
         public DataTable mapConfigsTable = null;
         DataTable dtRoomConfig = null;
 
-        EquipmentConfigCtl ctl = new EquipmentConfigCtl();
-        studentInfoCtl stuCtl = new studentInfoCtl();
-        roomConfigCtl configCtl = new roomConfigCtl();
-        bool bSeatVisible = true;
+        #region 各个选项对应的颜色
+        Color clrA = Color.FromArgb(0, 177, 89);
+        Color clrB = Color.FromArgb(243, 119, 53);
+        //Color clrB = Color.FromArgb(244, 119, 52);
+        Color clrC = Color.FromArgb(209, 17, 65);
+        Color clrD = Color.FromArgb(0, 174, 219);
+        //Color clrE_purple = Color.FromArgb(181, 33, 239);
+        #endregion
+        //EquipmentConfigCtl ctl = new EquipmentConfigCtl();
+        //studentInfoCtl stuCtl = new studentInfoCtl();
+        //roomConfigCtl configCtl = new roomConfigCtl();
+        //bool bSeatVisible = true;
 
-        int form_initial_heigth = 0;
-        int form_initial_width = 0;
-        int right_groups_initial_width = 0;
-        int right_groups_initial_left = 0;
-        int shown_width = 0;
-        int shown_heigth = 0;
+        //int form_initial_heigth = 0;
+        //int form_initial_width = 0;
+        //int right_groups_initial_width = 0;
+        //int right_groups_initial_left = 0;
+        //int shown_width = 0;
+        //int shown_heigth = 0;
         // 291,147
         #endregion
         #region 初始化
@@ -105,43 +113,23 @@ namespace Carbinet
 
         void frmSelect_VisibleChanged(object sender, EventArgs e)
         {
-            //if (this.Visible == true)
-            //{
-            //    for (int i = 0; i < this.studentInfoTable.Rows.Count; i++)
-            //    {
-            //        studentInfoTable.Rows[i]["answer"] = "A";//默认都选A，也就是不选择
-            //    }
-            //    MiddleWareCore.event_receiver = this;
-            //}
             this.Top = Program.frmFloat.Height + Program.frmFloat.Top;
             this.Left = Program.frmFloat.Left;
+            if (this.Visible == true)
+            {
+                this.clearSelectStatus();
+                MiddleWareCore.event_receiver = this;
+            }
+
         }
 
 
         void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //commonSocket.eventDataReived = null;
-            //StaticDataPort.evtParseReceivedData = null;
-            //StaticSerialPort.evtParseReceivedData -= StaticSerialPort_evtParseReceivedData_frmSelect;
-            //StaticDataPort.closeDataPort();
-            //for (int i = 0; i < studentInfoTable.Rows.Count; i++)
-            //{
-            //    DataRow dr = studentInfoTable.Rows[i];
-            //    dr["answer"] = "";
-            //}
-
             e.Cancel = true;
             this.Hide();
-            //Program.frmMain.Show();
         }
-        #region 各个选项对应的颜色
-        Color clrNotKnown_A_grey = Color.FromArgb(234, 234, 234);
-        Color clrB_blue = Color.FromArgb(32, 155, 232);
-        //Color clrB = Color.FromArgb(244, 119, 52);
-        Color clrC_yellow = Color.FromArgb(255, 231, 33);
-        Color clrD_orange = Color.FromArgb(247, 115, 41);
-        Color clrE_purple = Color.FromArgb(181, 33, 239);
-        #endregion
+
         private void InitializePanelControl()
         {
             m_panelDrawing.LeftMargin = 10;
@@ -149,29 +137,24 @@ namespace Carbinet
             m_panelDrawing.TopMargin = 10;
             m_panelDrawing.BottomMargin = 10;
             m_panelDrawing.FitChart = true;
-            m_panelDrawing.EdgeLineWidth = 1;
-            //m_panelDrawing.Values = new decimal[] { 0, 0 };
-            //m_panelDrawing.Values = new decimal[] { 0, 0, 0, 0, 0 };
-            m_panelDrawing.Values = new decimal[] { this.studentInfoTable.Rows.Count, 0, 0, 0, 0 };
-            int alpha = 160;
+            m_panelDrawing.EdgeLineWidth = 0;
+            m_panelDrawing.Values = new decimal[] { 0, 0, 0, this.studentInfoTable.Rows.Count };
+            int alpha = 100;
 
-            m_panelDrawing.Colors = new Color[] {Color.FromArgb(alpha, clrNotKnown_A_grey),
-                                            Color.FromArgb(alpha, clrB_blue), 
-                                            Color.FromArgb(alpha, clrC_yellow),
-                                            Color.FromArgb(alpha, clrD_orange)
-                                         ,  Color.FromArgb(alpha, clrE_purple)};
+            m_panelDrawing.Colors = new Color[] {Color.FromArgb(alpha, clrA),
+                                            Color.FromArgb(alpha, clrB), 
+                                            Color.FromArgb(alpha, clrC),
+                                            Color.FromArgb(alpha, clrD)};
             //m_panelDrawing.SliceRelativeDisplacements = new float[] { 0.1F, 0.2F, 0.2F, 0.2F };
-            m_panelDrawing.Texts = new string[] { "100%", "", "", "", "" };
+            m_panelDrawing.Texts = new string[] { "0%", "0%", "0%", "100%" };
             //            m_panelDrawing.Texts = new string[] { "未知", "A", "B", "C", "D" };
-            m_panelDrawing.ToolTips = new string[] { "不选择", 
-                                       "选择A","选择B","选择C","选择D"};
+            m_panelDrawing.ToolTips = new string[] { "选择A", "选择B", "选择C", "选择D" };
             m_panelDrawing.Font = new Font("Arial", 10F);
-            m_panelDrawing.ForeColor = SystemColors.WindowText;
+            m_panelDrawing.ForeColor = Color.White;
             m_panelDrawing.SliceRelativeHeight = 0.1F;
             m_panelDrawing.InitialAngle = -90F;
+            //m_panelDrawing.in
         }
-
-
         private void initialInfoTable()
         {
 
@@ -186,8 +169,6 @@ namespace Carbinet
 
 
         }
-
-
 
         private void InitialClassRoom()
         {
@@ -490,57 +471,44 @@ namespace Carbinet
         //        }
         //    }
         //}
+
         void clearSelectStatus()
         {
-            for (int i = 0; i < this.mapConfigsTable.Rows.Count; i++)
-            {
-                DataRow dr = this.mapConfigsTable.Rows[i];
-                int groupIndex = int.Parse(dr["IGROUP"].ToString());
-                //界面展示
-                Carbinet _carbinet = this.groups[groupIndex];
-                _carbinet.setDocBGImage((string)dr["EQUIPEMNTID"], global::Carbinet.Properties.Resources.grey);
-                _carbinet.setDocText((string)dr["EQUIPEMNTID"], "");
+            Program.frmClassRoom.resetClassRoomState();
+            MemoryTable.resetAllPersonAnswer("D");//默认都选A，也就是不选择
 
-                //_carbinet.setDocBGColor((string)dr["equipmentID"], this.clrNotKnown);
-            }
-            m_panelDrawing.Values = new decimal[] { this.studentInfoTable.Rows.Count, 0, 0, 0, 0 };
-            m_panelDrawing.Texts = new string[] { "100%", "", "", "", "" };
-
-            for (int i = 0; i < this.studentInfoTable.Rows.Count; i++)
-            {
-                studentInfoTable.Rows[i]["answer"] = "A";//默认都选A，也就是不选择
-            }
+            m_panelDrawing.Values = new decimal[] { 0, 0, 0, this.studentInfoTable.Rows.Count };
+            m_panelDrawing.Texts = new string[] { "0%", "0%", "0%", "100%" };
         }
-
 
         #endregion
 
         #region 事件处理
 
 
-        void df_Click(object sender, EventArgs e)
-        {
-            DocumentFile df = (DocumentFile)sender;
-            string studentID = null;
-            DataRow[] rows = this.mapConfigsTable.Select("EQUIPEMNTID = '" + df.name + "'");
-            if (rows.Length > 0)
-            {
-                //rows[0]["sdudentID"] = data.tagID;
-                //if (((string)rows[0]["studentName"]) == null || ((string)rows[0]["studentName"]).Length <= 0)
-                //{
-                //    rows[0]["studentName"] = data.tagID;//todo 这里应该检索学生信息
-                //}
-                //rows[0]["status"] = "1";
+        //void df_Click(object sender, EventArgs e)
+        //{
+        //    DocumentFile df = (DocumentFile)sender;
+        //    string studentID = null;
+        //    DataRow[] rows = this.mapConfigsTable.Select("EQUIPEMNTID = '" + df.name + "'");
+        //    if (rows.Length > 0)
+        //    {
+        //        //rows[0]["sdudentID"] = data.tagID;
+        //        //if (((string)rows[0]["studentName"]) == null || ((string)rows[0]["studentName"]).Length <= 0)
+        //        //{
+        //        //    rows[0]["studentName"] = data.tagID;//todo 这里应该检索学生信息
+        //        //}
+        //        //rows[0]["status"] = "1";
 
-                studentID = (string)rows[0]["studenID"];
-                if (studentID == null || studentID.Length <= 0)
-                {
-                    return;
-                }
-                frmShowStudentInfo frm = new frmShowStudentInfo(studentID);
-                frm.ShowDialog();
-            }
-        }
+        //        studentID = (string)rows[0]["studenID"];
+        //        if (studentID == null || studentID.Length <= 0)
+        //        {
+        //            return;
+        //        }
+        //        frmShowStudentInfo frm = new frmShowStudentInfo(studentID);
+        //        frm.ShowDialog();
+        //    }
+        //}
 
 
         private void button4_Click(object sender, EventArgs e)
@@ -566,21 +534,6 @@ namespace Carbinet
             }
         }
 
-        private void button3_Click_1(object sender, EventArgs e)
-        {
-            if (this.showPPT)
-            {
-
-
-                this.showPPT = false;
-            }
-            else
-            {
-                this.showPPT = true;
-
-            }
-        }
-
         public void receive_a_new_event()
         {
             this.handle_event();
@@ -592,121 +545,125 @@ namespace Carbinet
             {
                 deleControlInvoke dele = delegate(object o)
                 {
-                    IntelligentEvent p = (IntelligentEvent)o;
-                    string epcID = p.epcID;
-                    string remoteDeviceID = p.remoteDeviceID;
-                    string check_time = p.time_stamp;
+                    IntelligentEvent IEvent = (IntelligentEvent)o;
+                    string epcID = IEvent.epcID;
+                    string remoteDeviceID = IEvent.remoteDeviceID;
+                    string check_time = IEvent.time_stamp;
                     string studentName = string.Empty;
-                    string question_value = p.questionValue;
-                    DataRow[] rows = null;
-                    DataRow[] rowsMap = null;
+                    string question_value = IEvent.questionValue;
+
                     int totalCount = this.studentInfoTable.Rows.Count;
 
-                    rows = this.studentInfoTable.Select("STUDENTID = '" + epcID + "'");
-                    rowsMap = this.mapConfigsTable.Select("EQUIPEMNTID = '" + remoteDeviceID + "'");
-                    if (rows.Length > 0 && rowsMap.Length > 0)//有该用户资料和设备资料
+                    Person person = MemoryTable.getPersonByEpc(epcID);
+                    equipmentPosition ep = MemoryTable.getEquipmentConfigMapInfo(remoteDeviceID);
+                    if (ep != null)
                     {
-                        string answer = question_value;
-                        int groupIndex = int.Parse(rowsMap[0]["IGROUP"].ToString());
-                        studentName = (string)rows[0]["NAME"];
-                        Carbinet _carbinet = this.groups[groupIndex];
+                        int groupIndex = ep.group;
 
-                        //if (p.event_unit_list.IndexOf(IntelligentEventUnit.new_epc) >= 0)
-                        //{
-                        //    _carbinet.setDocText(remoteDeviceID, studentName);
-
-                        //}
-                        //else
-                        //{
-                        if (p.event_unit_list.IndexOf(IntelligentEventUnit.epc_on_another_device) >= 0)
+                        if (IEvent.event_unit_list.IndexOf(IntelligentEventUnit.epc_on_another_device) >= 0)
                         {
                             //这里要处理一下同一个学生用不一个设备发送答案的情况
-                            DataRow[] rowsForDuplicate = this.mapConfigsTable.Select("studenID = '" + epcID + "'");
-                            int groupIndex2 = int.Parse(rowsForDuplicate[0]["IGROUP"].ToString());
-                            string id = (string)rowsForDuplicate[0]["EQUIPEMNTID"];
-                            Program.frmClassRoom.changeChairState(groupIndex2, id, DocumentFileState.InitialState);
-                            Program.frmClassRoom.changeChairState(groupIndex2, id, "");
-                            //Carbinet _carbinet2 = this.groups[groupIndex2];
-                            //_carbinet2.setDocBGImage((string)rowsForDuplicate[0]["EQUIPEMNTID"], (Image)global::Carbinet.Properties.Resources.grey);
-                            //_carbinet2.setDocText((string)rowsForDuplicate[0]["EQUIPEMNTID"], "");
-                            rowsForDuplicate[0]["studenID"] = "";
+                            equipmentPosition ep_old = MemoryTable.getEquipmentInfoByStudentID(epcID);
+                            Program.frmClassRoom.changeChairState(ep_old.group, ep_old.formatedPosition(), DocumentFileState.InitialState);
+                            Program.frmClassRoom.changeChairState(ep_old.group, ep_old.formatedPosition(), "");
+                            MemoryTable.clearEquipmentAndStudentCombining(epcID);
                         }
-                        //}
-                        Program.frmClassRoom.changeChairState(groupIndex, remoteDeviceID, studentName);
-                        //_carbinet.setDocText(remoteDeviceID, studentName);
 
-                        rowsMap[0]["studenID"] = epcID;
+                        if (person != null)
+                        {
+                            studentName = person.name;
+                            Program.frmClassRoom.changeChairState(groupIndex, ep.formatedPosition(), studentName);
+                            MemoryTable.setEquipmentInfoCombineStudentID(ep, person.epc);
+                        }
 
-
-                        if (answer == "A")
+                        MemoryTable.setPersonAnswer(epcID, question_value);
+                        DocumentFileState dfs = DocumentFileState.InitialState;
+                        switch (question_value)
                         {
-                            rows[0]["answer"] = "A";
-                            // _carbinet.setDocBGColor(data.equipmentID, this.clrA);
-                            //_carbinet.setDocBGImage(remoteDeviceID, (Image)global::Carbinet.Properties.Resources.grey);
-                            Program.frmClassRoom.changeChairState(groupIndex, remoteDeviceID, DocumentFileState.Green);
-
+                            case "A":
+                                dfs = DocumentFileState.Green;
+                                break;
+                            case "B":
+                                dfs = DocumentFileState.Orange;
+                                break;
+                            case "C":
+                                dfs = DocumentFileState.Red;
+                                break;
+                            case "D":
+                                dfs = DocumentFileState.Blue;
+                                break;
                         }
-                        if (answer == "B")
-                        {
-                            //_carbinet.setDocBGImage(remoteDeviceID, (Image)global::Carbinet.Properties.Resources.blue);
-                            Program.frmClassRoom.changeChairState(groupIndex, remoteDeviceID, DocumentFileState.Orange);
-                            rows[0]["answer"] = "B";
-                        }
-                        if (answer == "C")
-                        {
-                            rows[0]["answer"] = "C";
-                            Program.frmClassRoom.changeChairState(groupIndex, remoteDeviceID, DocumentFileState.Red);
-                            //_carbinet.setDocBGImage(remoteDeviceID, (Image)global::Carbinet.Properties.Resources.yellow);
-                            //_carbinet.setDocBGColor(data.equipmentID, this.clrC);
-                        }
-                        if (answer == "D")
-                        {
-                            rows[0]["answer"] = "D";
-                            Program.frmClassRoom.changeChairState(groupIndex, remoteDeviceID, DocumentFileState.Blue);
-                            //_carbinet.setDocBGImage(remoteDeviceID, (Image)global::Carbinet.Properties.Resources.orange);
-                            //_carbinet.setDocBGColor(data.equipmentID, this.clrD);
-                        }
+                        Program.frmClassRoom.changeChairState(groupIndex, ep.formatedPosition(), dfs);
 
                         DataRow[] rowsA = this.studentInfoTable.Select("answer = 'A'");
                         DataRow[] rowsB = this.studentInfoTable.Select("answer = 'B'");
                         DataRow[] rowsC = this.studentInfoTable.Select("answer = 'C'");
                         DataRow[] rowsD = this.studentInfoTable.Select("answer = 'D'");
-                        DataRow[] rowsE = this.studentInfoTable.Select("answer = 'E'");
+                        //DataRow[] rowsE = this.studentInfoTable.Select("answer = 'E'");
                         int iA = rowsA.Length;
                         int iB = rowsB.Length;
                         int iC = rowsC.Length;
                         int iD = rowsD.Length;
-                        int iE = rowsE.Length;
+                        //int iE = rowsE.Length;
                         //int iUnknown = totalCount - iA - iB - iC - iD - iE;
-                        m_panelDrawing.Values = new decimal[] { iA, iB, iC, iD, iE };
-                        string strA = "", strB = "", strC = "", strD = "", strUnknown = "", strE = "";
+                        m_panelDrawing.Values = new decimal[] { iA, iB, iC, iD };
+                        string strA = "", strB = "", strC = "", strD = "";
 
                         //if (iUnknown > 0)
                         //{
                         //    strUnknown = (iUnknown * 100 / totalCount).ToString() + "%";
                         //}
-                        if (iA > 0)
+                        if (totalCount > 0)
                         {
                             strA = (iA * 100 / totalCount).ToString() + "%";
-                        }
-                        if (iB > 0)
-                        {
                             strB = (iB * 100 / totalCount).ToString() + "%";
-                        }
-                        if (iC > 0)
-                        {
                             strC = (iC * 100 / totalCount).ToString() + "%";
-                        }
-                        if (iD > 0)
-                        {
                             strD = (iD * 100 / totalCount).ToString() + "%";
                         }
-                        if (iE > 0)
-                        {
-                            strD = (iE * 100 / totalCount).ToString() + "%";
-                        }
-                        m_panelDrawing.Texts = new string[] { strA, strB, strC, strD, strE };
+                        //if (iB > 0)
+                        //{
+                        //}
+                        //if (iC > 0)
+                        //{
+                        //    strC = (iC * 100 / totalCount).ToString() + "%";
+                        //}
+                        //if (iD > 0)
+                        //{
+                        //    strD = (iD * 100 / totalCount).ToString() + "%";
+                        //}
+                        m_panelDrawing.Texts = new string[] { strA, strB, strC, strD };
+
                     }
+
+                    //DataRow[] rowsStudentInfo = null;
+                    //DataRow[] rowsMap = null;
+                    //rowsStudentInfo = this.studentInfoTable.Select("STUDENTID = '" + epcID + "'");
+                    //rowsMap = this.mapConfigsTable.Select("EQUIPEMNTID = '" + remoteDeviceID + "'");
+                    //if (rowsStudentInfo.Length > 0 && rowsMap.Length > 0)//有该用户资料和设备资料
+                    //{
+                    //int groupIndex = int.Parse(rowsMap[0]["IGROUP"].ToString());
+                    //studentName = (string)rowsStudentInfo[0]["NAME"];
+                    //Carbinet _carbinet = this.groups[groupIndex];
+
+                    //if (IEvent.event_unit_list.IndexOf(IntelligentEventUnit.epc_on_another_device) >= 0)
+                    //{
+                    //    //这里要处理一下同一个学生用不一个设备发送答案的情况
+                    //    equipmentPosition ep_old = MemoryTable.getEquipmentInfoByStudentID(epcID);
+                    //    //DataRow[] rowsForDuplicate = this.mapConfigsTable.Select("studenID = '" + epcID + "'");
+                    //    //int groupIndex2 = int.Parse(rowsForDuplicate[0]["IGROUP"].ToString());
+                    //    //string equipId = (string)rowsForDuplicate[0]["EQUIPEMNTID"];
+                    //    Program.frmClassRoom.changeChairState(ep_old.group, ep_old.equipmentID, DocumentFileState.InitialState);
+                    //    Program.frmClassRoom.changeChairState(ep_old.group, ep_old.equipmentID, "");
+                    //    MemoryTable.clearEquipmentAndStudentCombining(epcID);
+                    //    //rowsForDuplicate[0]["studenID"] = "";
+                    //}
+                    ////}
+                    //Program.frmClassRoom.changeChairState(groupIndex, remoteDeviceID, studentName);
+
+                    //rowsMap[0]["studenID"] = epcID;
+
+
+                    //}
                 };
 
                 this.Invoke(dele, evt);

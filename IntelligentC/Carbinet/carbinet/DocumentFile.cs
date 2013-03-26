@@ -8,6 +8,7 @@ namespace Carbinet
     public class DocumentFile : IComparable<DocumentFile>
     {
         #region
+        //public string referenceID;
         public event EventHandler Click;
         public string name;
         string text;
