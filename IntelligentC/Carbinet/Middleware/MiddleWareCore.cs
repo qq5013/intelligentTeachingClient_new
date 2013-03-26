@@ -12,7 +12,8 @@ namespace intelligentMiddleWare
         实时互动,
         课堂测验,
         设备绑定,
-        学生卡绑定
+        学生卡绑定,
+        无
     }
     public interface I_event_notify
     {

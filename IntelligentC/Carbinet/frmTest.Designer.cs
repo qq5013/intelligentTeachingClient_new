@@ -30,6 +30,7 @@
         {
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.PieChart1 = new Nexus.Windows.Forms.PieChart();
             this.SuspendLayout();
             // 
             // button1
@@ -52,11 +53,22 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // PieChart1
+            // 
+            this.PieChart1.Location = new System.Drawing.Point(225, 45);
+            this.PieChart1.Name = "PieChart1";
+            this.PieChart1.Radius = 200F;
+            this.PieChart1.Size = new System.Drawing.Size(303, 263);
+            this.PieChart1.TabIndex = 2;
+            this.PieChart1.Text = "pieChart1";
+            this.PieChart1.Thickness = 10F;
+            // 
             // frmTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(380, 287);
+            this.ClientSize = new System.Drawing.Size(585, 422);
+            this.Controls.Add(this.PieChart1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Name = "frmTest";
@@ -69,5 +81,6 @@
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private Nexus.Windows.Forms.PieChart PieChart1;
     }
 }

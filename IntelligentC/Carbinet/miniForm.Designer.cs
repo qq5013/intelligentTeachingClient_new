@@ -87,7 +87,6 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmFloat";
-            this.Opacity = 0.8D;
             this.Resizable = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;

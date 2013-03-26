@@ -345,6 +345,10 @@
       <Project>{bb41ac8b-cbed-4387-a7e0-4567edb3f57f}</Project>
       <Name>MetroFramework</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PieChartControls\PieChartControls.csproj">
+      <Project>{400546f8-14c6-47f5-a282-ac8662081150}</Project>
+      <Name>PieChartControls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PieChart\PieChart.csproj">
       <Project>{696E929A-6A4A-4C6D-A8B2-C4F25F781940}</Project>
       <Name>PieChart</Name>

@@ -40,9 +40,9 @@ namespace Carbinet
             this.metroTile3 = new MetroFramework.Controls.MetroTile();
             this.metroTile2 = new MetroFramework.Controls.MetroTile();
             this.metroTile1 = new MetroFramework.Controls.MetroTile();
-            this.m_panelDrawing = new System.Drawing.PieChart.PieChartControl();
             this.btnClearState = new System.Windows.Forms.Button();
             this.btnHideSeat = new System.Windows.Forms.Button();
+            this.PieChart1 = new Nexus.Windows.Forms.PieChart();
             this.groupPie.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,6 +61,7 @@ namespace Carbinet
             // 
             // groupPie
             // 
+            this.groupPie.Controls.Add(this.PieChart1);
             this.groupPie.Controls.Add(this.metroLabel4);
             this.groupPie.Controls.Add(this.metroLabel3);
             this.groupPie.Controls.Add(this.metroLabel2);
@@ -69,7 +70,6 @@ namespace Carbinet
             this.groupPie.Controls.Add(this.metroTile3);
             this.groupPie.Controls.Add(this.metroTile2);
             this.groupPie.Controls.Add(this.metroTile1);
-            this.groupPie.Controls.Add(this.m_panelDrawing);
             this.groupPie.Location = new System.Drawing.Point(1, 1);
             this.groupPie.Name = "groupPie";
             this.groupPie.Size = new System.Drawing.Size(243, 414);
@@ -196,14 +196,6 @@ namespace Carbinet
             this.metroTile1.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroTile1.TileCount = 0;
             // 
-            // m_panelDrawing
-            // 
-            this.m_panelDrawing.Location = new System.Drawing.Point(12, 15);
-            this.m_panelDrawing.Name = "m_panelDrawing";
-            this.m_panelDrawing.Size = new System.Drawing.Size(219, 200);
-            this.m_panelDrawing.TabIndex = 21;
-            this.m_panelDrawing.ToolTips = null;
-            // 
             // btnClearState
             // 
             this.btnClearState.BackgroundImage = global::Carbinet.Properties.Resources.PowerRestart;
@@ -229,6 +221,16 @@ namespace Carbinet
             this.btnHideSeat.TabIndex = 34;
             this.btnHideSeat.UseVisualStyleBackColor = true;
             this.btnHideSeat.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // PieChart1
+            // 
+            this.PieChart1.Location = new System.Drawing.Point(6, 20);
+            this.PieChart1.Name = "PieChart1";
+            this.PieChart1.Radius = 200F;
+            this.PieChart1.Size = new System.Drawing.Size(231, 192);
+            this.PieChart1.TabIndex = 30;
+            this.PieChart1.Text = "pieChart1";
+            this.PieChart1.Thickness = 10F;
             // 
             // frmSelect
             // 
@@ -258,7 +260,7 @@ namespace Carbinet
 
         #endregion
 
-        private System.Drawing.PieChart.PieChartControl m_panelDrawing;
+        //private System.Drawing.PieChart.PieChartControl m_panelDrawing;
         private System.Windows.Forms.Button btnQuit;
         private System.Windows.Forms.GroupBox groupPie;
         private System.Windows.Forms.Button btnClearState;
@@ -271,6 +273,7 @@ namespace Carbinet
         private MetroFramework.Controls.MetroLabel metroLabel3;
         private MetroFramework.Controls.MetroLabel metroLabel2;
         private MetroFramework.Controls.MetroLabel metroLabel1;
+        private Nexus.Windows.Forms.PieChart PieChart1;
     }
 }
 

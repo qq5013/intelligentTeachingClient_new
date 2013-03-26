@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using intelligentMiddleWare;
+using Nexus.Windows.Forms;
 
 namespace Carbinet
 {
@@ -16,6 +17,22 @@ namespace Carbinet
         public frmTest()
         {
             InitializeComponent();
+
+            PieChart1.ItemStyle.SurfaceAlphaTransparency = 0.95F;
+            PieChart1.FocusedItemStyle.SurfaceAlphaTransparency = 1F;
+            PieChart1.FocusedItemStyle.SurfaceBrightnessFactor = 0.3F;
+            PieChart1.Inclination = 1.047F;
+            PieChart1.AutoSizePie = true;
+            PieChart1.Thickness = 30;
+            PieChart1.Rotation = 0.1396263F;
+            PieChart1.ShowEdges = false;
+
+            PieChart1.Items.Add(new PieChartItem(10, Color.BurlyWood, "Tan", "Tan tool tip", 0));
+            PieChart1.Items.Add(new PieChartItem(10, Color.Gold, "Gold", "Gold tool tip", 0));
+            PieChart1.Items.Add(new PieChartItem(20, Color.Chocolate, "Brown", "Brown tool tip", 30));
+            PieChart1.Items.Add(new PieChartItem(10, Color.DarkRed, "Red", "Red tool tip", 0));
+
+
         }
         #region 实时互动
         void test_实时互动1()

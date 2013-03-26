@@ -14,6 +14,11 @@ namespace Carbinet
         public static DataTable mapConfigsTable = null;
         public static DataTable dtRoomConfig = null;
 
+        public static DataRow[] getPersonAnswerRows(string answer)
+        {
+            DataRow[] rows = studentInfoTable.Select(string.Format("answer = '{0}'", answer));
+            return rows;
+        }
         public static Person getPersonByEpc(string _epc)
         {
             DataRow[] rows = studentInfoTable.Select(string.Format("STUDENTID = '{0}'", _epc));
