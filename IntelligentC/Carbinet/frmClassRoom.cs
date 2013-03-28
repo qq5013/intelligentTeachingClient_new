@@ -19,12 +19,12 @@ namespace Carbinet
             InitializeComponent();
 
             ClassRoomConfig roomConfig = new ClassRoomConfig();
-            roomConfig.GroupList.Add(new ClassRoomGroup(0, 8, 2));
-            roomConfig.GroupList.Add(new ClassRoomGroup(1, 8, 2));
-            roomConfig.GroupList.Add(new ClassRoomGroup(2, 8, 2));
-            roomConfig.GroupList.Add(new ClassRoomGroup(3, 8, 2));
+            roomConfig.GroupList.Add(new ClassRoomGroup(0, 6, 2));
+            roomConfig.GroupList.Add(new ClassRoomGroup(1, 6, 2));
+            roomConfig.GroupList.Add(new ClassRoomGroup(2, 6, 2));
+            roomConfig.GroupList.Add(new ClassRoomGroup(3, 6, 2));
             int blackSpace = 100;
-            this.InitialClassRoom(roomConfig, this.Width - blackSpace, 100, 40, blackSpace / 2);
+            this.InitialClassRoom(roomConfig, this.Width - blackSpace, 180, 40, blackSpace / 2);
 
             this.Shown += frmSelect_Shown;
             this.FormClosing += frmClassRoom_FormClosing;

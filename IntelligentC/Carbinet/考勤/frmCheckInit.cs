@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using intelligentMiddleWare;
+using MetroFramework.Forms;
 
 namespace Carbinet
 {
-    public partial class frmCheckInit : Form
+    public partial class frmCheckInit : MetroForm
     {
         public frmCheckInit()
         {

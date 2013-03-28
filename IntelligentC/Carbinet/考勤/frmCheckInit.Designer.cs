@@ -45,7 +45,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 18);
+            this.label1.Location = new System.Drawing.Point(14, 65);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.TabIndex = 0;
@@ -54,7 +54,7 @@
             // lblCheckGuid
             // 
             this.lblCheckGuid.AutoSize = true;
-            this.lblCheckGuid.Location = new System.Drawing.Point(91, 18);
+            this.lblCheckGuid.Location = new System.Drawing.Point(91, 65);
             this.lblCheckGuid.Name = "lblCheckGuid";
             this.lblCheckGuid.Size = new System.Drawing.Size(89, 12);
             this.lblCheckGuid.TabIndex = 0;
@@ -63,7 +63,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 62);
+            this.label2.Location = new System.Drawing.Point(16, 109);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 12);
             this.label2.TabIndex = 1;
@@ -73,7 +73,7 @@
             // 
             this.dtpStart.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             this.dtpStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpStart.Location = new System.Drawing.Point(88, 59);
+            this.dtpStart.Location = new System.Drawing.Point(88, 106);
             this.dtpStart.Name = "dtpStart";
             this.dtpStart.Size = new System.Drawing.Size(200, 21);
             this.dtpStart.TabIndex = 1;
@@ -82,7 +82,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 115);
+            this.label3.Location = new System.Drawing.Point(16, 162);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 12);
             this.label3.TabIndex = 1;
@@ -92,7 +92,7 @@
             // 
             this.dtpEnd.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             this.dtpEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpEnd.Location = new System.Drawing.Point(87, 109);
+            this.dtpEnd.Location = new System.Drawing.Point(87, 156);
             this.dtpEnd.Name = "dtpEnd";
             this.dtpEnd.Size = new System.Drawing.Size(200, 21);
             this.dtpEnd.TabIndex = 2;
@@ -101,7 +101,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 153);
+            this.label4.Location = new System.Drawing.Point(16, 200);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(41, 12);
             this.label4.TabIndex = 1;
@@ -109,7 +109,7 @@
             // 
             // txtInfo
             // 
-            this.txtInfo.Location = new System.Drawing.Point(87, 150);
+            this.txtInfo.Location = new System.Drawing.Point(87, 197);
             this.txtInfo.Multiline = true;
             this.txtInfo.Name = "txtInfo";
             this.txtInfo.Size = new System.Drawing.Size(355, 98);
@@ -117,7 +117,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(137, 301);
+            this.button1.Location = new System.Drawing.Point(137, 348);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 4;
@@ -127,7 +127,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(271, 301);
+            this.button2.Location = new System.Drawing.Point(271, 348);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 5;
@@ -138,7 +138,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(16, 263);
+            this.label5.Location = new System.Drawing.Point(16, 310);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(173, 12);
             this.label5.TabIndex = 1;
@@ -148,7 +148,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(483, 342);
+            this.ClientSize = new System.Drawing.Size(470, 386);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txtInfo);
@@ -160,12 +160,11 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblCheckGuid);
             this.Controls.Add(this.label1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Location = new System.Drawing.Point(0, 0);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmCheckInit";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "考勤";
             this.Load += new System.EventHandler(this.frmCheckInit_Load);
             this.ResumeLayout(false);

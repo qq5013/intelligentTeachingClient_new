@@ -33,6 +33,7 @@
             this.metroBtnNext = new MetroFramework.Controls.MetroButton();
             this.metroBtnPre = new MetroFramework.Controls.MetroButton();
             this.metroBtnStart = new MetroFramework.Controls.MetroButton();
+            this.editor1 = new HtmlEditor.Editor();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -42,7 +43,6 @@
             this.metroTile1 = new MetroFramework.Controls.MetroTile();
             this.PieChart1 = new Nexus.Windows.Forms.PieChart();
             this.metroButton1 = new MetroFramework.Controls.MetroButton();
-            this.editor1 = new HtmlEditor.Editor();
             this.groupBoxQuestion.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -98,6 +98,22 @@
             this.metroBtnStart.Text = "开始(&S)";
             this.metroBtnStart.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroBtnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // editor1
+            // 
+            this.editor1.BodyHtml = null;
+            this.editor1.BodyText = null;
+            this.editor1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.editor1.DocumentText = resources.GetString("editor1.DocumentText");
+            this.editor1.EditorBackColor = System.Drawing.Color.White;
+            this.editor1.EditorForeColor = System.Drawing.Color.Black;
+            this.editor1.FontName = null;
+            this.editor1.FontSize = HtmlEditor.FontSize.NA;
+            this.editor1.Location = new System.Drawing.Point(3, 17);
+            this.editor1.Name = "editor1";
+            this.editor1.Size = new System.Drawing.Size(651, 411);
+            this.editor1.TabIndex = 3;
+            this.editor1.TabStop = false;
             // 
             // label1
             // 
@@ -200,22 +216,6 @@
             this.metroButton1.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroButton1.Click += new System.EventHandler(this.metroButton1_Click);
             // 
-            // editor1
-            // 
-            this.editor1.BodyHtml = null;
-            this.editor1.BodyText = null;
-            this.editor1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.editor1.DocumentText = resources.GetString("editor1.DocumentText");
-            this.editor1.EditorBackColor = System.Drawing.Color.White;
-            this.editor1.EditorForeColor = System.Drawing.Color.Black;
-            this.editor1.FontName = null;
-            this.editor1.FontSize = HtmlEditor.FontSize.NA;
-            this.editor1.Location = new System.Drawing.Point(3, 17);
-            this.editor1.Name = "editor1";
-            this.editor1.Size = new System.Drawing.Size(651, 411);
-            this.editor1.TabIndex = 3;
-            this.editor1.TabStop = false;
-            // 
             // frmRTTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -228,8 +228,9 @@
             this.Controls.Add(this.groupBoxQuestion);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Location = new System.Drawing.Point(0, 0);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmRTTest";
-            this.ShowInTaskbar = false;
             this.Text = "课堂测验";
             this.groupBoxQuestion.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);

@@ -56,36 +56,24 @@ namespace Carbinet
 
             #endregion
 
-
             this.test_id = string.Format("{0}{1}", "test_id", DateTime.Now.ToString("yyyyMMddHHmmss"));
 
-            dtQuestion = new DataTable();
-            dtQuestion.Columns.Add("question_id", typeof(string));
-            dtQuestion.Columns.Add("caption", typeof(string));
-            dtQuestion.Columns.Add("answer", typeof(string));
-            dtQuestion.Columns.Add("question_index", typeof(string));//播放次序
-            dtQuestion.Columns.Add("state", typeof(string));//标识是否正在播放
-
-            this.dtQuestion_answer_record = new DataTable();
-            dtQuestion_answer_record.Columns.Add("student_id", typeof(string));
-            dtQuestion_answer_record.Columns.Add("question_id", typeof(string));
-            dtQuestion_answer_record.Columns.Add("answer", typeof(string));
-
             this.initialInfoTable();
-            InitializePanelControl();
+            //InitializePanelControl();
 
             this.Shown += new EventHandler(frmRTTest_Shown);
             this.FormClosing += new FormClosingEventHandler(frmRTTest_FormClosing);
             this.VisibleChanged += new EventHandler(frmRTTest_VisibleChanged);
-            MiddleWareCore.event_receiver = this;
+            //MiddleWareCore.event_receiver = this;
         }
 
-        void frmRTTest_VisibleChanged(object sender, EventArgs e)
+        private void frmRTTest_VisibleChanged(object sender, EventArgs e)
         {
             if (this.Visible == true)
             {
-                this.clearSelectStatus();
-                MiddleWareCore.event_receiver = this;
+                this.resetFormInitialState();
+                MiddleWareCore.set_mode(MiddleWareMode.课堂测验, this);
+                //MiddleWareCore.event_receiver = this;
             }
 
             //if (this.Visible == true)
@@ -99,13 +87,8 @@ namespace Carbinet
             //    }
             //}
         }
-        void clearSelectStatus()
-        {
-            Program.frmClassRoom.resetClassRoomState();
-            MemoryTable.resetAllPersonAnswer("B");//默认都选B，也就是不选择
-            this.InitializePanelControl();
-        }
-        void frmRTTest_FormClosing(object sender, FormClosingEventArgs e)
+
+        private void frmRTTest_FormClosing(object sender, FormClosingEventArgs e)
         {
             //for (int i = 0; i < studentInfoTable.Rows.Count; i++)
             //{
@@ -115,7 +98,7 @@ namespace Carbinet
             this.save_answer_info();
         }
 
-        void frmRTTest_Shown(object sender, EventArgs e)
+        private void frmRTTest_Shown(object sender, EventArgs e)
         {
 
 
@@ -143,14 +126,31 @@ namespace Carbinet
             //    }
             //}
         }
+
+        //form初始化状态，包括数据和饼图
+        void resetFormInitialState()
+        {
+            Program.frmClassRoom.resetClassRoomState();
+            MemoryTable.resetAllPersonAnswer("B");//默认都选B，也就是不选择
+            this.InitializePanelControl();
+        }
+
         private void initialInfoTable()
         {
+            this.dtQuestion = new DataTable();
+            dtQuestion.Columns.Add("question_id", typeof(string));
+            dtQuestion.Columns.Add("caption", typeof(string));
+            dtQuestion.Columns.Add("answer", typeof(string));
+            dtQuestion.Columns.Add("question_index", typeof(string));//播放次序
+            dtQuestion.Columns.Add("state", typeof(string));//标识是否正在播放
+
+            this.dtQuestion_answer_record = new DataTable();
+            dtQuestion_answer_record.Columns.Add("student_id", typeof(string));
+            dtQuestion_answer_record.Columns.Add("question_id", typeof(string));
+            dtQuestion_answer_record.Columns.Add("answer", typeof(string));
 
             //统一初始化
-            if (MemoryTable.isInitialized == false)
-            {
-                MemoryTable.initializeTabes();
-            }
+            MemoryTable.initializeTabes();
             this.dtRoomConfig = MemoryTable.dtRoomConfig;
             this.studentInfoTable = MemoryTable.studentInfoTable;
             this.mapConfigsTable = MemoryTable.mapConfigsTable;
@@ -166,47 +166,26 @@ namespace Carbinet
 
         }
 
+        //页面初始化时，饼图初始状态，并不一定与之后恢复的状态相同
         private void InitializePanelControl()
         {
-            PieChart1.Items.Clear();
-            PieChart1.Items.Add(new PieChartItem(0, this.clrAnswered, "0", "A", 0));
             int total = this.studentInfoTable.Rows.Count;
-            PieChart1.Items.Add(new PieChartItem(total, this.clrNotKnown, total.ToString(), "B", 0));
+            setPieItem(0, total, 0);
         }
-
+        private void setPieItem(int a, int b, int offset)
+        {
+            PieChart1.Items.Clear();
+            PieChart1.Items.Add(new PieChartItem(a, this.clrAnswered, a.ToString(), "A", 0));
+            PieChart1.Items.Add(new PieChartItem(b, this.clrNotKnown, b.ToString(), "B", offset));
+        }
         #endregion
         #region 事件处理
-        //单击座位时的处理
-
-        //显示座位、题目
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-        }
         //切换题目
         private void btnNext_Click(object sender, EventArgs e)
         {
-            ////发送下一题命令
-            //if (this.eventInvokeCommand != null)
-            //{
-            //    this.eventInvokeCommand(InternalCommand.NextQuestion, null);
-            //}
-            DataRow[] rows = this.dtQuestion.Select("state = 'true'");
-            if (rows.Length > 0)
+            int index = changeQuestion(true);
+            if (index >= 0)
             {
-                DataRow dr = rows[0];
-                int index = dtQuestion.Rows.IndexOf(dr);
-                index++;
-                DataRow drNext = dtQuestion.Rows[index];
-                dr["state"] = "false";
-                this.current_question_id = drNext["question_id"].ToString();
-                drNext["state"] = "true";
-                string html = this.GetHtmlFile(current_question_id);
-                this.editor1.Clear();
-                if (html != string.Empty)
-                {
-                    this.editor1.DocumentText = html;
-                }
                 if (index == this.dtQuestion.Rows.Count - 1)
                 {
                     this.metroBtnNext.Enabled = false;
@@ -216,35 +195,14 @@ namespace Carbinet
                     this.metroBtnNext.Enabled = true;
                 }
                 this.metroBtnPre.Enabled = true;
-
-                this.reset_test_status();
             }
-
         }
 
         private void btnPre_Click(object sender, EventArgs e)
         {
-            ////发送上一题命令
-            //if (this.eventInvokeCommand != null)
-            //{
-            //    this.eventInvokeCommand(InternalCommand.PreQuestion, null);
-            //}
-            DataRow[] rows = this.dtQuestion.Select("state = 'true'");//
-            if (rows.Length > 0)
+            int index = changeQuestion(false);
+            if (index >= 0)
             {
-                DataRow dr = rows[0];
-                int index = dtQuestion.Rows.IndexOf(dr);
-                index--;
-                DataRow drNext = dtQuestion.Rows[index];
-                dr["state"] = "false";
-                this.current_question_id = drNext["question_id"].ToString();
-                drNext["state"] = "true";
-                string html = this.GetHtmlFile(current_question_id);
-                this.editor1.Clear();
-                if (html != string.Empty)
-                {
-                    this.editor1.DocumentText = html;
-                }
                 if (index == 0)
                 {
                     this.metroBtnPre.Enabled = false;
@@ -254,53 +212,84 @@ namespace Carbinet
                     this.metroBtnPre.Enabled = true;
                 }
                 this.metroBtnPre.Enabled = true;
-
-                this.reset_test_status();
             }
         }
-        //设置当前题目的答题状态，包括作为和饼图
-        void reset_test_status()
+
+        private void btnStart_Click(object sender, EventArgs e)
         {
-            DataRow[] rows = this.dtQuestion_answer_record.Select(string.Format("question_id = '{0}'", current_question_id));
+            int index = changeQuestion(true);
+            if (index >= 0)
+            {
+                this.metroBtnPre.Enabled = true;
+                this.metroBtnNext.Enabled = true;
+                if (this.dtQuestion.Rows.Count <= 1)
+                {
+                    this.metroBtnPre.Enabled = false;
+                    this.metroBtnNext.Enabled = false;
+                }
+                this.metroBtnStart.Enabled = false;
+            }
+
+        }
+
+        //设置当前题目的答题状态
+        private void reset_test_status(string question_id)
+        {
+            DataRow[] rows = this.dtQuestion_answer_record.Select(string.Format("question_id = '{0}'", question_id));
             int total_student_count = this.studentInfoTable.Rows.Count;
             int iAnswered = rows.Length;
             int iUnknown = total_student_count - iAnswered;
-            string strUnknown = iUnknown.ToString();
-            string strAnswered = iAnswered.ToString();
-            //m_panelDrawing.Values = new decimal[] { iUnknown, iAnswered };
-            //m_panelDrawing.Texts = new string[] { iUnknown.ToString(), iAnswered.ToString() };
+            this.setPieItem(iAnswered, iUnknown, 10);
 
             MiddleWareCore.set_mode(MiddleWareMode.课堂测验);
+
+            Program.frmClassRoom.resetClassRoomState();
         }
-        private void btnStart_Click(object sender, EventArgs e)
+
+        /// <summary>
+        /// 切换题目
+        /// </summary>
+        /// <param name="b">true 往后切换；否则回退</param>
+        /// <returns>切换后的题目的索引；如果为-1，切换失败</returns>
+        private int changeQuestion(bool b)
         {
+            int index = -1;
             if (this.dtQuestion.Rows.Count > 0)
             {
-                DataRow dr0 = this.dtQuestion.Rows[0];
-                current_question_id = dr0["question_id"].ToString();
-                dr0["state"] = "true";
-                string html = this.GetHtmlFile(current_question_id);
+                DataRow[] rows = this.dtQuestion.Select("state = 'true'");
+                if (rows.Length > 0)
+                {
+                    DataRow dr = rows[0];
+                    index = dtQuestion.Rows.IndexOf(dr);
+                    dr["state"] = "false";
+                    if (b) { index += 1; }
+                    else { index -= 1; }
+
+                }
+                else { index = 0; }
+
+                DataRow drNext = dtQuestion.Rows[index];
+                this.current_question_id = drNext["question_id"].ToString();
+                drNext["state"] = "true";
+                string html = this.GetHtmlFile(this.current_question_id);
                 this.editor1.Clear();
                 if (html != string.Empty)
                 {
                     this.editor1.DocumentText = html;
                 }
-                this.metroBtnPre.Enabled = true;
-                this.metroBtnNext.Enabled = true;
+
+                this.reset_test_status(this.current_question_id);
+
             }
-            if (this.dtQuestion.Rows.Count <= 1)
-            {
-                this.metroBtnPre.Enabled = false;
-                this.metroBtnNext.Enabled = false;
-            }
-            this.metroBtnStart.Enabled = false;
-            this.reset_test_status();
+
+            return index;
         }
+
         public void receive_a_new_event()
         {
             this.handle_event();
         }
-        void handle_event()
+        private void handle_event()
         {
             IntelligentEvent evt = MiddleWareCore.get_a_event();
             if (evt != null)
@@ -310,11 +299,11 @@ namespace Carbinet
                     IntelligentEvent p = (IntelligentEvent)o;
                     string epcID = p.epcID;
                     string remoteDeviceID = p.remoteDeviceID;
-                    string check_time = p.time_stamp;
-                    string studentName = string.Empty;
+                    //string check_time = p.time_stamp;
+                    //string studentName = string.Empty;
                     string question_value = p.questionValue;
-                    DataRow[] rows = null;
-                    DataRow[] rowsMap = null;
+                    //DataRow[] rows = null;
+                    //DataRow[] rowsMap = null;
                     int totalCount = this.studentInfoTable.Rows.Count;
 
                     Person person = MemoryTable.getPersonByEpc(epcID);
@@ -329,14 +318,12 @@ namespace Carbinet
                             {
                                 int groupIndex = ep.group;
 
-
                                 equipmentPosition ep_old = MemoryTable.getEquipmentInfoByStudentID(epcID);
                                 Program.frmClassRoom.changeChairState(ep_old.group, ep_old.formatedPosition(), DocumentFileState.InitialState);
                                 Program.frmClassRoom.changeChairState(ep_old.group, ep_old.formatedPosition(), "");
                                 MemoryTable.clearEquipmentAndStudentCombining(epcID);
 
-                                studentName = person.name;
-                                Program.frmClassRoom.changeChairState(groupIndex, ep.formatedPosition(), studentName);
+                                Program.frmClassRoom.changeChairState(groupIndex, ep.formatedPosition(), person.name);
                                 MemoryTable.setEquipmentInfoCombineStudentID(ep, person.epc);
 
                                 MemoryTable.setPersonAnswer(epcID, question_value);
@@ -375,21 +362,13 @@ namespace Carbinet
 
                             //}
                         }
-                        //如果重复发送之外，还改变了问题的答案
+                        //如果重复发送之外，还改变了问题的答案，按照设计，这里不需要更改饼图
                         if (p.event_unit_list.IndexOf(IntelligentEventUnit.change_answer) >= 0)
                         {
                             MemoryTable.setPersonAnswer(epcID, question_value);
 
-                            //更新答题记录
-                            rows = this.dtQuestion_answer_record.Select(string.Format("student_id = '{0}' and question_id = {1}", epcID, current_question_id));
-                            if (rows.Length > 0)
-                            {
-                                rows[0]["answer"] = question_value;
-                            }
-                            else
-                            {
-                                dtQuestion_answer_record.Rows.Add(new object[3] { epcID, current_question_id, question_value });
-                            }
+                            this.refreshAnswerRecord(epcID, question_value);
+                            this.refreshPie();
                         }
                     }
                     else
@@ -398,38 +377,39 @@ namespace Carbinet
                             //处理该事件需要更新数据和显示页面
                             if (person != null && ep != null)
                             {
-                                MemoryTable.setPersonAnswer(epcID, question_value);
                                 MemoryTable.setEquipmentInfoCombineStudentID(ep, epcID);
                                 Program.frmClassRoom.changeChairState(ep.group, ep.formatedPosition(), person.name);
-
-                                DataRow[] rowsUnknown = MemoryTable.getPersonAnswerRows("B");
-                                DataRow[] rowsAnswered = MemoryTable.getPersonAnswerRows("A");
-                                int iUnknown = rowsUnknown.Length;
-                                int iAnswered = rowsAnswered.Length;
-                                string strUnknown = iUnknown.ToString();
-                                string strAnswered = iAnswered.ToString();
-
-                                PieChart1.Items.Clear();
-                                PieChart1.Items.Add(new PieChartItem(iAnswered, this.clrAnswered, iAnswered.ToString(), "A", 0));
-                                PieChart1.Items.Add(new PieChartItem(iUnknown, this.clrNotKnown, iUnknown.ToString(), "B", 10));
-
                             }
 
-                            //更新答题记录
-                            rows = this.dtQuestion_answer_record.Select(string.Format("student_id = '{0}' and question_id = '{1}'", epcID, current_question_id));
-                            if (rows.Length > 0)
-                            {
-                                rows[0]["answer"] = question_value;
-                            }
-                            else
-                            {
-                                dtQuestion_answer_record.Rows.Add(new object[3] { epcID, current_question_id, question_value });
-                            }
+                            MemoryTable.setPersonAnswer(epcID, question_value);
+                            this.refreshAnswerRecord(epcID, question_value);
+                            this.refreshPie();
                         }
                 };
 
                 this.Invoke(dele, evt);
             }
+        }
+        private void refreshAnswerRecord(string student_id, string question_value)
+        {
+            //更新答题记录
+            DataRow[] rows = this.dtQuestion_answer_record.Select(string.Format("student_id = '{0}' and question_id = '{1}'", student_id, current_question_id));
+            if (rows.Length > 0)
+            {
+                rows[0]["answer"] = question_value;
+            }
+            else
+            {
+                dtQuestion_answer_record.Rows.Add(new object[3] { student_id, current_question_id, question_value });
+            }
+        }
+        private void refreshPie()
+        {
+            DataRow[] rowsUnknown = MemoryTable.getPersonAnswerRows("B");
+            DataRow[] rowsAnswered = MemoryTable.getPersonAnswerRows("A");
+            int iUnknown = rowsUnknown.Length;
+            int iAnswered = rowsAnswered.Length;
+            this.setPieItem(iAnswered, iUnknown, 10);
         }
         #endregion
         #region 内部函数
@@ -486,11 +466,6 @@ namespace Carbinet
         {
             Program.frmClassRoom.ShowDialog();
         }
-
-
-
-
-
 
     }
 }

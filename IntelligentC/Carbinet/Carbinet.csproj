@@ -434,6 +434,7 @@
     <Content Include="5.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\blackboard.png" />
     <Content Include="Resources\close.png" />
     <Content Include="Resources\Groups.png" />
     <Content Include="Resources\Libraries alt.png" />

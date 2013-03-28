@@ -79,7 +79,7 @@ namespace Carbinet
             pictureBox2.Click += (sender, e) =>
                 {
                     frmRTTest frm = new frmRTTest();
-                    MiddleWareCore.set_mode(MiddleWareMode.课堂测验);
+                    //MiddleWareCore.set_mode(MiddleWareMode.课堂测验);
                     frm.ShowDialog();
                 };
             pictureBox3.Click += (sender, e) =>

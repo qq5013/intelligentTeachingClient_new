@@ -210,7 +210,7 @@ namespace intelligentMiddleWare
             event_list.Add(evt);
             MRE_event_block.Set();
 
-            if (event_receiver != null && bNotify_receiver == true)
+            if (event_receiver != null && bNotify_receiver == true && mode != MiddleWareMode.无)
             {
                 event_receiver.receive_a_new_event();
             }
@@ -236,6 +236,11 @@ namespace intelligentMiddleWare
             }
             MRE_event_block.Set();
             return evt;
+        }
+        public static void set_mode(MiddleWareMode _mode, I_event_notify receiver)
+        {
+            set_mode(_mode);
+            event_receiver = receiver;
         }
         public static void set_mode(MiddleWareMode _mode)
         {

@@ -44,11 +44,6 @@ namespace Carbinet
             PieChart1.ShowEdges = false;
             //PieChart1.Radius = 90F;
 
-
-            //this.initialInfoTable();
-            //InitializePanelControl();
-            //InitialClassRoom();
-
             Screen[] screens = System.Windows.Forms.Screen.AllScreens;
             for (int i = 0; i < screens.Length; i++)
             {
@@ -63,14 +58,9 @@ namespace Carbinet
             }
 
             this.initialInfoTable();
-            InitializePanelControl();
-            //InitialClassRoom();
-            Program.frmClassRoom.resetClassRoomState();
 
             this.FormClosing += new FormClosingEventHandler(Form1_FormClosing);
             this.VisibleChanged += new EventHandler(frmSelect_VisibleChanged);
-            MiddleWareCore.event_receiver = this;
-            MiddleWareCore.set_mode(MiddleWareMode.实时互动);
         }
 
         void frmSelect_VisibleChanged(object sender, EventArgs e)
@@ -80,7 +70,7 @@ namespace Carbinet
             if (this.Visible == true)
             {
                 this.clearSelectStatus();
-                MiddleWareCore.event_receiver = this;
+                MiddleWareCore.set_mode(MiddleWareMode.实时互动, this);
             }
         }
 
@@ -114,80 +104,6 @@ namespace Carbinet
 
         }
 
-        private void InitialClassRoom()
-        {
-            //this.button6.Left = (this.pictureBox1.Width - this.button6.Width) / 2 + this.pictureBox1.Left;
-
-            //int numberOfGroup = dtRoomConfig.Rows.Count;
-            //int widthOfRoom = this.pictureBox1.Width;
-            //int heightOfRow = 38;
-
-            //int totalColumns = numberOfGroup;
-            //DataRow[] rows4Sum = dtRoomConfig.Select("IGROUP=1");
-            //if (rows4Sum.Length > 0)
-            //{
-            //    totalColumns = int.Parse(rows4Sum[0]["totalColumn"].ToString());
-            //}
-            //int numberOfUnit = totalColumns + numberOfGroup - 1;
-            //int widthOfUnit = widthOfRoom / numberOfUnit;
-            //int groupInitialLeft = 0;
-
-            //for (int i = 0; i < numberOfGroup; i++)
-            //{
-            //    int numberofColumn = 1;
-            //    int numberOfRow = 1;
-
-            //    DataRow[] rows = dtRoomConfig.Select(string.Format("IGROUP={0}", i + 1));
-            //    if (rows.Length > 0)
-            //    {
-            //        numberofColumn = int.Parse(rows[0]["ICOLUMN"].ToString());
-            //        numberOfRow = int.Parse(rows[0]["IROW"].ToString());
-            //    }
-            //    int groupWidth = numberofColumn * widthOfUnit;
-
-            //    Carbinet group = new Carbinet(this.pictureBox1.Controls);
-            //    group.Left = groupInitialLeft;
-            //    group.Top = 67;
-            //    this.groups.Add(group);
-            //    //初始化每一排的行
-            //    int initialTop = 0;
-            //    for (int irow = 1; irow <= numberOfRow; irow++, initialTop = initialTop + (int)(1.7 * heightOfRow))
-            //    {
-            //        CarbinetFloor row = new CarbinetFloor(group, irow, this.pictureBox1.Controls);
-            //        row.Width = groupWidth;
-            //        row.Height = heightOfRow;
-            //        row.relativeTop = initialTop;
-            //        row.relativeLeft = 0;
-
-            //        group.AddFloor(row);
-
-            //        for (int k = 1; k <= numberofColumn; k++)
-            //        {
-            //            // 如果座位与设备已经设置绑定的话，则在此处将座位与设备ID相挂钩
-            //            DataRow[] rowsMap = mapConfigsTable.Select(
-            //                string.Format("IGROUP = {0} and IROW = {1} and ICOLUMN = {2}",
-            //                                i.ToString(), irow.ToString(), k.ToString()));
-
-            //            string _equipmentID = i.ToString() + "," + irow.ToString() + "," + k.ToString();
-            //            if (rowsMap.Length > 0)
-            //            {
-            //                _equipmentID = (string)rowsMap[0]["EQUIPEMNTID"];
-            //            }
-            //            DocumentFile df = new DocumentFile(_equipmentID, irow);
-            //            df.Width = widthOfUnit;
-            //            df.Height = heightOfRow;
-            //            df.carbinetIndex = i;
-            //            df.floorNumber = irow;
-            //            df.columnNumber = k;
-            //            df.indexBase = k.ToString();
-            //            df.Click += new EventHandler(df_Click);
-            //            group.AddDocFile(df);
-            //        }
-
-            //    }
-            //    groupInitialLeft += groupWidth + widthOfUnit;
-            //}
-        }
         #endregion
         #region 内部函数
         void clearSelectStatus()
