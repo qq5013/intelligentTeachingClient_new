@@ -13,26 +13,27 @@ namespace Carbinet
     {
         #region 成员
         List<Carbinet> groups = new List<Carbinet>();
-        public DataTable studentInfoTable = null;
-        public DataTable mapConfigsTable = null;
+        DataTable studentInfoTable = null;
+        DataTable mapConfigsTable = null;
         DataTable dtRoomConfig = null;
+        //保存学生发送的答案
+        DataTable dtAnswerRecord = null;
+        DataTable dtStudentAndEquipmentCombining = null;
 
         #region 各个选项对应的颜色
         Color clrA = Color.FromArgb(0, 177, 89);
         Color clrB = Color.FromArgb(243, 119, 53);
-        //Color clrB = Color.FromArgb(244, 119, 52);
         Color clrC = Color.FromArgb(209, 17, 65);
         Color clrD = Color.FromArgb(0, 174, 219);
-        //Color clrE_purple = Color.FromArgb(181, 33, 239);
         #endregion
 
-        // 291,147
         #endregion
         #region 初始化
         public frmSelect()
         {
             InitializeComponent();
 
+            #region InitializeComponent
 
             PieChart1.ItemStyle.SurfaceAlphaTransparency = 0.92F;
             PieChart1.FocusedItemStyle.SurfaceAlphaTransparency = 0.92F;
@@ -57,30 +58,34 @@ namespace Carbinet
                 }
             }
 
+            #endregion
+
             this.initialInfoTable();
 
-            this.FormClosing += new FormClosingEventHandler(Form1_FormClosing);
+            this.FormClosing += new FormClosingEventHandler(thisFormClosing);
             this.VisibleChanged += new EventHandler(frmSelect_VisibleChanged);
         }
-
+        #region 窗体事件
         void frmSelect_VisibleChanged(object sender, EventArgs e)
         {
             this.Top = Program.frmFloat.Height + Program.frmFloat.Top;
             this.Left = Program.frmFloat.Left;
             if (this.Visible == true)
             {
-                this.clearSelectStatus();
+                this.setFormToInitialState();
                 MiddleWareCore.set_mode(MiddleWareMode.实时互动, this);
             }
         }
 
-        void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        void thisFormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = true;
             this.Hide();
         }
 
-        private void InitializePanelControl()
+        #endregion
+
+        private void setPieToInitializeState()
         {
             PieChart1.Items.Clear();
             PieChart1.Items.Add(new PieChartItem(0, this.clrA, "0", "A", 0));
@@ -91,26 +96,77 @@ namespace Carbinet
         }
         private void initialInfoTable()
         {
-
-            //统一初始化
-            if (MemoryTable.isInitialized == false)
-            {
-                MemoryTable.initializeTabes();
-            }
             this.dtRoomConfig = MemoryTable.dtRoomConfig;
             this.studentInfoTable = MemoryTable.studentInfoTable;
             this.mapConfigsTable = MemoryTable.mapConfigsTable;
 
+            this.dtAnswerRecord = new DataTable();
+            this.dtAnswerRecord.Columns.Add("answer", typeof(string));
+            this.dtAnswerRecord.Columns.Add("studenID", typeof(string));
+
+            //学生ID与设备ID绑定，查找学生位置时，先通过本表查询设备ID，在通过设备ID确定学生位置
+            this.dtStudentAndEquipmentCombining = new DataTable();
+            this.dtStudentAndEquipmentCombining.Columns.Add("studenID", typeof(string));
+            this.dtStudentAndEquipmentCombining.Columns.Add("equipmentID", typeof(string));
 
         }
 
         #endregion
-        #region 内部函数
-        void clearSelectStatus()
+        #region 工具函数
+        void setFormToInitialState()
         {
             Program.frmClassRoom.resetClassRoomState();
-            MemoryTable.resetAllPersonAnswer("D");//默认都选A，也就是不选择
-            this.InitializePanelControl();
+            this.setPersonAnswer("D");//默认都选D，也就是不选择
+            this.setPieToInitializeState();
+        }
+        private void setPersonAnswer(string answer)
+        {
+            int total = this.dtAnswerRecord.Rows.Count;
+            for (int i = 0; i < total; i++)
+            {
+                DataRow dr = this.dtAnswerRecord.Rows[i];
+                dr["answer"] = answer;
+            }
+        }
+        private void setPersonAnswer(string studentID, string answer)
+        {
+            DataRow[] rows = this.dtAnswerRecord.Select(string.Format("studenID = '{0}'", studentID));
+            if (rows.Length > 0)
+            {
+                rows[0]["answer"] = answer;
+            }
+        }
+        private DocumentFileState getStateByAnswer(string answer)
+        {
+            DocumentFileState dfs = DocumentFileState.InitialState;
+            switch (answer)
+            {
+                case "A":
+                    dfs = DocumentFileState.Green;
+                    break;
+                case "B":
+                    dfs = DocumentFileState.Orange;
+                    break;
+                case "C":
+                    dfs = DocumentFileState.Red;
+                    break;
+                case "D":
+                    dfs = DocumentFileState.Blue;
+                    break;
+            }
+            return dfs;
+        }
+        private void clearEquipmentAndStudentCombining(string studentID)
+        {
+            DataRow[] rows = this.dtStudentAndEquipmentCombining.Select(string.Format("studenID = '{0}'", studentID));
+            if (rows.Length > 0)
+            {
+                this.dtStudentAndEquipmentCombining.Rows.Remove(rows[0]);
+            }
+        }
+        private void setEquipmentInfoCombineStudentID(string studentID, string equipmentID)
+        {
+            this.dtStudentAndEquipmentCombining.Rows.Add(new object[] { studentID, equipmentID });
         }
         #endregion
 
@@ -123,7 +179,7 @@ namespace Carbinet
 
         private void btnClearState_Click(object sender, EventArgs e)
         {
-            this.clearSelectStatus();
+            this.setFormToInitialState();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -143,6 +199,7 @@ namespace Carbinet
         {
             this.handle_event();
         }
+
         void handle_event()
         {
             IntelligentEvent evt = MiddleWareCore.get_a_event();
@@ -157,75 +214,80 @@ namespace Carbinet
                     string studentName = string.Empty;
                     string question_value = IEvent.questionValue;
 
+                    //1 更改本地信息
+                    //2 更改饼图
+                    //3 更改座位状态
+
                     int totalCount = this.studentInfoTable.Rows.Count;
 
                     Person person = MemoryTable.getPersonByEpc(epcID);
                     equipmentPosition ep = MemoryTable.getEquipmentConfigMapInfo(remoteDeviceID);
                     if (ep != null)
                     {
-                        int groupIndex = ep.group;
-
                         if (IEvent.event_unit_list.IndexOf(IntelligentEventUnit.epc_on_another_device) >= 0)
                         {
                             //这里要处理一下同一个学生用不一个设备发送答案的情况
                             equipmentPosition ep_old = MemoryTable.getEquipmentInfoByStudentID(epcID);
-                            Program.frmClassRoom.changeChairState(ep_old.group, ep_old.formatedPosition(), DocumentFileState.InitialState);
-                            Program.frmClassRoom.changeChairState(ep_old.group, ep_old.formatedPosition(), "");
+                            this.setChairState(ep_old, DocumentFileState.InitialState, "");
                             MemoryTable.clearEquipmentAndStudentCombining(epcID);
                         }
 
                         if (person != null)
                         {
                             studentName = person.name;
-                            Program.frmClassRoom.changeChairState(groupIndex, ep.formatedPosition(), studentName);
+                            this.setChairState(ep, studentName);
                             MemoryTable.setEquipmentInfoCombineStudentID(ep, person.epc);
                         }
 
-                        MemoryTable.setPersonAnswer(epcID, question_value);
-                        DocumentFileState dfs = DocumentFileState.InitialState;
-                        switch (question_value)
-                        {
-                            case "A":
-                                dfs = DocumentFileState.Green;
-                                break;
-                            case "B":
-                                dfs = DocumentFileState.Orange;
-                                break;
-                            case "C":
-                                dfs = DocumentFileState.Red;
-                                break;
-                            case "D":
-                                dfs = DocumentFileState.Blue;
-                                break;
-                        }
-                        Program.frmClassRoom.changeChairState(groupIndex, ep.formatedPosition(), dfs);
+                        this.setPersonAnswer(epcID, question_value);
 
-                        DataRow[] rowsA = this.studentInfoTable.Select("answer = 'A'");
-                        DataRow[] rowsB = this.studentInfoTable.Select("answer = 'B'");
-                        DataRow[] rowsC = this.studentInfoTable.Select("answer = 'C'");
-                        DataRow[] rowsD = this.studentInfoTable.Select("answer = 'D'");
-                        int iA = rowsA.Length;
-                        int iB = rowsB.Length;
-                        int iC = rowsC.Length;
-                        int iD = rowsD.Length;
-                        string strA = "", strB = "", strC = "", strD = "";
+                        DocumentFileState dfs = this.getStateByAnswer(question_value);
+                        this.setChairState(ep, dfs);
 
-                        if (totalCount > 0)
-                        {
-                            strA = (iA * 100 / totalCount).ToString() + "%";
-                            strB = (iB * 100 / totalCount).ToString() + "%";
-                            strC = (iC * 100 / totalCount).ToString() + "%";
-                            strD = (iD * 100 / totalCount).ToString() + "%";
-                        }
-                        PieChart1.Items.Clear();
-                        PieChart1.Items.Add(new PieChartItem(iA, this.clrA, iA.ToString(), "A " + strA, 0));
-                        PieChart1.Items.Add(new PieChartItem(iB, this.clrB, iB.ToString(), "B " + strB, 0));
-                        PieChart1.Items.Add(new PieChartItem(iC, this.clrC, iC.ToString(), "C " + strC, 0));
-                        PieChart1.Items.Add(new PieChartItem(iD, this.clrD, iD.ToString(), "D " + strD, 10));
+                        this.refreshPie();
                     }
                 };
                 this.Invoke(dele, evt);
             }
+        }
+        private void setChairState(equipmentPosition ep, string text)
+        {
+            Program.frmClassRoom.changeChairState(ep.group, ep.formatedPosition(), text);
+        }
+        private void setChairState(equipmentPosition ep, DocumentFileState dfs, string text)
+        {
+            setChairState(ep, dfs);
+            Program.frmClassRoom.changeChairState(ep.group, ep.formatedPosition(), text);
+        }
+        private void setChairState(equipmentPosition ep, DocumentFileState dfs)
+        {
+            Program.frmClassRoom.changeChairState(ep.group, ep.formatedPosition(), dfs);
+        }
+        private void refreshPie()
+        {
+            DataRow[] rowsA = this.dtAnswerRecord.Select("answer = 'A'");
+            DataRow[] rowsB = this.dtAnswerRecord.Select("answer = 'B'");
+            DataRow[] rowsC = this.dtAnswerRecord.Select("answer = 'C'");
+            DataRow[] rowsD = this.dtAnswerRecord.Select("answer = 'D'");
+            int iA = rowsA.Length;
+            int iB = rowsB.Length;
+            int iC = rowsC.Length;
+            int iD = rowsD.Length;
+            string strA = "", strB = "", strC = "", strD = "";
+            int totalCount = this.studentInfoTable.Rows.Count;
+
+            if (totalCount > 0)
+            {
+                strA = (iA * 100 / totalCount).ToString() + "%";
+                strB = (iB * 100 / totalCount).ToString() + "%";
+                strC = (iC * 100 / totalCount).ToString() + "%";
+                strD = (iD * 100 / totalCount).ToString() + "%";
+            }
+            PieChart1.Items.Clear();
+            PieChart1.Items.Add(new PieChartItem(iA, this.clrA, iA.ToString(), "A " + strA, 0));
+            PieChart1.Items.Add(new PieChartItem(iB, this.clrB, iB.ToString(), "B " + strB, 0));
+            PieChart1.Items.Add(new PieChartItem(iC, this.clrC, iC.ToString(), "C " + strC, 0));
+            PieChart1.Items.Add(new PieChartItem(iD, this.clrD, iD.ToString(), "D " + strD, 10));
         }
         #endregion
     }
