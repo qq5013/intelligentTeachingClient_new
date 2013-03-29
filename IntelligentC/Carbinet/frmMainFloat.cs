@@ -201,7 +201,6 @@ namespace Carbinet
         private void pbFloatPie_Click(object sender, EventArgs e)
         {
 
-            Program.frmSelect.Show();
         }
 
         private void pbTest_Click(object sender, EventArgs e)

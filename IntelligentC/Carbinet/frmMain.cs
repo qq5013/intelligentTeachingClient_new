@@ -92,10 +92,7 @@ namespace Carbinet
             //    Program.frmFloat = new frmFloat();
 
             //}
-            if (Program.frmSelect == null)
-            {
-                Program.frmSelect = new frmSelect();
-            }
+
             //frm.ShowDialog();
             this.Hide();
             Program.frmFloat.Show();

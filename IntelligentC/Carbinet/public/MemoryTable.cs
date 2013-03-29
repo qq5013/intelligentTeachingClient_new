@@ -134,12 +134,12 @@ namespace Carbinet
             //获取设备和位置的对应数据
             mapConfigsTable = EquipmentConfigCtl.getAllMapConfigs();
 
-            //mapConfigsTable.Columns.Add("studenID", typeof(string));
-            //for (int i = 0; i < mapConfigsTable.Rows.Count; i++)
-            //{
-            //    DataRow dr = mapConfigsTable.Rows[i];
-            //    dr["studenID"] = "";
-            //}
+            mapConfigsTable.Columns.Add("studenID", typeof(string));
+            for (int i = 0; i < mapConfigsTable.Rows.Count; i++)
+            {
+                DataRow dr = mapConfigsTable.Rows[i];
+                dr["studenID"] = "";
+            }
             isInitialized = true;
         }
 

@@ -53,9 +53,9 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Carbinet.Properties.Resources.blackboard;
-            this.pictureBox1.Location = new System.Drawing.Point(259, 18);
+            this.pictureBox1.Location = new System.Drawing.Point(225, 18);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(360, 90);
+            this.pictureBox1.Size = new System.Drawing.Size(428, 90);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
