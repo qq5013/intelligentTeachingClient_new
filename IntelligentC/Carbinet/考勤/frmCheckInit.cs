@@ -13,6 +13,7 @@ namespace Carbinet
 {
     public partial class frmCheckInit : MetroForm
     {
+        string record_id = string.Empty;
         public frmCheckInit()
         {
             InitializeComponent();
@@ -20,19 +21,18 @@ namespace Carbinet
 
         private void frmCheckInit_Load(object sender, EventArgs e)
         {
-            this.lblCheckGuid.Text = string.Format("{0}{1}", "prefix", DateTime.Now.ToString("yyyyMMddHHmmss"));
-            this.dtpEnd.Value = DateTime.Now;
+            record_id = string.Format("{0}{1})", "考勤记录(", DateTime.Now.ToString("yyyyMMddHHmmss"));
+            this.lblCheckGuid.Text = record_id;
             this.dtpStart.Value = DateTime.Now;
             this.txtInfo.Text = string.Empty;
-
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            frmCheckInitctl.insert_record(this.lblCheckGuid.Text, this.dtpStart.Text, this.dtpEnd.Text, this.txtInfo.Text, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-            frmCheck check = new frmCheck(this.lblCheckGuid.Text, this.dtpStart.Text, this.dtpEnd.Text);
-            check.ShowDialog();
-            MiddleWareCore.set_mode(intelligentMiddleWare.MiddleWareMode.考勤);
+            CheckCtl.insert_record(record_id, this.txtInfo.Text, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+
+            I_event_handler event_handler = (I_event_handler)(new StudentCheck(record_id));
+            event_handler.prepare_handler();
             this.Close();
         }
 
@@ -41,5 +41,15 @@ namespace Carbinet
             this.Close();
         }
 
+        private void metroButton1_Click(object sender, EventArgs e)
+        {
+            frmSelectCheckRecord frm = new frmSelectCheckRecord(this);
+            frm.ShowDialog();
+        }
+        public void setRecordID(string record)
+        {
+            this.record_id = record;
+            this.lblCheckGuid.Text = record_id;
+        }
     }
 }

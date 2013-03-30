@@ -4,19 +4,15 @@ using MetroFramework.Forms;
 using Nexus.Windows.Forms;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Carbinet
 {
     public partial class frmFloat : MetroForm, I_mini_form_show_notify
     {
-        #region
+        #region 成员
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.ContextMenu notifyContextMenu;
         private System.Windows.Forms.MenuItem menuItemClose;
@@ -27,11 +23,12 @@ namespace Carbinet
         private System.Windows.Forms.MenuItem menuItemStudentMng;
         private System.Windows.Forms.MenuItem menuItemAbout;
 
-        #endregion
 
         I_event_handler event_handler;
         List<PictureBox> pblst = new List<PictureBox>();
         List<PictureBox> pblst2 = new List<PictureBox>();
+        #endregion
+
         public frmFloat()
         {
             #region 控件初始化
@@ -73,6 +70,8 @@ namespace Carbinet
             #endregion
 
             #region 设置窗体及主要控件位置
+            this.lblTip.Text = string.Empty;
+
             Screen[] screens = System.Windows.Forms.Screen.AllScreens;
             for (int i = 0; i < screens.Length; i++)
             {
@@ -92,11 +91,7 @@ namespace Carbinet
             #endregion
 
             #region 绑定按钮事件
-            //pictureBox4.Click += (sender, e) =>
-            //{
-            //    frmCheckInit startCheck = new frmCheckInit();
-            //    startCheck.ShowDialog();
-            //};
+
 
             pictureBox1_1.Click += (sender, e) =>
             {
@@ -107,96 +102,27 @@ namespace Carbinet
                 {
                     event_handler = (I_event_handler)(new frmRTTest(this));
                     event_handler.prepare_handler();
-
                 };
             pictureBox3_1.Click += (sender, e) =>
             {
                 event_handler = new RealtimeInteractive(this);
-
                 event_handler.prepare_handler();
-                //Program.frmSelect.Visible = !Program.frmSelect.Visible;
-
             };
+            pictureBox4_1.Click += (sender, e) =>
+            {
+                frmCheckInit startCheck = new frmCheckInit();
+                startCheck.ShowDialog();
+            };
+
             pictureBox5_1.Click += (sender, e) =>
                 {
                     Program.frmClassRoom.ShowDialog();
-                    Debug.WriteLine("click ***********************");
                 };
 
-
-            pictureBox5_1.MouseLeave += (sender, e) =>
-            {
-                this.pictureBox5.Visible = true;
-                this.pictureBox5_1.Visible = false;
-            };
-            pictureBox5.MouseEnter += (sender, e) =>
-                {
-                    Debug.WriteLine("MouseMove ***********************");
-                    this.pictureBox5.Visible = false;
-                    this.pictureBox5_1.Visible = true;
-                };
-            pictureBox4_1.MouseLeave += (sender, e) =>
-            {
-                this.pictureBox4.Visible = true;
-                this.pictureBox4_1.Visible = false;
-            };
-            pictureBox4.MouseMove += (sender, e) =>
-            {
-                this.pictureBox4.Visible = false;
-                this.pictureBox4_1.Visible = true;
-            };
-            pictureBox3_1.MouseLeave += (sender, e) =>
-            {
-                this.pictureBox3.Visible = true;
-                this.pictureBox3_1.Visible = false;
-            };
-            pictureBox3.MouseMove += (sender, e) =>
-            {
-                this.pictureBox3.Visible = false;
-                this.pictureBox3_1.Visible = true;
-            };
-            pictureBox2_1.MouseLeave += (sender, e) =>
-            {
-                this.pictureBox2.Visible = true;
-                this.pictureBox2_1.Visible = false;
-            };
-            pictureBox2.MouseMove += (sender, e) =>
-            {
-                this.pictureBox2.Visible = false;
-                this.pictureBox2_1.Visible = true;
-            };
-            pictureBox1_1.MouseLeave += (sender, e) =>
-            {
-                this.pictureBox1.Visible = true;
-                this.pictureBox1_1.Visible = false;
-            };
-            pictureBox1.MouseMove += (sender, e) =>
-            {
-                this.pictureBox1.Visible = false;
-                this.pictureBox1_1.Visible = true;
-            };
             #endregion
             //this.initial_popup_menu();
         }
 
-        void pictureBox_MouseLeave(object sender, EventArgs e)
-        {
-            this.pictureBox5.Visible = true;
-            //PictureBox pb = (PictureBox)sender;
-
-            //miniButton button = getMiniButton(pb);
-            //setButtonState(button, false);
-            //Debug.WriteLine("pictureBox_MouseLeave => " + pb.Name);
-        }
-
-        void pictureBox_MouseHover(object sender, EventArgs e)
-        {
-            this.pictureBox5_1.Visible = true;
-            //PictureBox pb = (PictureBox)sender;
-            //miniButton button = getMiniButton(pb);
-            //setButtonState(button, true);
-            //Debug.WriteLine("pictureBox_MouseHover => " + pb.Name);
-        }
         //miniButton getMiniButton(PictureBox pb)
         //{
         //    miniButton button = miniButton.显示座位;
@@ -246,6 +172,8 @@ namespace Carbinet
         //            break;
         //    }
         //}
+
+        #region 接口函数
         public void refreshPie(List<string> captionList, List<int> valueList, List<Color> colorList, bool b)
         {
             if (captionList.Count != valueList.Count || valueList.Count != colorList.Count) return;
@@ -276,6 +204,11 @@ namespace Carbinet
                 }
             }
         }
+        public void show_tip(string tip)
+        {
+            this.lblTip.Text = tip;
+        } 
+        #endregion
 
         void resetPbYPos(int screenHeight)
         {
@@ -295,22 +228,24 @@ namespace Carbinet
                 this.pblst2[i].Top = defaultTop + 80 * i + defaultVGap * i;
                 this.pblst2[i].Visible = false;
 
-                //this.pblst[i].MouseMove += (sender, e) =>
-                //{
-                //    this.pblst[i].Visible = false;
-                //    this.pblst2[i].Visible = true;
-                //};
-                //this.pblst2[i].MouseLeave += (sender, e) =>
-                //{
-                //    this.pblst[i].Visible = true;
-                //    this.pblst2[i].Visible = false;
-                //};
+                int iTemp = i;
+                this.pblst[i].MouseMove += (sender, e) =>
+                {
+                    this.pblst[iTemp].Visible = false;
+                    this.pblst2[iTemp].Visible = true;
+                };
+                this.pblst2[i].MouseLeave += (sender, e) =>
+                {
+                    this.pblst[iTemp].Visible = true;
+                    this.pblst2[iTemp].Visible = false;
+                };
             }
+
+            
 
         }
 
-
-        #region
+        #region 状态栏图标点击事件
         private void initial_popup_menu()
         {
             this.menuItemClose = new System.Windows.Forms.MenuItem();

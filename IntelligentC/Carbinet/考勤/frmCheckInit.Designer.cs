@@ -33,19 +33,18 @@
             this.lblCheckGuid = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dtpStart = new System.Windows.Forms.DateTimePicker();
-            this.label3 = new System.Windows.Forms.Label();
-            this.dtpEnd = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.txtInfo = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
+            this.metroButton1 = new MetroFramework.Controls.MetroButton();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 65);
+            this.label1.Location = new System.Drawing.Point(17, 76);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.TabIndex = 0;
@@ -54,7 +53,7 @@
             // lblCheckGuid
             // 
             this.lblCheckGuid.AutoSize = true;
-            this.lblCheckGuid.Location = new System.Drawing.Point(91, 65);
+            this.lblCheckGuid.Location = new System.Drawing.Point(92, 76);
             this.lblCheckGuid.Name = "lblCheckGuid";
             this.lblCheckGuid.Size = new System.Drawing.Size(89, 12);
             this.lblCheckGuid.TabIndex = 0;
@@ -75,33 +74,14 @@
             this.dtpStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpStart.Location = new System.Drawing.Point(88, 106);
             this.dtpStart.Name = "dtpStart";
-            this.dtpStart.Size = new System.Drawing.Size(200, 21);
+            this.dtpStart.Size = new System.Drawing.Size(355, 21);
             this.dtpStart.TabIndex = 1;
             this.dtpStart.Value = new System.DateTime(2012, 7, 7, 0, 0, 0, 0);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 162);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(65, 12);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "结束时间：";
-            // 
-            // dtpEnd
-            // 
-            this.dtpEnd.CustomFormat = "yyyy-MM-dd HH:mm:ss";
-            this.dtpEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpEnd.Location = new System.Drawing.Point(87, 156);
-            this.dtpEnd.Name = "dtpEnd";
-            this.dtpEnd.Size = new System.Drawing.Size(200, 21);
-            this.dtpEnd.TabIndex = 2;
-            this.dtpEnd.Value = new System.DateTime(2012, 7, 7, 0, 0, 0, 0);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 200);
+            this.label4.Location = new System.Drawing.Point(17, 148);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(41, 12);
             this.label4.TabIndex = 1;
@@ -109,10 +89,10 @@
             // 
             // txtInfo
             // 
-            this.txtInfo.Location = new System.Drawing.Point(87, 197);
+            this.txtInfo.Location = new System.Drawing.Point(88, 145);
             this.txtInfo.Multiline = true;
             this.txtInfo.Name = "txtInfo";
-            this.txtInfo.Size = new System.Drawing.Size(355, 98);
+            this.txtInfo.Size = new System.Drawing.Size(355, 138);
             this.txtInfo.TabIndex = 3;
             // 
             // button1
@@ -142,21 +122,34 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(173, 12);
             this.label5.TabIndex = 1;
-            this.label5.Text = "注：时间段之外的考勤记录无效";
+            this.label5.Text = "注：您可以选择之前的考勤记录";
+            // 
+            // metroButton1
+            // 
+            this.metroButton1.Highlight = false;
+            this.metroButton1.Location = new System.Drawing.Point(374, 73);
+            this.metroButton1.Name = "metroButton1";
+            this.metroButton1.Size = new System.Drawing.Size(69, 22);
+            this.metroButton1.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroButton1.StyleManager = null;
+            this.metroButton1.TabIndex = 6;
+            this.metroButton1.Text = "更多...";
+            this.metroButton1.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroButton1.Visible = false;
+            this.metroButton1.Click += new System.EventHandler(this.metroButton1_Click);
             // 
             // frmCheckInit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(470, 386);
+            this.Controls.Add(this.metroButton1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txtInfo);
-            this.Controls.Add(this.dtpEnd);
             this.Controls.Add(this.dtpStart);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblCheckGuid);
             this.Controls.Add(this.label1);
@@ -178,12 +171,11 @@
         private System.Windows.Forms.Label lblCheckGuid;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker dtpStart;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DateTimePicker dtpEnd;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtInfo;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label5;
+        private MetroFramework.Controls.MetroButton metroButton1;
     }
 }

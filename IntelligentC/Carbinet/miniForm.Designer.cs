@@ -40,6 +40,7 @@
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lblTip = new MetroFramework.Controls.MetroLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1_1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2_1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3_1)).BeginInit();
@@ -57,7 +58,7 @@
             this.metroButton1.Highlight = false;
             this.metroButton1.Location = new System.Drawing.Point(0, 0);
             this.metroButton1.Name = "metroButton1";
-            this.metroButton1.Size = new System.Drawing.Size(85, 40);
+            this.metroButton1.Size = new System.Drawing.Size(85, 30);
             this.metroButton1.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroButton1.StyleManager = null;
             this.metroButton1.TabIndex = 4;
@@ -66,7 +67,7 @@
             // 
             // PieChart1
             // 
-            this.PieChart1.Location = new System.Drawing.Point(2, 57);
+            this.PieChart1.Location = new System.Drawing.Point(2, 64);
             this.PieChart1.Name = "PieChart1";
             this.PieChart1.Radius = 200F;
             this.PieChart1.Size = new System.Drawing.Size(80, 80);
@@ -164,11 +165,29 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // lblTip
+            // 
+            this.lblTip.AutoSize = true;
+            this.lblTip.CustomBackground = false;
+            this.lblTip.FontSize = MetroFramework.MetroLabelSize.Medium;
+            this.lblTip.FontWeight = MetroFramework.MetroLabelWeight.Light;
+            this.lblTip.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
+            this.lblTip.Location = new System.Drawing.Point(0, 37);
+            this.lblTip.Name = "lblTip";
+            this.lblTip.Size = new System.Drawing.Size(81, 19);
+            this.lblTip.Style = MetroFramework.MetroColorStyle.Blue;
+            this.lblTip.StyleManager = null;
+            this.lblTip.TabIndex = 12;
+            this.lblTip.Text = "metroLabel1";
+            this.lblTip.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.lblTip.UseStyleColors = false;
+            // 
             // frmFloat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(65, 818);
+            this.Controls.Add(this.lblTip);
             this.Controls.Add(this.pictureBox1_1);
             this.Controls.Add(this.pictureBox2_1);
             this.Controls.Add(this.pictureBox3_1);
@@ -205,6 +224,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -222,6 +242,7 @@
         private System.Windows.Forms.PictureBox pictureBox3_1;
         private System.Windows.Forms.PictureBox pictureBox2_1;
         private System.Windows.Forms.PictureBox pictureBox1_1;
+        private MetroFramework.Controls.MetroLabel lblTip;
 
     }
 }

@@ -7,10 +7,10 @@ using System.Drawing;
 
 namespace intelligentMiddleWare
 {
-    public enum miniButton
-    {
-        显示座位, 考勤, 实时互动, 课堂测验, 退出
-    }
+    //public enum miniButton
+    //{
+    //    显示座位, 考勤, 实时互动, 课堂测验, 退出
+    //}
     public enum MiddleWareMode
     {
         考勤,
@@ -27,6 +27,7 @@ namespace intelligentMiddleWare
     public interface I_mini_form_show_notify
     {
         void refreshPie(List<string> captionList, List<int> valueList, List<Color> colorList, bool bShowLabel);
+        void show_tip(string tip);
     }
     public interface I_event_notify
     {

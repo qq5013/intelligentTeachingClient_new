@@ -81,6 +81,12 @@
   <ItemGroup>
     <Compile Include="carbinet\ClassRoomConfig.cs" />
     <Compile Include="carbinet\DocumentFileState.cs" />
+    <Compile Include="frmSelectCheckRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSelectCheckRecord.Designer.cs">
+      <DependentUpon>frmSelectCheckRecord.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmTest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,6 +114,7 @@
       <DependentUpon>frmClassRoom.cs</DependentUpon>
     </Compile>
     <Compile Include="RealtimeInteractive.cs" />
+    <Compile Include="StudentCheck.cs" />
     <Compile Include="课堂测验\frmQuestionTestStatics.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -131,7 +138,7 @@
     <Compile Include="Middleware\ProtocolHelper.cs" />
     <Compile Include="Middleware\StaticDataPort.cs" />
     <Compile Include="public\Configures.cs" />
-    <Compile Include="考勤\frmCheckInitctl.cs" />
+    <Compile Include="考勤\CheckCtl.cs" />
     <Compile Include="课堂测验\frmQuestionMng.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -214,6 +221,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmSelectCheckRecord.resx">
+      <DependentUpon>frmSelectCheckRecord.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmTest.resx">
       <DependentUpon>frmTest.cs</DependentUpon>
     </EmbeddedResource>

@@ -33,18 +33,17 @@ namespace Carbinet
         EquipmentConfigCtl ctl = new EquipmentConfigCtl();
         roomConfigCtl configCtl = new roomConfigCtl();
 
-        string dtStart, dtEnd;
+        string dtStart;
         string check_record_id = string.Empty;
 
         Color clrChecked = Color.FromArgb(243, 119, 53);
         Color clrUncheck = Color.FromArgb(0, 174, 219);
         #endregion
         // 291,147
-        public frmCheck(string record_id, string dtStart, string dtEnd)
+        public frmCheck(string record_id, string dtStart)
             : this()
         {
             this.check_record_id = record_id;
-            this.dtEnd = dtEnd;
             this.dtStart = dtStart;
         }
         public frmCheck()
@@ -130,7 +129,7 @@ namespace Carbinet
                         //更新考勤信息
                         //rows = this.checkTable.Select("equipmentID = '" + data.equipmentID + "'");
                         //根据接收到的信息，首先将学生出勤状态置为 1，之后将控件的显示状态改为绿色
-                        if (string.Compare(this.dtStart, check_time) <= 0 && string.Compare(this.dtEnd, check_time) >= 0)
+                        if (string.Compare(this.dtStart, check_time) <= 0)
                         {
                             rows = this.studentInfoTable.Select("STUDENTID = '" + epcID + "'");
                             if (rows.Length > 0)

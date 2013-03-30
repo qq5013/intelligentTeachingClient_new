@@ -29,6 +29,8 @@ namespace Carbinet
             @"SELECT CLASS_NAME as 班级名称,CHECK_TIME as 考勤时间,PERCENTAGE as 出勤率 from T_CLASS_CHECK_INFO
              where CLASS_NAME = '{0}' and CHECK_TIME > '{1}' and CHECK_TIME < '{2}'";
 
+
+
         public static DataTable GetClassCheckInfo(string className, string start, string end)
         {
             DataSet ds = null;
@@ -37,16 +39,6 @@ namespace Carbinet
                 DataTable dt = CsharpSQLiteHelper.ExecuteTable(
            sqlSelect_GetClassCheckInfo, new object[3] { className, start, end });
                 return dt;
-                //ds = SQLiteHelper.ExecuteDataSet(
-                //          SQLiteHelper.connectString,
-                //           sqlSelect_GetClassCheckInfo, new object[3] { className, start, end });
-                //if (ds != null)
-                //{
-                //    if (ds.Tables.Count > 0)
-                //    {
-                //        return ds.Tables[0];
-                //    }
-                //}
             }
             catch (System.Exception ex)
             {
@@ -67,14 +59,6 @@ namespace Carbinet
                                                         ,name
                                                         ,percentage
                                                     }).ToString());
-                //int result = int.Parse(SQLiteHelper.ExecuteNonQuery(SQLiteHelper.connectString,
-                //                             sqlInsert_AddClassCheckInfo
-                //                             , new object[3]
-                //                                    {
-                //                                        time
-                //                                        ,name
-                //                                        ,percentage
-                //                                    }).ToString());
                 if (result > 0)
                 {
                     return true;
@@ -88,46 +72,36 @@ namespace Carbinet
             return false;
         }
 
+        public static bool AddCheckInfo(string record_id, string STUDENTID, string CHECK_TIME)
+        {
+            bool bR = true;
+            int result = CsharpSQLiteHelper.ExecuteNonQuery(sqlInsert_AddCheckInfo, new object[3] { record_id, STUDENTID, CHECK_TIME });
+            if (result <= 0)
+            {
+                bR = false;
+            }
+            return bR;
+        }
         public bool AddCheckInfo(List<CheckInfo> paraList)
         {
             bool bR = true;
-            // List<CheckInfo>< object[]> ls = new List<CheckInfo><object[]>();
-            //Hashtable SQLStringList = new Hashtable();
             foreach (CheckInfo ci in paraList)
             {
-                //SQLStringList.Add(new object[4] { ci.STUDENTID, ci.CHECK_TIME, ci.SUBJECT_NAME, ci.STATUS }, sqlInsert_AddCheckInfo);
-
                 int result = CsharpSQLiteHelper.ExecuteNonQuery(sqlInsert_AddCheckInfo, new object[3] { ci.record_id, ci.STUDENTID, ci.CHECK_TIME });
                 if (result <= 0)
                 {
                     bR = false;
                 }
-                //SQLStringList.Add(sqlInsert_AddCheckInfo, new object[3] { ci.STUDENTID, ci.CHECK_TIME, ci.SUBJECT_NAME });
             }
             return bR;
-            //return SQLiteHelper.ExecuteSqlTran(
-            //                        SQLiteHelper.connectString,
-            //                        SQLStringList);
-
         }
 
         public DataTable getStudentInfo(string id)
         {
-            DataSet ds = null;
             try
             {
                 DataTable dt = CsharpSQLiteHelper.ExecuteTable(sqlSelect_GetSpecifiedStudentInfo, new object[1] { id });
                 return dt;
-                //ds = SQLiteHelper.ExecuteDataSet(
-                //          SQLiteHelper.connectString,
-                //           sqlSelect_GetSpecifiedStudentInfo, new object[1] { id });
-                //if (ds != null)
-                //{
-                //    if (ds.Tables.Count > 0)
-                //    {
-                //        return ds.Tables[0];
-                //    }
-                //}
             }
             catch (System.Exception ex)
             {
@@ -142,16 +116,6 @@ namespace Carbinet
             {
                 DataTable dt = CsharpSQLiteHelper.ExecuteTable(sqlSelect_allGetStudentInfo, null);
                 return dt;
-                //ds = SQLiteHelper.ExecuteDataSet(
-                //          SQLiteHelper.connectString,
-                //           sqlSelect_allGetStudentInfo, null);
-                //if (ds != null)
-                //{
-                //    if (ds.Tables.Count > 0)
-                //    {
-                //        return ds.Tables[0];
-                //    }
-                //}
             }
             catch (System.Exception ex)
             {
