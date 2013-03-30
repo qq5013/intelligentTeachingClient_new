@@ -242,4 +242,58 @@
   <data name="MB_Hand_副本" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MB_Hand_副本.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="line" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\line.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="关闭1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\关闭1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="关闭2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\关闭2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="提问1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\提问1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="提问2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\提问2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="教学互动课堂界面设计2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\教学互动课堂界面设计2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="测验1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\测验1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="测验2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\测验2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="讲台2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\讲台2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="讲台带字" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\讲台带字.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="课堂1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\课堂1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="课堂2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\课堂2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="互动1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\互动1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="互动2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\互动2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="座位1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\座位1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="座位2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\座位2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="打卡1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\打卡1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="打卡2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\打卡2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

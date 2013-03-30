@@ -28,55 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.metroButton1 = new MetroFramework.Controls.MetroButton();
+            this.PieChart1 = new Nexus.Windows.Forms.PieChart();
+            this.pictureBox1_1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2_1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3_1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4_1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5_1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.metroButton1 = new MetroFramework.Controls.MetroButton();
-            this.PieChart1 = new Nexus.Windows.Forms.PieChart();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1_1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2_1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3_1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4_1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5_1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Location = new System.Drawing.Point(2, 345);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(80, 80);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox4.TabIndex = 3;
-            this.pictureBox4.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Location = new System.Drawing.Point(2, 445);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(80, 80);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 2;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Location = new System.Drawing.Point(2, 555);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(80, 80);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 1;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(2, 657);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(80, 80);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
             // 
             // metroButton1
             // 
@@ -100,20 +74,106 @@
             this.PieChart1.Text = "pieChart1";
             this.PieChart1.Thickness = 10F;
             // 
+            // pictureBox1_1
+            // 
+            this.pictureBox1_1.Location = new System.Drawing.Point(11, 759);
+            this.pictureBox1_1.Name = "pictureBox1_1";
+            this.pictureBox1_1.Size = new System.Drawing.Size(60, 80);
+            this.pictureBox1_1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1_1.TabIndex = 11;
+            this.pictureBox1_1.TabStop = false;
+            // 
+            // pictureBox2_1
+            // 
+            this.pictureBox2_1.Location = new System.Drawing.Point(11, 702);
+            this.pictureBox2_1.Name = "pictureBox2_1";
+            this.pictureBox2_1.Size = new System.Drawing.Size(60, 80);
+            this.pictureBox2_1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2_1.TabIndex = 10;
+            this.pictureBox2_1.TabStop = false;
+            // 
+            // pictureBox3_1
+            // 
+            this.pictureBox3_1.Location = new System.Drawing.Point(11, 645);
+            this.pictureBox3_1.Name = "pictureBox3_1";
+            this.pictureBox3_1.Size = new System.Drawing.Size(60, 80);
+            this.pictureBox3_1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3_1.TabIndex = 9;
+            this.pictureBox3_1.TabStop = false;
+            // 
+            // pictureBox4_1
+            // 
+            this.pictureBox4_1.Location = new System.Drawing.Point(11, 588);
+            this.pictureBox4_1.Name = "pictureBox4_1";
+            this.pictureBox4_1.Size = new System.Drawing.Size(60, 80);
+            this.pictureBox4_1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox4_1.TabIndex = 8;
+            this.pictureBox4_1.TabStop = false;
+            // 
+            // pictureBox5_1
+            // 
+            this.pictureBox5_1.Location = new System.Drawing.Point(11, 508);
+            this.pictureBox5_1.Name = "pictureBox5_1";
+            this.pictureBox5_1.Size = new System.Drawing.Size(60, 80);
+            this.pictureBox5_1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox5_1.TabIndex = 7;
+            this.pictureBox5_1.TabStop = false;
+            // 
             // pictureBox5
             // 
-            this.pictureBox5.Location = new System.Drawing.Point(2, 268);
+            this.pictureBox5.Location = new System.Drawing.Point(11, 143);
             this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(80, 80);
+            this.pictureBox5.Size = new System.Drawing.Size(60, 80);
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox5.TabIndex = 6;
             this.pictureBox5.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Location = new System.Drawing.Point(11, 216);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(60, 80);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox4.TabIndex = 3;
+            this.pictureBox4.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Location = new System.Drawing.Point(11, 289);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(60, 80);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 2;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Location = new System.Drawing.Point(11, 362);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(60, 80);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 1;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(11, 435);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(60, 80);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // frmFloat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(85, 818);
+            this.ClientSize = new System.Drawing.Size(65, 818);
+            this.Controls.Add(this.pictureBox1_1);
+            this.Controls.Add(this.pictureBox2_1);
+            this.Controls.Add(this.pictureBox3_1);
+            this.Controls.Add(this.pictureBox4_1);
+            this.Controls.Add(this.pictureBox5_1);
             this.Controls.Add(this.pictureBox5);
             this.Controls.Add(this.PieChart1);
             this.Controls.Add(this.metroButton1);
@@ -134,11 +194,16 @@
             this.Style = MetroFramework.MetroColorStyle.Black;
             this.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.TopMost = true;
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1_1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2_1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3_1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4_1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5_1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -152,6 +217,11 @@
         private MetroFramework.Controls.MetroButton metroButton1;
         private Nexus.Windows.Forms.PieChart PieChart1;
         private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.PictureBox pictureBox5_1;
+        private System.Windows.Forms.PictureBox pictureBox4_1;
+        private System.Windows.Forms.PictureBox pictureBox3_1;
+        private System.Windows.Forms.PictureBox pictureBox2_1;
+        private System.Windows.Forms.PictureBox pictureBox1_1;
 
     }
 }

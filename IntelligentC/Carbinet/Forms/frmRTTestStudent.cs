@@ -22,10 +22,6 @@ namespace Carbinet
 
         void frmRTTestStudent_Shown(object sender, EventArgs e)
         {
-            if (this.frmParent != null)
-            {
-                frmParent.eventInvokeCommand += new deleInternalCommandInvoke(frmParent_eventInvokeCommand);
-            }
             this.groupBoxQuestion.Left = 0;
             this.groupBoxQuestion.Width = this.Width;
 
@@ -50,7 +46,6 @@ namespace Carbinet
                 case (int)InternalCommand.CloseForm:
                     if (this.frmParent != null)
                     {
-                        frmParent.eventInvokeCommand -= this.frmParent_eventInvokeCommand;
                         this.Close();
                     }
                     break;

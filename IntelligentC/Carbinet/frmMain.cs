@@ -61,8 +61,8 @@ namespace Carbinet
 
         private void 课堂测试_Click(object sender, EventArgs e)
         {
-            frmRTTest frm = new frmRTTest();
-            frm.ShowDialog();
+            //frmRTTest frm = new frmRTTest();
+            //frm.ShowDialog();
 
         }
 
@@ -100,8 +100,8 @@ namespace Carbinet
 
         private void 课堂测试TToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmRTTest frm = new frmRTTest();
-            frm.ShowDialog();
+            //frmRTTest frm = new frmRTTest();
+            //frm.ShowDialog();
         }
 
         private void 串口设置CToolStripMenuItem_Click(object sender, EventArgs e)

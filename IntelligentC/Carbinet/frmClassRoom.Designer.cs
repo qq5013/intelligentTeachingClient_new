@@ -30,7 +30,9 @@
         {
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // metroLabel1
@@ -52,19 +54,29 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::Carbinet.Properties.Resources.blackboard;
-            this.pictureBox1.Location = new System.Drawing.Point(225, 18);
+            this.pictureBox1.Image = global::Carbinet.Properties.Resources.教学互动课堂界面设计2;
+            this.pictureBox1.Location = new System.Drawing.Point(69, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(428, 90);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.Size = new System.Drawing.Size(760, 183);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::Carbinet.Properties.Resources.line;
+            this.pictureBox2.Location = new System.Drawing.Point(44, 196);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(804, 17);
+            this.pictureBox2.TabIndex = 2;
+            this.pictureBox2.TabStop = false;
             // 
             // frmClassRoom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(879, 700);
+            this.ClientSize = new System.Drawing.Size(898, 788);
+            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.metroLabel1);
             this.Location = new System.Drawing.Point(0, 0);
@@ -73,6 +85,7 @@
             this.Name = "frmClassRoom";
             this.Resizable = false;
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -82,5 +95,6 @@
 
         private MetroFramework.Controls.MetroLabel metroLabel1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }

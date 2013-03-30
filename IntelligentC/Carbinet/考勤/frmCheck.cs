@@ -264,7 +264,7 @@ namespace Carbinet
         void clearSelectStatus()
         {
             Program.frmClassRoom.resetClassRoomState();
-            MemoryTable.resetAllPersonAnswer("X");//默认X
+            //MemoryTable.resetAllPersonAnswer("X");//默认X
             this.InitializePanelControl();
         }
         void Form1_FormClosing(object sender, FormClosingEventArgs e)

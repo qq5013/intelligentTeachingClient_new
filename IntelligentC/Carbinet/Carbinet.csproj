@@ -107,6 +107,7 @@
     <Compile Include="frmClassRoom.Designer.cs">
       <DependentUpon>frmClassRoom.cs</DependentUpon>
     </Compile>
+    <Compile Include="RealtimeInteractive.cs" />
     <Compile Include="课堂测验\frmQuestionTestStatics.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -438,6 +439,7 @@
     <Content Include="Resources\close.png" />
     <Content Include="Resources\Groups.png" />
     <Content Include="Resources\Libraries alt.png" />
+    <None Include="Resources\line.png" />
     <Content Include="Resources\Live Sync.png" />
     <Content Include="Resources\MB_Hand_副本.png" />
     <Content Include="Resources\MB_tasks.png" />
@@ -447,6 +449,23 @@
     <Content Include="Resources\MB_touch.png" />
     <Content Include="Resources\PowerRestart.png" />
     <Content Include="Resources\PowerShut Down.png" />
+    <None Include="Resources\关闭1.png" />
+    <None Include="Resources\关闭2.png" />
+    <None Include="Resources\互动1.png" />
+    <None Include="Resources\互动2.png" />
+    <None Include="Resources\座位1.png" />
+    <None Include="Resources\座位2.png" />
+    <Content Include="Resources\打卡1.png" />
+    <Content Include="Resources\打卡2.png" />
+    <Content Include="Resources\提问1.png" />
+    <Content Include="Resources\提问2.png" />
+    <None Include="Resources\教学互动课堂界面设计2.png" />
+    <Content Include="Resources\测验1.png" />
+    <Content Include="Resources\测验2.png" />
+    <None Include="Resources\讲台2.png" />
+    <Content Include="Resources\讲台带字.png" />
+    <Content Include="Resources\课堂1.png" />
+    <Content Include="Resources\课堂2.png" />
     <None Include="Resources\htc11.png" />
     <Content Include="Resources\IconsLand_002_left.png" />
     <Content Include="Resources\IconsLand_002_right.png" />

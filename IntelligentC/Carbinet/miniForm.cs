@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -13,8 +14,9 @@ using System.Windows.Forms;
 
 namespace Carbinet
 {
-    public partial class frmFloat : MetroForm, I_event_notify
+    public partial class frmFloat : MetroForm, I_mini_form_show_notify
     {
+        #region
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.ContextMenu notifyContextMenu;
         private System.Windows.Forms.MenuItem menuItemClose;
@@ -25,17 +27,14 @@ namespace Carbinet
         private System.Windows.Forms.MenuItem menuItemStudentMng;
         private System.Windows.Forms.MenuItem menuItemAbout;
 
-
-        #region 各个选项对应的颜色
-        Color clrA = Color.FromArgb(0, 177, 89);
-        Color clrB = Color.FromArgb(243, 119, 53);
-        Color clrC = Color.FromArgb(209, 17, 65);
-        Color clrD = Color.FromArgb(0, 174, 219);
         #endregion
 
+        I_event_handler event_handler;
         List<PictureBox> pblst = new List<PictureBox>();
+        List<PictureBox> pblst2 = new List<PictureBox>();
         public frmFloat()
         {
+            #region 控件初始化
             InitializeComponent();
             pblst.Add(pictureBox5);
             pblst.Add(pictureBox4);
@@ -43,12 +42,24 @@ namespace Carbinet
             pblst.Add(pictureBox2);
             pblst.Add(pictureBox1);
 
+            pblst2.Add(pictureBox5_1);
+            pblst2.Add(pictureBox4_1);
+            pblst2.Add(pictureBox3_1);
+            pblst2.Add(pictureBox2_1);
+            pblst2.Add(pictureBox1_1);
 
-            this.pictureBox5.Image = (Image)global::Carbinet.Properties.Resources.Groups;//显示座位
-            this.pictureBox4.Image = (Image)global::Carbinet.Properties.Resources.MB_touch;//考勤
-            this.pictureBox3.Image = (Image)global::Carbinet.Properties.Resources.MB_Hand_副本;//实时互动
-            this.pictureBox2.Image = (Image)global::Carbinet.Properties.Resources.MB_tasks;//课堂测验
-            this.pictureBox1.Image = (Image)global::Carbinet.Properties.Resources.MB_shut_down;//退出
+            this.pictureBox5.Image = (Image)global::Carbinet.Properties.Resources.座位1;//显示座位
+            this.pictureBox4.Image = (Image)global::Carbinet.Properties.Resources.打卡1;//考勤
+            this.pictureBox3.Image = (Image)global::Carbinet.Properties.Resources.互动1;//实时互动
+            this.pictureBox2.Image = (Image)global::Carbinet.Properties.Resources.测验1;//课堂测验
+            this.pictureBox1.Image = (Image)global::Carbinet.Properties.Resources.关闭1;//退出
+
+            this.pictureBox5_1.Image = (Image)global::Carbinet.Properties.Resources.座位2;//显示座位
+            this.pictureBox4_1.Image = (Image)global::Carbinet.Properties.Resources.打卡2;//考勤
+            this.pictureBox3_1.Image = (Image)global::Carbinet.Properties.Resources.互动2;//实时互动
+            this.pictureBox2_1.Image = (Image)global::Carbinet.Properties.Resources.测验2;//课堂测验
+            this.pictureBox1_1.Image = (Image)global::Carbinet.Properties.Resources.关闭2;//退出
+
 
             PieChart1.ItemStyle.SurfaceAlphaTransparency = 0.92F;
             PieChart1.FocusedItemStyle.SurfaceAlphaTransparency = 0.92F;
@@ -59,8 +70,9 @@ namespace Carbinet
             PieChart1.Rotation = 0.0F;
             PieChart1.ShowEdges = false;
             //PieChart1.Radius = 90F;
+            #endregion
 
-            //this.Move += Form1_Move;
+            #region 设置窗体及主要控件位置
             Screen[] screens = System.Windows.Forms.Screen.AllScreens;
             for (int i = 0; i < screens.Length; i++)
             {
@@ -68,8 +80,6 @@ namespace Carbinet
                 if (sc.Primary == true)
                 {
                     Rectangle rect = sc.WorkingArea;
-                    //this.Left = (int)(rect.Width - this.Width);
-                    //this.Left = (int)(rect.Width * 0.7);
                     this.Top = (int)(rect.Height * 0.0);
                     this.Height = rect.Height;
                     this.Left = 0;
@@ -79,226 +89,200 @@ namespace Carbinet
                     resetPbYPos(rect.Height);
                 }
             }
+            #endregion
 
-
-
-
-            //int gap = 3;
-            //this.pictureBox3.Left = this.pictureBox4.Left + pictureBox4.Width + gap;
-            //this.pictureBox2.Left = this.pictureBox3.Left + pictureBox3.Width + gap;
-            //this.pictureBox1.Left = this.pictureBox2.Left + pictureBox2.Width + gap;
-
-
-
-
-            //foreach (PictureBox pb in pblst)
-            //{
-            //    pb.MouseHover += pictureBox_mouse_hover;
-            //    pb.MouseLeave += pictureBox_mouse_leave;
-            //}
-
+            #region 绑定按钮事件
             //pictureBox4.Click += (sender, e) =>
             //{
             //    frmCheckInit startCheck = new frmCheckInit();
             //    startCheck.ShowDialog();
             //};
 
-
-
-            //pictureBox1.Click += (sender, e) =>
-            //{
-            //    Program.closeAllForms();
-            //    this.Close();
-            //};
-            //pictureBox2.Click += (sender, e) =>
-            //    {
-            //        frmRTTest frm = new frmRTTest();
-            //        //MiddleWareCore.set_mode(MiddleWareMode.课堂测验);
-            //        frm.ShowDialog();
-            //    };
-            pictureBox3.Click += (sender, e) =>
+            pictureBox1_1.Click += (sender, e) =>
             {
-                //Program.frmSelect.Visible = !Program.frmSelect.Visible;
-                MiddleWareCore.set_mode(MiddleWareMode.实时互动);
-                setPieToInitializeState();
-                this.setPersonAnswer("");
+                Program.closeAllForms();
+                this.Close();
             };
-            pictureBox5.Click += (sender, e) =>
+            pictureBox2_1.Click += (sender, e) =>
+                {
+                    event_handler = (I_event_handler)(new frmRTTest(this));
+                    event_handler.prepare_handler();
+
+                };
+            pictureBox3_1.Click += (sender, e) =>
+            {
+                event_handler = new RealtimeInteractive(this);
+
+                event_handler.prepare_handler();
+                //Program.frmSelect.Visible = !Program.frmSelect.Visible;
+
+            };
+            pictureBox5_1.Click += (sender, e) =>
                 {
                     Program.frmClassRoom.ShowDialog();
+                    Debug.WriteLine("click ***********************");
                 };
-            //this.initial_popup_menu();
-            setPieToInitializeState();
-            this.initialInfoTable();
-            MiddleWareCore.event_receiver = this;
-        }
-        public void receive_a_new_event()
-        {
-            this.handle_event();
-        }
-        private void handle_event()
-        {
-            IntelligentEvent evt = MiddleWareCore.get_a_event();
-            if (evt != null)
+
+
+            pictureBox5_1.MouseLeave += (sender, e) =>
             {
-                deleControlInvoke dele = delegate(object o)
+                this.pictureBox5.Visible = true;
+                this.pictureBox5_1.Visible = false;
+            };
+            pictureBox5.MouseEnter += (sender, e) =>
                 {
-                    IntelligentEvent IEvent = (IntelligentEvent)o;
-                    string epcID = IEvent.epcID;
-                    string remoteDeviceID = IEvent.remoteDeviceID;
-                    string check_time = IEvent.time_stamp;
-                    string studentName = string.Empty;
-                    string question_value = IEvent.questionValue;
-
-                    //1 更改本地信息
-                    //2 更改饼图
-                    //3 更改座位状态
-
-                    int totalCount = MemoryTable.studentInfoTable.Rows.Count;
-
-                    Person person = MemoryTable.getPersonByEpc(epcID);
-                    equipmentPosition ep = MemoryTable.getEquipmentConfigMapInfo(remoteDeviceID);
-                    if (ep != null)
-                    {
-                        if (IEvent.event_unit_list.IndexOf(IntelligentEventUnit.epc_on_another_device) >= 0)
-                        {
-                            ////这里要处理一下同一个学生用不一个设备发送答案的情况
-                            equipmentPosition ep_old = MemoryTable.getEquipmentInfoByStudentID(epcID);
-                            this.setChairState(ep_old, DocumentFileState.InitialState, "");
-                            MemoryTable.clearEquipmentAndStudentCombining(epcID);
-                        }
-
-                        if (person != null)
-                        {
-                            studentName = person.name;
-                            this.setChairState(ep, studentName);
-                            MemoryTable.setEquipmentInfoCombineStudentID(ep, person.epc);
-                        }
-
-                        this.setPersonAnswer(epcID, question_value);
-
-                        DocumentFileState dfs = this.getStateByAnswer(question_value);
-                        this.setChairState(ep, dfs);
-
-                        this.refreshPie();
-                    }
+                    Debug.WriteLine("MouseMove ***********************");
+                    this.pictureBox5.Visible = false;
+                    this.pictureBox5_1.Visible = true;
                 };
-                this.Invoke(dele, evt);
-            }
-        }
-        private DocumentFileState getStateByAnswer(string answer)
-        {
-            DocumentFileState dfs = DocumentFileState.InitialState;
-            switch (answer)
+            pictureBox4_1.MouseLeave += (sender, e) =>
             {
-                case "A":
-                    dfs = DocumentFileState.Green;
-                    break;
-                case "B":
-                    dfs = DocumentFileState.Orange;
-                    break;
-                case "C":
-                    dfs = DocumentFileState.Red;
-                    break;
-                case "D":
-                    dfs = DocumentFileState.Blue;
-                    break;
-            }
-            return dfs;
-        }
-        private void setChairState(equipmentPosition ep, DocumentFileState dfs, string text)
-        {
-            setChairState(ep, dfs);
-            Program.frmClassRoom.changeChairState(ep.group, ep.formatedPosition(), text);
-        }
-        private void setChairState(equipmentPosition ep, string text)
-        {
-            Program.frmClassRoom.changeChairState(ep.group, ep.formatedPosition(), text);
-        }
-
-        private void setChairState(equipmentPosition ep, DocumentFileState dfs)
-        {
-            Program.frmClassRoom.changeChairState(ep.group, ep.formatedPosition(), dfs);
-        }
-        DataTable dtAnswerRecord = null;
-        private void setPersonAnswer(string answer)
-        {
-            int total = this.dtAnswerRecord.Rows.Count;
-            for (int i = 0; i < total; i++)
+                this.pictureBox4.Visible = true;
+                this.pictureBox4_1.Visible = false;
+            };
+            pictureBox4.MouseMove += (sender, e) =>
             {
-                DataRow dr = this.dtAnswerRecord.Rows[i];
-                dr["answer"] = answer;
-            }
-        }
-        private void setPersonAnswer(string studentID, string answer)
-        {
-            DataRow[] rows = this.dtAnswerRecord.Select(string.Format("studenID = '{0}'", studentID));
-            if (rows.Length > 0)
+                this.pictureBox4.Visible = false;
+                this.pictureBox4_1.Visible = true;
+            };
+            pictureBox3_1.MouseLeave += (sender, e) =>
             {
-                rows[0]["answer"] = answer;
-            }
-            else
+                this.pictureBox3.Visible = true;
+                this.pictureBox3_1.Visible = false;
+            };
+            pictureBox3.MouseMove += (sender, e) =>
             {
-                this.dtAnswerRecord.Rows.Add(new object[] { studentID, answer });
-            }
+                this.pictureBox3.Visible = false;
+                this.pictureBox3_1.Visible = true;
+            };
+            pictureBox2_1.MouseLeave += (sender, e) =>
+            {
+                this.pictureBox2.Visible = true;
+                this.pictureBox2_1.Visible = false;
+            };
+            pictureBox2.MouseMove += (sender, e) =>
+            {
+                this.pictureBox2.Visible = false;
+                this.pictureBox2_1.Visible = true;
+            };
+            pictureBox1_1.MouseLeave += (sender, e) =>
+            {
+                this.pictureBox1.Visible = true;
+                this.pictureBox1_1.Visible = false;
+            };
+            pictureBox1.MouseMove += (sender, e) =>
+            {
+                this.pictureBox1.Visible = false;
+                this.pictureBox1_1.Visible = true;
+            };
+            #endregion
+            //this.initial_popup_menu();
         }
-        private void initialInfoTable()
+
+        void pictureBox_MouseLeave(object sender, EventArgs e)
         {
-            //this.dtRoomConfig = MemoryTable.dtRoomConfig;
-            //this.studentInfoTable = MemoryTable.studentInfoTable;
-            //this.mapConfigsTable = MemoryTable.mapConfigsTable;
+            this.pictureBox5.Visible = true;
+            //PictureBox pb = (PictureBox)sender;
 
-            this.dtAnswerRecord = new DataTable();
-            this.dtAnswerRecord.Columns.Add("studenID", typeof(string));
-            this.dtAnswerRecord.Columns.Add("answer", typeof(string));
-
-            //学生ID与设备ID绑定，查找学生位置时，先通过本表查询设备ID，在通过设备ID确定学生位置
-            //this.dtStudentAndEquipmentCombining = new DataTable();
-            //this.dtStudentAndEquipmentCombining.Columns.Add("studenID", typeof(string));
-            //this.dtStudentAndEquipmentCombining.Columns.Add("equipmentID", typeof(string));
-
+            //miniButton button = getMiniButton(pb);
+            //setButtonState(button, false);
+            //Debug.WriteLine("pictureBox_MouseLeave => " + pb.Name);
         }
-        private void refreshPie()
+
+        void pictureBox_MouseHover(object sender, EventArgs e)
         {
-            DataRow[] rowsA = this.dtAnswerRecord.Select("answer = 'A'");
-            DataRow[] rowsB = this.dtAnswerRecord.Select("answer = 'B'");
-            DataRow[] rowsC = this.dtAnswerRecord.Select("answer = 'C'");
-            DataRow[] rowsD = this.dtAnswerRecord.Select("answer = 'D'");
+            this.pictureBox5_1.Visible = true;
+            //PictureBox pb = (PictureBox)sender;
+            //miniButton button = getMiniButton(pb);
+            //setButtonState(button, true);
+            //Debug.WriteLine("pictureBox_MouseHover => " + pb.Name);
+        }
+        //miniButton getMiniButton(PictureBox pb)
+        //{
+        //    miniButton button = miniButton.显示座位;
+        //    switch (pb.Name)
+        //    {
+        //        case "pictureBox5":
+        //            break;
+        //        case "pictureBox4":
+        //            button = miniButton.考勤;
+        //            break;
+        //        case "pictureBox3":
+        //            button = miniButton.实时互动;
+        //            break;
+        //        case "pictureBox2":
+        //            button = miniButton.课堂测验;
+        //            break;
+        //        case "pictureBox1":
+        //            button = miniButton.退出;
+        //            break;
+        //    }
+        //    return button;
+        //}
 
-            int iA = rowsA.Length;
-            int iB = rowsB.Length;
-            int iC = rowsC.Length;
-            int iD = rowsD.Length;
-            string strA = "", strB = "", strC = "", strD = "";
-            int totalCount = MemoryTable.studentInfoTable.Rows.Count;
+        //public void setButtonState(miniButton button, bool state)
+        //{
+        //    switch (button)
+        //    {
+        //        case miniButton.显示座位:
+        //            if (state) this.pictureBox5.Image = (Image)global::Carbinet.Properties.Resources.课堂2;//显示座位
+        //            else this.pictureBox5.Image = (Image)global::Carbinet.Properties.Resources.课堂1;//显示座位
+        //            break;
+        //        case miniButton.考勤:
+        //            if (state) this.pictureBox4.Image = (Image)global::Carbinet.Properties.Resources.打卡2;//显示座位
+        //            else this.pictureBox4.Image = (Image)global::Carbinet.Properties.Resources.打卡1;//显示座位
+        //            break;
+        //        case miniButton.课堂测验:
+        //            if (state) this.pictureBox2.Image = (Image)global::Carbinet.Properties.Resources.测验2;//显示座位
+        //            else this.pictureBox2.Image = (Image)global::Carbinet.Properties.Resources.测验1;//显示座位
+        //            break;
+        //        case miniButton.实时互动:
+        //            if (state) this.pictureBox3.Image = (Image)global::Carbinet.Properties.Resources.提问2;//显示座位
+        //            else this.pictureBox3.Image = (Image)global::Carbinet.Properties.Resources.提问1;//显示座位
+        //            break;
+        //        case miniButton.退出:
+        //            if (state) this.pictureBox1.Image = (Image)global::Carbinet.Properties.Resources.关闭2;//显示座位
+        //            else this.pictureBox1.Image = (Image)global::Carbinet.Properties.Resources.关闭1;//显示座位
+        //            break;
+        //    }
+        //}
+        public void refreshPie(List<string> captionList, List<int> valueList, List<Color> colorList, bool b)
+        {
+            if (captionList.Count != valueList.Count || valueList.Count != colorList.Count) return;
 
+            int totalCount = valueList.Sum();
+            List<string> labelList = new List<string>();
             if (totalCount > 0)
             {
-                strA = (iA * 100 / totalCount).ToString() + "%";
-                strB = (iB * 100 / totalCount).ToString() + "%";
-                strC = (iC * 100 / totalCount).ToString() + "%";
-                strD = (iD * 100 / totalCount).ToString() + "%";
+                for (int i = 0; i < captionList.Count; i++)
+                {
+                    string temp = (valueList[i] * 100 / totalCount) + "%";
+                    labelList.Add(temp);
+                }
             }
+            else return;
+
             PieChart1.Items.Clear();
-            PieChart1.Items.Add(new PieChartItem(iA, this.clrA, iA.ToString(), "A " + strA, 0));
-            PieChart1.Items.Add(new PieChartItem(iB, this.clrB, iB.ToString(), "B " + strB, 0));
-            PieChart1.Items.Add(new PieChartItem(iC, this.clrC, iC.ToString(), "C " + strC, 0));
-            PieChart1.Items.Add(new PieChartItem(iD, this.clrD, iD.ToString(), "D " + strD, 10));
+            for (int i = 0; i < valueList.Count; i++)
+            {
+                if (b)
+                {
+                    PieChart1.Items.Add(new PieChartItem(valueList[i], colorList[i], valueList[i].ToString(), string.Format("{0} {1} ", captionList[i], labelList[i]), 0));
+                }
+                else
+                {
+                    PieChart1.Items.Add(new PieChartItem(valueList[i], colorList[i], captionList[i], captionList[i], 0));
+
+                }
+            }
         }
-        private void setPieToInitializeState()
-        {
-            PieChart1.Items.Clear();
-            PieChart1.Items.Add(new PieChartItem(25, this.clrA, "0", "A", 0));
-            PieChart1.Items.Add(new PieChartItem(25, this.clrB, "0", "B", 0));
-            PieChart1.Items.Add(new PieChartItem(25, this.clrC, "0", "C", 0));
-            PieChart1.Items.Add(new PieChartItem(25, this.clrD, "0", "D", 0));
-        }
+
         void resetPbYPos(int screenHeight)
         {
             int totalCount = this.pblst.Count;
 
             int defaultTop = 150;
-            int defaultVGap = 20;
+            int defaultVGap = 0;
             int totalHeight = 80 * totalCount + defaultVGap * (totalCount - 1);
             int newTop = (screenHeight - totalHeight) / 2;
             if (newTop > defaultTop)
@@ -308,27 +292,24 @@ namespace Carbinet
             for (int i = 0; i < totalCount; i++)
             {
                 this.pblst[i].Top = defaultTop + 80 * i + defaultVGap * i;
+                this.pblst2[i].Top = defaultTop + 80 * i + defaultVGap * i;
+                this.pblst2[i].Visible = false;
+
+                //this.pblst[i].MouseMove += (sender, e) =>
+                //{
+                //    this.pblst[i].Visible = false;
+                //    this.pblst2[i].Visible = true;
+                //};
+                //this.pblst2[i].MouseLeave += (sender, e) =>
+                //{
+                //    this.pblst[i].Visible = true;
+                //    this.pblst2[i].Visible = false;
+                //};
             }
-            //this.pictureBox4.Top = defaultTop;
-            //this.pictureBox3.Top = defaultTop + 80 + defaultVGap;
-            //this.pictureBox2.Top = defaultTop + 80 * 2 + defaultVGap * 2;
-            //this.pictureBox1.Top = defaultTop + 80 * 3 + defaultVGap * 3;
 
         }
-        void pictureBox_mouse_hover(object sender, EventArgs e)
-        {
-            ((PictureBox)sender).BackColor = Color.YellowGreen;
 
-        }
-        void pictureBox_mouse_leave(object sender, EventArgs e)
-        {
-            ((PictureBox)sender).BackColor = Color.White;
-        }
-        private void Form1_Move(object sender, EventArgs e)
-        {
-            //Program.frmSelect.Left = this.Left;
-            //Program.frmSelect.Top = this.Top + this.Height;
-        }
+
         #region
         private void initial_popup_menu()
         {

@@ -13,11 +13,11 @@ namespace Carbinet
         public static DataTable mapConfigsTable = null;
         public static DataTable dtRoomConfig = null;
 
-        public static DataRow[] getPersonAnswerRows(string answer)
-        {
-            DataRow[] rows = studentInfoTable.Select(string.Format("answer = '{0}'", answer));
-            return rows;
-        }
+        //public static DataRow[] getPersonAnswerRows(string answer)
+        //{
+        //    DataRow[] rows = studentInfoTable.Select(string.Format("answer = '{0}'", answer));
+        //    return rows;
+        //}
         public static Person getPersonByEpc(string _epc)
         {
             DataRow[] rows = studentInfoTable.Select(string.Format("STUDENTID = '{0}'", _epc));
@@ -34,23 +34,23 @@ namespace Carbinet
                 return null;
             }
         }
-        public static void setPersonAnswer(string id, string answer)
-        {
-            DataRow[] rows = studentInfoTable.Select("STUDENTID = '" + id + "'");
-            if (rows.Length > 0)
-            {
-                rows[0]["answer"] = answer;
-            }
-        }
-        public static void resetAllPersonAnswer(string answer)
-        {
-            int total = studentInfoTable.Rows.Count;
-            for (int i = 0; i < total; i++)
-            {
-                DataRow dr = studentInfoTable.Rows[i];
-                dr["answer"] = answer;
-            }
-        }
+        //public static void setPersonAnswer(string id, string answer)
+        //{
+        //    DataRow[] rows = studentInfoTable.Select("STUDENTID = '" + id + "'");
+        //    if (rows.Length > 0)
+        //    {
+        //        rows[0]["answer"] = answer;
+        //    }
+        //}
+        //public static void resetAllPersonAnswer(string answer)
+        //{
+        //    int total = studentInfoTable.Rows.Count;
+        //    for (int i = 0; i < total; i++)
+        //    {
+        //        DataRow dr = studentInfoTable.Rows[i];
+        //        dr["answer"] = answer;
+        //    }
+        //}
         public static void clearEquipmentAndStudentCombining(string id)
         {
             DataRow[] rowsMap = mapConfigsTable.Select("studenID = '" + id + "'");

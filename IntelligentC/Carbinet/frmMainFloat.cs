@@ -205,10 +205,8 @@ namespace Carbinet
 
         private void pbTest_Click(object sender, EventArgs e)
         {
-            //Program.frmTest.Show();
-            frmRTTest frm = new frmRTTest();
-            //MiddleWareCore.set_mode(MiddleWareMode.课堂测验);
-            frm.ShowDialog();
+            //frmRTTest frm = new frmRTTest();
+            //frm.ShowDialog();
         }
         void menuItemStudentMng_Click(object sender, EventArgs e)
         {
