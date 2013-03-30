@@ -67,7 +67,7 @@ namespace intelligentMiddleWare
                 }
                 catch (System.Exception ex)
                 {
-
+                    Debug.WriteLine(ex.Message);
                 }
             }
             return helper;

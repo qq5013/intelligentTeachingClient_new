@@ -34,7 +34,7 @@ namespace Carbinet
                 }
 
             }
-            catch (System.Exception ex)
+            catch
             {
                 //MessageBox.Show("出现错误：" + ex.Message);
             }

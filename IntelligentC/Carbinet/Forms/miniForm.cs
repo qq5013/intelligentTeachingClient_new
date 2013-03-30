@@ -120,7 +120,7 @@ namespace Carbinet
                 };
 
             #endregion
-            //this.initial_popup_menu();
+            this.initial_popup_menu();
         }
 
         //miniButton getMiniButton(PictureBox pb)
@@ -265,14 +265,14 @@ namespace Carbinet
                 frm.ShowDialog();
             };
 
-            menuItemSerialConfig = new System.Windows.Forms.MenuItem();
-            menuItemSerialConfig.Index = 2;
-            menuItemSerialConfig.Text = "串口设置(&C)";
-            menuItemSerialConfig.Click += (sender, e) =>
-            {
-                frmSerialPortConfig frm = new frmSerialPortConfig();
-                frm.ShowDialog();
-            };
+            //menuItemSerialConfig = new System.Windows.Forms.MenuItem();
+            //menuItemSerialConfig.Index = 2;
+            //menuItemSerialConfig.Text = "串口设置(&C)";
+            //menuItemSerialConfig.Click += (sender, e) =>
+            //{
+            //    frmSerialPortConfig frm = new frmSerialPortConfig();
+            //    frm.ShowDialog();
+            //};
 
 
 
@@ -281,29 +281,27 @@ namespace Carbinet
             menuItemEquipmentConfig.Text = "教室设置(&E)";
             menuItemEquipmentConfig.Click += new EventHandler(menuItemEquipmentConfig_Click);
 
-            menuItemQuestionMng = new System.Windows.Forms.MenuItem();
-            menuItemQuestionMng.Index = 4;
-            menuItemQuestionMng.Text = "题目管理(&Q)";
-            menuItemQuestionMng.Click += new EventHandler(menuItemQuestionMng_Click);
+            //menuItemQuestionMng = new System.Windows.Forms.MenuItem();
+            //menuItemQuestionMng.Index = 4;
+            //menuItemQuestionMng.Text = "题目管理(&Q)";
 
-            menuItemAnalysis = new System.Windows.Forms.MenuItem();
-            menuItemAnalysis.Index = 5;
-            menuItemAnalysis.Text = "统计分析(&S)";
-            menuItemAnalysis.Click += new EventHandler(menuItemAnalysis_Click);
+            //menuItemAnalysis = new System.Windows.Forms.MenuItem();
+            //menuItemAnalysis.Index = 5;
+            //menuItemAnalysis.Text = "统计分析(&S)";
 
-            menuItemStudentMng = new System.Windows.Forms.MenuItem();
-            menuItemStudentMng.Index = 6;
-            menuItemStudentMng.Text = "学生管理(&T)";
-            menuItemStudentMng.Click += new EventHandler(menuItemStudentMng_Click);
+            //menuItemStudentMng = new System.Windows.Forms.MenuItem();
+            //menuItemStudentMng.Index = 6;
+            //menuItemStudentMng.Text = "学生管理(&T)";
+            //menuItemStudentMng.Click += new EventHandler(menuItemStudentMng_Click);
 
 
 
             this.notifyContextMenu = new System.Windows.Forms.ContextMenu();
-            this.notifyContextMenu.MenuItems.Add(menuItemStudentMng);
-            this.notifyContextMenu.MenuItems.Add(menuItemAnalysis);
-            this.notifyContextMenu.MenuItems.Add(menuItemQuestionMng);
+            //this.notifyContextMenu.MenuItems.Add(menuItemStudentMng);
+            //this.notifyContextMenu.MenuItems.Add(menuItemAnalysis);
+            //this.notifyContextMenu.MenuItems.Add(menuItemQuestionMng);
             this.notifyContextMenu.MenuItems.Add(menuItemEquipmentConfig);
-            this.notifyContextMenu.MenuItems.Add(menuItemSerialConfig);
+            //this.notifyContextMenu.MenuItems.Add(menuItemSerialConfig);
             this.notifyContextMenu.MenuItems.Add(menuItemAbout);
             this.notifyContextMenu.MenuItems.Add(menuItemClose);
 
@@ -327,7 +325,7 @@ namespace Carbinet
 
             notifyIcon1.BalloonTipTitle = "智能教学互动系统已经启动";
             notifyIcon1.BalloonTipText = "更多功能请点击...";
-            notifyIcon1.ShowBalloonTip(15);
+            notifyIcon1.ShowBalloonTip(5);
         }
         void menuItemAbout_Click(object sender, EventArgs e)
         {
@@ -345,22 +343,12 @@ namespace Carbinet
             frm.Show();
         }
 
-        void menuItemAnalysis_Click(object sender, EventArgs e)
-        {
-            //frmCheckAnalysis frm = new frmCheckAnalysis();
-            frmCheckStatics frm = new frmCheckStatics();
-            frm.Show();
-        }
-
-        void menuItemQuestionMng_Click(object sender, EventArgs e)
-        {
-            frmQuestionMng frm = new frmQuestionMng();
-            frm.Show();
-        }
-
         void menuItemEquipmentConfig_Click(object sender, EventArgs e)
         {
             frmEquipmentConfig frm = new frmEquipmentConfig();
+            Program.frmClassRoom.Show();
+            frm.Left = Program.frmClassRoom.Left + Program.frmClassRoom.Width;
+            frm.Top = Program.frmClassRoom.Top;
             frm.Show();
         }
 

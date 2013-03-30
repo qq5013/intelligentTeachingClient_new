@@ -26,20 +26,7 @@ namespace Carbinet
             {
                 int result = int.Parse(CsharpSQLiteHelper.ExecuteNonQuery(
                                              sqlInsert_addConfig
-                                             , new object[3]
-                                                    {
-                                                        group
-                                                        ,row
-                                                        ,column
-                                                    }).ToString());
-                //int result = int.Parse(SQLiteHelper.ExecuteNonQuery(SQLiteHelper.connectString,
-                //                             sqlInsert_addConfig
-                //                             , new object[3]
-                //                                    {
-                //                                        group
-                //                                        ,row
-                //                                        ,column
-                //                                    }).ToString());
+                                             , new object[3] { group, row, column }).ToString());
                 if (result > 0)
                 {
                     return true;
@@ -55,7 +42,6 @@ namespace Carbinet
 
         public bool ConfigExists(int group)
         {
-            DataSet ds = null;
             try
             {
                 DataTable dt = CsharpSQLiteHelper.ExecuteTable(sqlSelect_SpecifiedRoomConfig, new object[1] { group });
@@ -63,19 +49,6 @@ namespace Carbinet
                 {
                     return true;
                 }
-                //ds = SQLiteHelper.ExecuteDataSet(
-                //          SQLiteHelper.connectString,
-                //           sqlSelect_SpecifiedRoomConfig, new object[1] { group });
-                //if (ds != null)
-                //{
-                //    if (ds.Tables.Count > 0)
-                //    {
-                //        if (ds.Tables[0].Rows.Count > 0)
-                //        {
-                //            return true;
-                //        }
-                //    }
-                //}
             }
             catch (System.Exception ex)
             {
@@ -109,19 +82,8 @@ namespace Carbinet
             try
             {
                 int result = int.Parse(CsharpSQLiteHelper.ExecuteNonQuery(
-                             sql
-                             , new object[2]
-                                                    {
-                                                        value
-                                                        ,group
-                                                    }).ToString());
-                //int result = int.Parse(SQLiteHelper.ExecuteNonQuery(SQLiteHelper.connectString,
-                //                             sql
-                //                             , new object[2]
-                //                                    {
-                //                                        value
-                //                                        ,group
-                //                                    }).ToString());
+                             sql, new object[2] { value, group }).ToString());
+
                 if (result > 0)
                 {
                     return true;
@@ -137,21 +99,10 @@ namespace Carbinet
 
         public static DataTable getAllRoomConfigInfo()
         {
-            DataSet ds = null;
             try
             {
                 DataTable dt = CsharpSQLiteHelper.ExecuteTable(sqlSelect_allRoomConfig, null);
                 return dt;
-                //ds = SQLiteHelper.ExecuteDataSet(
-                //          SQLiteHelper.connectString,
-                //           sqlSelect_allRoomConfig, null);
-                //if (ds != null)
-                //{
-                //    if (ds.Tables.Count > 0)
-                //    {
-                //        return ds.Tables[0];
-                //    }
-                //}
             }
             catch (System.Exception ex)
             {

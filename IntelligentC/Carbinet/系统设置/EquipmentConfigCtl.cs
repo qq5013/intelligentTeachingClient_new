@@ -38,21 +38,10 @@ namespace Carbinet
 
         public static DataTable getAllMapConfigs()
         {
-            DataSet ds = null;
             try
             {
                 DataTable dt = CsharpSQLiteHelper.ExecuteTable(sqlSelect_GetAllMapConfigs, null);
                 return dt;
-                //ds = SQLiteHelper.ExecuteDataSet(
-                //          SQLiteHelper.connectString,
-                //           sqlSelect_GetAllMapConfigs, null);
-                //if (ds != null)
-                //{
-                //    if (ds.Tables.Count > 0)
-                //    {
-                //        return ds.Tables[0];
-                //    }
-                //}
             }
             catch (System.Exception ex)
             {
@@ -80,7 +69,6 @@ namespace Carbinet
             {
                 return 0;
             }
-            DataSet ds = null;
             try
             {
                 DataTable dt = CsharpSQLiteHelper.ExecuteTable(sql, null);
@@ -89,20 +77,6 @@ namespace Carbinet
                     DataRow dr = dt.Rows[0];
                     return int.Parse(dr["VVALUE"].ToString());
                 }
-                //ds = SQLiteHelper.ExecuteDataSet(
-                //          SQLiteHelper.connectString,
-                //           sql, null);
-                //if (ds != null)
-                //{
-                //    if (ds.Tables.Count > 0)
-                //    {
-                //        if (ds.Tables[0].Rows.Count > 0)
-                //        {
-                //            DataRow dr = ds.Tables[0].Rows[0];
-                //            return int.Parse(dr["VVALUE"].ToString());
-                //        }
-                //    }
-                //}
             }
             catch (System.Exception ex)
             {
@@ -138,17 +112,7 @@ namespace Carbinet
             }
             try
             {
-                int result = int.Parse(CsharpSQLiteHelper.ExecuteNonQuery(sql
-                             , new object[1]
-                                                    {
-                                                        number
-                                                    }).ToString());
-                //int result = int.Parse(SQLiteHelper.ExecuteNonQuery(SQLiteHelper.connectString,
-                //                             sql
-                //                             , new object[1]
-                //                                    {
-                //                                        number
-                //                                    }).ToString());
+                int result = int.Parse(CsharpSQLiteHelper.ExecuteNonQuery(sql, new object[1] { number }).ToString());
                 if (result > 0)
                 {
                     return true;
@@ -166,24 +130,9 @@ namespace Carbinet
         {
             try
             {
-                int result = int.Parse(CsharpSQLiteHelper.ExecuteNonQuery(
-                             sqlUpdate_UpdateConfig
-                             , new object[4]
-                                                    {
-                                                        equipID
-                                                        ,group
-                                                        ,row
-                                                        ,column
-                                                    }).ToString());
-                //int result = int.Parse(SQLiteHelper.ExecuteNonQuery(SQLiteHelper.connectString,
-                //                             sqlUpdate_UpdateConfig
-                //                             , new object[4]
-                //                                    {
-                //                                        equipID
-                //                                        ,group
-                //                                        ,row
-                //                                        ,column
-                //                                    }).ToString());
+                int result = int.Parse(CsharpSQLiteHelper.ExecuteNonQuery(sqlUpdate_UpdateConfig
+                             , new object[4] { equipID, group, row, column }).ToString());
+
                 if (result > 0)
                 {
                     return true;
@@ -200,24 +149,8 @@ namespace Carbinet
         {
             try
             {
-                int result = int.Parse(CsharpSQLiteHelper.ExecuteNonQuery(
-                              sqlInsert_SaveConfig
-                              , new object[4]
-                                                    {
-                                                        equipID
-                                                        ,group
-                                                        ,row
-                                                        ,column
-                                                    }).ToString());
-                //int result = int.Parse(SQLiteHelper.ExecuteNonQuery(SQLiteHelper.connectString,
-                //                             sqlInsert_SaveConfig
-                //                             , new object[4]
-                //                                    {
-                //                                        equipID
-                //                                        ,group
-                //                                        ,row
-                //                                        ,column
-                //                                    }).ToString());
+                int result = int.Parse(CsharpSQLiteHelper.ExecuteNonQuery(sqlInsert_SaveConfig
+                              , new object[4] { equipID, group, row, column }).ToString());
                 if (result > 0)
                 {
                     return true;
@@ -232,28 +165,14 @@ namespace Carbinet
         }
         public bool CheckExists(int group, int row, int column)
         {
-            DataSet ds = null;
             try
             {
                 DataTable dt = CsharpSQLiteHelper.ExecuteTable(
                        sqlSelect_CheckConfigExist, new object[3] { group, row, column });
-                if (dt.Rows.Count>0)
+                if (dt.Rows.Count > 0)
                 {
                     return true;
                 }
-                //ds = SQLiteHelper.ExecuteDataSet(
-                //          SQLiteHelper.connectString,
-                //           sqlSelect_CheckConfigExist, new object[3] { group, row, column });
-                //if (ds != null)
-                //{
-                //    if (ds.Tables.Count > 0)
-                //    {
-                //        if (ds.Tables[0].Rows.Count > 0)
-                //        {
-                //            return true;
-                //        }
-                //    }
-                //}
             }
             catch (System.Exception ex)
             {

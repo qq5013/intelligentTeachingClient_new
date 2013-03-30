@@ -102,7 +102,6 @@ namespace Carbinet
         }
         public static bool QuestionExists(string content)
         {
-            DataSet ds = null;
             try
             {
                 DataTable dt = CsharpSQLiteHelper.ExecuteTable(sqlSelect_getSpecifiedQuestion, new object[1] { content });
@@ -237,7 +236,6 @@ namespace Carbinet
 
         public static DataTable getAllQuestion()
         {
-            DataSet ds = null;
             try
             {
                 DataTable dt = CsharpSQLiteHelper.ExecuteTable(sqlSelect_getAllQuestion, null);

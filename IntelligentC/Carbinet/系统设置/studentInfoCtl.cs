@@ -33,7 +33,6 @@ namespace Carbinet
 
         public static DataTable GetClassCheckInfo(string className, string start, string end)
         {
-            DataSet ds = null;
             try
             {
                 DataTable dt = CsharpSQLiteHelper.ExecuteTable(
@@ -111,7 +110,6 @@ namespace Carbinet
         }
         public static DataTable getAllStudentInfo()
         {
-            DataSet ds = null;
             try
             {
                 DataTable dt = CsharpSQLiteHelper.ExecuteTable(sqlSelect_allGetStudentInfo, null);

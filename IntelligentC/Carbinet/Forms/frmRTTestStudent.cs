@@ -31,26 +31,5 @@ namespace Carbinet
             this.lblInfo.Left = this.lblTime.Left;
         }
 
-        void frmParent_eventInvokeCommand(InternalCommand cmd, object o)
-        {
-            Debug.WriteLine(
-                string.Format("frmRTTestStudent.frmParent_eventInvokeCommand  ->  = {0}"
-                , cmd.ToString()));
-            switch ((int)cmd)
-            {
-                case (int)InternalCommand.PreQuestion:
-
-                    break;
-                case (int)InternalCommand.NextQuestion:
-                    break;
-                case (int)InternalCommand.CloseForm:
-                    if (this.frmParent != null)
-                    {
-                        this.Close();
-                    }
-                    break;
-            }
-        }
-
     }
 }

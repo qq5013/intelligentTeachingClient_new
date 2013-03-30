@@ -12,8 +12,6 @@ namespace Carbinet
         //相当于全局变量 
         //public static frmSelect frmSelect = null;
         public static frmFloat frmFloat = null;
-        public static frmMain frmMain = null;
-        public static frmCheck frmCheck = null;
         public static frmRTTest frmTest = null;
         public static frmClassRoom frmClassRoom = null;
         /// <summary>
@@ -71,7 +69,6 @@ namespace Carbinet
         public static void compareString()
         {
             string str1 = "abc";
-            string str2 = "ABC";
             string str3 = "bca";
             int i = string.CompareOrdinal(str1, str3);
             Debug.WriteLine(

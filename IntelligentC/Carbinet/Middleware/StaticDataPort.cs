@@ -24,7 +24,6 @@ namespace intelligentMiddleWare
     /// </summary>
     public class StaticDataPort
     {
-        static string port_name = "com5";
         static bool bDataPortOpen = false;
         static int udp_server_port = 5000;
         static StringBuilder sbuilder = new StringBuilder();
@@ -36,9 +35,6 @@ namespace intelligentMiddleWare
 #if SERIAL_PORT_TRANSE
 #endif
         static SerialPort comport = null;
-        //static List<delevoid_Data> delegateDataList = new List<delevoid_Data>();
-        //static List<delevoid_bytes> delegateList = new List<delevoid_bytes>();
-        //public static delevoid_ProtocolHelper evtParseReceivedData;
         static byte[] byteData = new byte[1024];
 
         public static void openDataPort(string port_name, int baud_rate)
@@ -312,6 +308,7 @@ namespace intelligentMiddleWare
             }
             catch (System.Exception ex)
             {
+                Debug.WriteLine("配置文件出现错误！" + ex.Message);
                 //MessageBox.Show("配置文件出现错误！" + ex.Message);
             }
         }

@@ -37,8 +37,6 @@ namespace Carbinet
             Configures.ClassName = this.cmbClass.Text;
             Configures.SubjectName = this.cmbSubject.Text;
 
-            frmMain main = new frmMain();
-            main.Show();
             // Form1 frm = new Form1();
             // frm.Show();
             //Application.Run(new Form1());

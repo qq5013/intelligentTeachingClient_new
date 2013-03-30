@@ -81,22 +81,22 @@
   <ItemGroup>
     <Compile Include="carbinet\ClassRoomConfig.cs" />
     <Compile Include="carbinet\DocumentFileState.cs" />
-    <Compile Include="frmSelectCheckRecord.cs">
+    <Compile Include="考勤\frmSelectCheckRecord.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmSelectCheckRecord.Designer.cs">
+    <Compile Include="考勤\frmSelectCheckRecord.Designer.cs">
       <DependentUpon>frmSelectCheckRecord.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmTest.cs">
+    <Compile Include="Forms\frmTest.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmTest.Designer.cs">
+    <Compile Include="Forms\frmTest.Designer.cs">
       <DependentUpon>frmTest.cs</DependentUpon>
     </Compile>
-    <Compile Include="miniForm.cs">
+    <Compile Include="Forms\miniForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="miniForm.Designer.cs">
+    <Compile Include="Forms\miniForm.Designer.cs">
       <DependentUpon>miniForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\about.cs">
@@ -107,26 +107,14 @@
     </Compile>
     <Compile Include="carbinet\Cabinet.cs" />
     <Compile Include="carbinet\CarbinetFloor.cs" />
-    <Compile Include="frmClassRoom.cs">
+    <Compile Include="Forms\frmClassRoom.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmClassRoom.Designer.cs">
+    <Compile Include="Forms\frmClassRoom.Designer.cs">
       <DependentUpon>frmClassRoom.cs</DependentUpon>
     </Compile>
-    <Compile Include="RealtimeInteractive.cs" />
-    <Compile Include="StudentCheck.cs" />
-    <Compile Include="课堂测验\frmQuestionTestStatics.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="课堂测验\frmQuestionTestStatics.Designer.cs">
-      <DependentUpon>frmQuestionTestStatics.cs</DependentUpon>
-    </Compile>
-    <Compile Include="考勤\frmCheckStatics.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="考勤\frmCheckStatics.Designer.cs">
-      <DependentUpon>frmCheckStatics.cs</DependentUpon>
-    </Compile>
+    <Compile Include="互动\RealtimeInteractive.cs" />
+    <Compile Include="考勤\StudentCheck.cs" />
     <Compile Include="考勤\frmCheckInit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,12 +127,6 @@
     <Compile Include="Middleware\StaticDataPort.cs" />
     <Compile Include="public\Configures.cs" />
     <Compile Include="考勤\CheckCtl.cs" />
-    <Compile Include="课堂测验\frmQuestionMng.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="课堂测验\frmQuestionMng.Designer.cs">
-      <DependentUpon>frmQuestionMng.cs</DependentUpon>
-    </Compile>
     <Compile Include="课堂测验\frmQuestionMngCtl.cs" />
     <Compile Include="系统设置\FrmRfidCheck_StudentManage.cs">
       <SubType>Form</SubType>
@@ -190,28 +172,14 @@
     </Compile>
     <Compile Include="public\MemoryTable.cs" />
     <Compile Include="public\person.cs" />
-    <Compile Include="public\commonSocket.cs" />
-    <Compile Include="public\Data.cs" />
     <Compile Include="carbinet\DocumentChair.cs" />
     <Compile Include="carbinet\DocumentFile.cs" />
     <Compile Include="系统设置\EquipmentConfigCtl.cs" />
-    <Compile Include="考勤\frmCheck.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="考勤\frmCheck.Designer.cs">
-      <DependentUpon>frmCheck.cs</DependentUpon>
-    </Compile>
     <Compile Include="系统设置\frmEquipmentConfig.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="系统设置\frmEquipmentConfig.Designer.cs">
       <DependentUpon>frmEquipmentConfig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmMain.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmMain.Designer.cs">
-      <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmShowStudentInfo.cs">
       <SubType>Form</SubType>
@@ -221,36 +189,24 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="frmSelectCheckRecord.resx">
+    <EmbeddedResource Include="考勤\frmSelectCheckRecord.resx">
       <DependentUpon>frmSelectCheckRecord.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmTest.resx">
+    <EmbeddedResource Include="Forms\frmTest.resx">
       <DependentUpon>frmTest.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="miniForm.resx">
+    <EmbeddedResource Include="Forms\miniForm.resx">
       <DependentUpon>miniForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\about.resx">
       <DependentUpon>about.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmClassRoom.resx">
+    <EmbeddedResource Include="Forms\frmClassRoom.resx">
       <DependentUpon>frmClassRoom.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="课堂测验\frmQuestionTestStatics.resx">
-      <DependentUpon>frmQuestionTestStatics.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="考勤\frmCheckInit.resx">
       <DependentUpon>frmCheckInit.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="考勤\frmCheckStatics.resx">
-      <DependentUpon>frmCheckStatics.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="课堂测验\frmQuestionMng.resx">
-      <DependentUpon>frmQuestionMng.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="系统设置\FrmRfidCheck_StudentManage.resx">
@@ -265,10 +221,6 @@
       <DependentUpon>frmSerialPortConfig.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="考勤\frmCheck.resx">
-      <DependentUpon>frmCheck.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="系统设置\frmEquipmentConfig.resx">
       <DependentUpon>frmEquipmentConfig.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -279,10 +231,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmMain.resx">
-      <DependentUpon>frmMain.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="课堂测验\frmRTTest.resx">
@@ -298,20 +246,12 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmSelect.resx">
-      <DependentUpon>frmSelect.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="public\Editor.resx">
       <DependentUpon>Editor.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="public\NotifyIconChart.resx">
       <DependentUpon>NotifyIconChart.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmMainFloat.resx">
-      <DependentUpon>frmMainFloat.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
@@ -333,23 +273,11 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="public\PubDelegate.cs" />
-    <Compile Include="frmSelect.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmSelect.Designer.cs">
-      <DependentUpon>frmSelect.cs</DependentUpon>
-    </Compile>
     <Compile Include="public\CsharpSQLiteHelper.cs" />
     <Compile Include="考勤\rfidCheck_CheckOn.cs" />
     <Compile Include="系统设置\serialPortConfig.cs" />
     <Compile Include="系统设置\studentInfoCtl.cs" />
     <Compile Include="系统设置\roomConfigCtl.cs" />
-    <Compile Include="frmMainFloat.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmMainFloat.Designer.cs">
-      <DependentUpon>frmMainFloat.cs</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\MetroFramework\MetroFramework.csproj">
@@ -359,10 +287,6 @@
     <ProjectReference Include="..\PieChartControls\PieChartControls.csproj">
       <Project>{400546f8-14c6-47f5-a282-ac8662081150}</Project>
       <Name>PieChartControls</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PieChart\PieChart.csproj">
-      <Project>{696E929A-6A4A-4C6D-A8B2-C4F25F781940}</Project>
-      <Name>PieChart</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

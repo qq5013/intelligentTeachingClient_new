@@ -17,60 +17,21 @@ namespace Carbinet
     public class rfidCheck_CheckOn
     {
         #region Static Memebers
-        static string dbFile = "db.db3";
         static bool bDBInitialized = false;
         public static string dbPath = "Data Source=db.db3";
-        static string tableSerialPortConfigsExist =
-            @"SELECT count(*) FROM sqlite_master where type = 'table' and tbl_name = 'tbSerialPortConfigs'";
-        static string tableSerialPortConfigsCreate =
-            @"CREATE TABLE tbSerialPortConfigs(name varchar(20) primary key
-                                    ,PortName varchar(50)
-                                    ,BaudRate varchar(50)
-                                    ,Parity varchar(50)
-                                    ,StopBits varchar(50)
-                                    ,DataBits varchar(50)
-                                     );";
-        static string tableConfigExist =
-            @"SELECT count(*) FROM sqlite_master where type = 'table' and tbl_name = 'tbConfig'";
-        static string tableConfigCreate =
-            @"CREATE TABLE tbConfig(key varchar(20) primary key
-                                    ,value varchar(100) );";
-        static string tablePersonExist =
-            "SELECT count(*) FROM sqlite_master where type = \"table\" and tbl_name = \"person\"";
-        static string tablePersonCreate =
-            @"CREATE TABLE person(xh varchar(20) primary key
-                    ,xm varchar(30)
-                    ,nj char(4)
-                    ,bj char(10)
-                    ,tel varchar(20)
-                    ,email varchar(100)
-                    ,uniqueID varchar(30) unique);";
         static string SqlInsertPerson =
-            //"insert into T_STUDENTINFO(STUDENTID,NAME,SEX,AGE,CLASS_NAME,EMAIL,DEVICEID) values(@STUDENTID,@NAME,@SEX,@AGE,@CLASS_NAME,@EMAIL,@DEVICEID);";
             "insert into T_STUDENTINFO(STUDENTID,NAME,SEX,AGE,CLASS_NAME,EMAIL,DEVICEID) values('{0}','{1}','{2}',{3},'{4}','{5}','{6}');";
-        //"insert into T_STUDENTINFO(STUDENTID,NAME,SEX,AGE,CLASS_NAME,EMAIL,DEVICEID) values(@STUDENTID,@NAME,@SEX,@AGE,@CLASS_NAME,@EMAIL,@DEVICEID);";
-        static string SqlSelectSpecialPerson =
-            @"select  p.xh as 学号,p.xm as 姓名 ,p.nj as 年级
-            ,p.bj as 班级,p.tel as 电话,p.email as 邮箱 FROM person as p where xh = '{0}';";
-            //,p.bj as 班级,p.tel as 电话,p.email as 邮箱 FROM person as p where xh = @xh;";
         static string SqlSelectAllPerson =
             @"select  p.STUDENTID ,p.NAME, p.SEX  , p.AGE , p.CLASS_NAME , p.EMAIL
              FROM T_STUDENTINFO as p;";
-        //            @"select  p.STUDENTID as 学号,p.NAME as 姓名 , p.SEX as 性别 , p.AGE as 年龄, p.CLASS_NAME as 班级,p.EMAIL as 邮箱
-
-        //p.DEVICEID as 设备编号
         static string SqlCheckSpecialPersonExist =
             "SELECT * FROM T_STUDENTINFO where STUDENTID = '{0}';";
-            //"SELECT count(*) FROM T_STUDENTINFO where STUDENTID = @STUDENTID;";
         static string SqlUpdatePerson =
             "update T_STUDENTINFO set NAME = '{0}',SEX='{1}',AGE = {2},CLASS_NAME='{3}',EMAIL= '{4}',DEVICEID = '{5}' where STUDENTID ='{6}';";
-            //"update T_STUDENTINFO set NAME = @NAME,SEX=@SEX,AGE = @AGE,CLASS_NAME=@CLASS_NAME,EMAIL= @EMAIL,DEVICEID = @DEVICEID where STUDENTID = @STUDENTID;";
         static string SqlDeletePerson =
             "delete from T_STUDENTINFO where STUDENTID= '{0}';";
-            //"delete from T_STUDENTINFO where STUDENTID= @STUDENTID;";
         static string SqlUpdatePersonEPC =
             @"update person set uniqueID = '{0}' where xh= '{1}';";
-            //@"update person set uniqueID = @uniqueID where xh= @xh;";
         static string SqlDeletePersonEPC =
             @"update person set uniqueID = "" where xh= '{0}';";
         static string SqlCheckEPCUsed =
@@ -80,14 +41,7 @@ namespace Carbinet
         static string SqlGetbj =
             @"select distinct bj from person";
 
-        static string tableCheckRecordExist =
-            "SELECT count(*) FROM sqlite_master where type = \"table\" and tbl_name = \"tbCheckRecords\"";
-        static string TableCheckRecordCreate =
-            @"CREATE TABLE tbCheckRecords(uniqueID varchar(30)
-                                        ,checkDate varchar(10) not null
-                                        , primary key(uniqueID,checkDate));";
-        static string SqlInsertCheckRecord =
-            "insert into tbCheckRecords(uniqueID,checkDate) values('{0}','{1}');";
+
         static string SqlSelectAllRecords =
             "SELECT * FROM tbCheckRecords";
 
@@ -108,14 +62,6 @@ namespace Carbinet
              FROM
              person as p join tbCheckRecords as r on r.uniqueID=p.uniqueID
              where r.checkDate between '{0}' and '{1}'";
-        //        static string SqlSelectCheckedPersonWithPara_head =
-        //    @" SELECT newT.xh as 学号,newT.xm as 姓名,newT.nj as 年级,newT.bj as 班级 
-        //            ,newT.tel as 电话,newT.email as 邮箱,newT.checkDate as 考勤日期
-        //             FROM (
-        //             SELECT  p.xh,p.xm,p.nj,p.bj,p.tel,p.email,r.checkDate 
-        //             FROM
-        //             person as p join tbCheckRecords as r on r.uniqueID=p.uniqueID
-        //             where r.checkDate between @startDate and @endDate ";
         static string SqlSelectCheckedPersonWithPara_nj =
             @" and p.nj = '{0}' ";
         static string SqlSelectCheckedPersonWithPara_bj =
@@ -130,9 +76,6 @@ namespace Carbinet
              where p.uniqueID not in(
              SELECT distinct r.uniqueID FROM tbCheckRecords as r 
              where r.checkDate between '{0}' and '{1}')";
-
-        static string FileCheckName = "FilecheckR.xml";
-        static string FilePersonName = "person.xml";
 
         static string regexString = @"2\d{3}[-/](1[0-2]|0?[1-9])[-/](3[0-1]|[0-2]?\d)";
         #endregion
@@ -285,8 +228,6 @@ namespace Carbinet
             bool bR = false;
             if (InitialDB())
             {
-                int result = 0;
-
                 DataTable dt = CsharpSQLiteHelper.ExecuteTable(SqlCheckSpecialPersonExist, new object[1] { p.id_num });
                 if (dt.Rows.Count >= 1)
                 {
@@ -624,7 +565,6 @@ namespace Carbinet
         public static List<string> GetbjList()
         {
             List<string> list = new List<string>();
-            DataSet ds = null;
             DataTable dt = null;
             try
             {
@@ -657,7 +597,6 @@ namespace Carbinet
         public static List<string> GetnjList()
         {
             List<string> list = new List<string>();
-            DataSet ds = null;
             DataTable dt = null;
             try
             {
@@ -690,7 +629,6 @@ namespace Carbinet
         public static DataTable GetStatisticCheckInfoDataSet(string startDate, string endDate
                                                     , string nj, string bj)
         {
-            DataSet ds = null;
             DataTable dt = null;
             if (null == startDate || null == endDate)
             {
@@ -746,7 +684,6 @@ namespace Carbinet
         }
         public static DataTable GetCheckDataSet()
         {
-            DataSet dsCheckRecords = null;
             DataTable dtCheckRecords = null;
             try
             {
@@ -936,7 +873,6 @@ namespace Carbinet
             {
                 if (InitialDB())
                 {
-                    int result = 0;
                     object[] pars = new object[1]
 	                    {
 	                       epc
@@ -996,196 +932,13 @@ namespace Carbinet
             List<string> listRtn = new List<string>();
 
             DataTable CheckRecords = rfidCheck_CheckOn.GetCheckDataSet();
-            //DataSet CheckRecords = rfidCheck_CheckOn.GetCheckDataSet();
-            //if (CheckRecords.Tables.Count <= 0)
-            //{
-            //    rfidCheck_CheckOn.AddCheckRecordTableToCheckDS(ref CheckRecords);
-            //    //return listRtn;
-            //}
+
             for (int i = 0; i < CheckRecords.Rows.Count; i++)
             {
                 listRtn.Add(CheckRecords.Rows[i][0].ToString());
             }
             return listRtn;
         }
-        //暂时不用
-        public static int CheckOn(string id, string strDate)
-        {
-            bool bwriteData = true;
-            DataSet CheckRecords = new DataSet();
-            try
-            {
-                if (!File.Exists(FileCheckName))
-                {
-                    DataSet dsCheckRecords = new DataSet("checkR");
-                    dsCheckRecords.WriteXml(FileCheckName);
-                }
-                if (null != id && null != strDate)
-                {
-                    CheckRecords.ReadXml(FileCheckName);
-                    if (CheckRecords.Tables.Count <= 0)
-                    {
-                        DataTable table = new DataTable("CheckRecords");
-                        DataColumn idColumn = new DataColumn("id_no");
-                        DataColumn DateColumn = new DataColumn("Date");
-                        table.Columns.Add(idColumn);
-                        table.Columns.Add(DateColumn);
-                        CheckRecords.Tables.Add(table);
-                    }
-                    for (int i = 0; i < CheckRecords.Tables["CheckRecords"].Rows.Count; i++)
-                    {
-                        if (id == CheckRecords.Tables["CheckRecords"].Rows[i][0].ToString()
-                            && strDate == CheckRecords.Tables["CheckRecords"].Rows[i][1].ToString())
-                        {
-                            bwriteData = false;
-                            break;
-                        }
-                    }
-                    if (bwriteData)
-                    {
-                        DataRow myRow = CheckRecords.Tables["CheckRecords"].NewRow();
-                        myRow["id_no"] = id;
-                        myRow["Date"] = DateTime.Today.ToShortDateString() + " " + DateTime.Today.ToShortTimeString();
-                        CheckRecords.Tables["CheckRecords"].Rows.Add(myRow);
-                        CheckRecords.WriteXml(FileCheckName);
-                    }
-                }
-            }
-            catch (System.Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            return 0;
-        }
-        /// <summary>
-        /// 将考勤记录至数据库中
-        /// </summary>
-        /// <param name="_cr"></param>
-        //        public static bool AddCheckRecord(CheckRecord _cr)
-        //        {
-        //            bool bR = false;
-        //            try
-        //            {
-        //                if (InitialDB())
-        //                {
-        //                    int result = 0;
-        //                    object[] pars = new object[2]
-        //                        {
-        //                            _cr.id,
-        //                            _cr.checkDate
-        //                        };
-
-        //                    result = int.Parse(SQLiteHelper.ExecuteNonQuery(dbPath, SqlInsertCheckRecord, pars).ToString());
-        //                    if (result >= 1)
-        //                    {
-        //                        bR = true;
-        //                    }
-        //                    else
-        //                    {
-        //                        bR = false;
-        //                    }
-        //                }
-        //            }
-        //            catch (System.Exception ex)
-        //            {
-        //                MessageBox.Show("添加新考勤记录出现错误：" + ex.Message);
-        //            }
-        //            return bR;
-        //            /* 
-
-        //            string strDate = rfidCheck_CheckOn.GetDateSubString(_cr.checkDate);
-        //            bool bwriteData = true;
-        //            DataSet CheckRecords = rfidCheck_CheckOn.GetCheckDataSet();
-        //            try
-        //            {
-        //                if (null != _cr.id && null != strDate)
-        //                {
-        //                    if (CheckRecords.Tables.Count <= 0)
-        //                    {
-        //                        rfidCheck_CheckOn.AddCheckRecordTableToCheckDS(ref CheckRecords);
-        //                    }
-        //                    for (int i = 0; i < CheckRecords.Tables["CheckRecords"].Rows.Count; i++)
-        //                    {
-        //                        if (_cr.id == CheckRecords.Tables["CheckRecords"].Rows[i][0].ToString()
-        //                            && strDate == rfidCheck_CheckOn.GetDateSubString(CheckRecords.Tables["CheckRecords"].Rows[i][1].ToString()))
-        //                        {
-        //                            bwriteData = false;
-        //                            break;
-        //                        }
-        //                    }
-        //                    if (bwriteData)
-        //                    {
-        //                        DataRow myRow = CheckRecords.Tables["CheckRecords"].NewRow();
-        //                        myRow["id_no"] = _cr.id;
-        //                        myRow["Date"] = strDate;
-        //                        CheckRecords.Tables["CheckRecords"].Rows.Add(myRow);
-        //                        CheckRecords.WriteXml(FileCheckName);
-        //                    }
-        //                }
-        //            }
-        //            catch (System.Exception ex)
-        //            {
-        //                MessageBox.Show(ex.Message);
-
-        //            }
-        //*/
-        //        }
-        /// <summary>
-        /// 将id记录至数据库中
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public static int CheckOn(string id)
-        {
-            string strDate = DateTime.Today.ToShortDateString();
-            bool bwriteData = true;
-            DataTable CheckRecords = rfidCheck_CheckOn.GetCheckDataSet();
-            //DataSet CheckRecords = rfidCheck_CheckOn.GetCheckDataSet();
-            try
-            {
-                //if (!File.Exists(FileCheckName))
-                //{
-                //    DataSet dsCheckRecords = new DataSet("checkR");
-                //    dsCheckRecords.WriteXml(FileCheckName);
-                //}
-                if (null != id && null != strDate)
-                {
-                    //CheckRecords.ReadXml(FileCheckName);
-                    //if (CheckRecords.Tables.Count <= 0)
-                    //{
-                    //    rfidCheck_CheckOn.AddCheckRecordTableToCheckDS(ref CheckRecords);
-                    //    //DataTable table = new DataTable("CheckRecords");
-                    //    //DataColumn idColumn = new DataColumn("id_no");
-                    //    //DataColumn DateColumn = new DataColumn("Date");
-                    //    //table.Columns.Add(idColumn);
-                    //    //table.Columns.Add(DateColumn);
-                    //    //CheckRecords.Tables.Add(table);
-                    //}
-                    for (int i = 0; i < CheckRecords.Rows.Count; i++)
-                    {
-                        if (id == CheckRecords.Rows[i][0].ToString()
-                            && strDate == rfidCheck_CheckOn.GetDateSubString(CheckRecords.Rows[i][1].ToString()))
-                        //&& strDate ==Regex.Match(CheckRecords.Tables["CheckRecords"].Rows[i][1].ToString(),@"\d{4}[-/](1[1-2]|0?\d)[-/](3[0-1]|[0-2]?\d\s)").ToString() )
-                        {
-                            bwriteData = false;
-                            break;
-                        }
-                    }
-                    //if (bwriteData)
-                    //{
-                    //    DataRow myRow = CheckRecords.Tables["CheckRecords"].NewRow();
-                    //    myRow["id_no"] = id;
-                    //    myRow["Date"] = DateTime.Today.ToShortDateString() + " " + DateTime.Today.ToShortTimeString();
-                    //    CheckRecords.Tables["CheckRecords"].Rows.Add(myRow);
-                    //    CheckRecords.WriteXml(FileCheckName);
-                    //}
-                }
-            }
-            catch (System.Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            return 0;
-        }
+    
     }
 }

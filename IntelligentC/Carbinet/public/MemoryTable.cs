@@ -13,11 +13,6 @@ namespace Carbinet
         public static DataTable mapConfigsTable = null;
         public static DataTable dtRoomConfig = null;
 
-        //public static DataRow[] getPersonAnswerRows(string answer)
-        //{
-        //    DataRow[] rows = studentInfoTable.Select(string.Format("answer = '{0}'", answer));
-        //    return rows;
-        //}
         public static Person getPersonByEpc(string _epc)
         {
             DataRow[] rows = studentInfoTable.Select(string.Format("STUDENTID = '{0}'", _epc));
@@ -34,23 +29,7 @@ namespace Carbinet
                 return null;
             }
         }
-        //public static void setPersonAnswer(string id, string answer)
-        //{
-        //    DataRow[] rows = studentInfoTable.Select("STUDENTID = '" + id + "'");
-        //    if (rows.Length > 0)
-        //    {
-        //        rows[0]["answer"] = answer;
-        //    }
-        //}
-        //public static void resetAllPersonAnswer(string answer)
-        //{
-        //    int total = studentInfoTable.Rows.Count;
-        //    for (int i = 0; i < total; i++)
-        //    {
-        //        DataRow dr = studentInfoTable.Rows[i];
-        //        dr["answer"] = answer;
-        //    }
-        //}
+
         public static void clearEquipmentAndStudentCombining(string id)
         {
             DataRow[] rowsMap = mapConfigsTable.Select("studenID = '" + id + "'");
@@ -63,6 +42,7 @@ namespace Carbinet
                 }
             }
         }
+
         public static string getPersonIDByPosition(int group, int row, int column)
         {
             string id = null;
@@ -84,6 +64,7 @@ namespace Carbinet
                 dr["studenID"] = id;
             }
         }
+
         public static equipmentPosition getEquipmentInfoByStudentID(string id)
         {
             DataRow[] rowsMap = mapConfigsTable.Select("studenID = '" + id + "'");
@@ -95,6 +76,7 @@ namespace Carbinet
             }
             return null;
         }
+
         public static equipmentPosition getEquipmentConfigMapInfo(string remoteDeviceID)
         {
             DataRow[] rowsMap = mapConfigsTable.Select("EQUIPEMNTID = '" + remoteDeviceID + "'");
@@ -106,6 +88,7 @@ namespace Carbinet
             }
             return null;
         }
+
         public static void initializeTabes()
         {
             if (isInitialized) return;
@@ -119,17 +102,6 @@ namespace Carbinet
             //学生信息
             studentInfoTable = studentInfoCtl.getAllStudentInfo();
             studentInfoTable.CaseSensitive = false;
-
-            //studentInfoTable.Columns.Add("status", typeof(string));
-            //studentInfoTable.Columns.Add("answer", typeof(string));
-            //studentInfoTable.Columns.Add("checkTime", typeof(string));
-            //for (int i = 0; i < studentInfoTable.Rows.Count; i++)
-            //{
-            //    DataRow dr = studentInfoTable.Rows[i];
-            //    dr["status"] = "0";
-            //    dr["answer"] = "";
-            //    dr["checkTime"] = "";
-            //}
 
             //获取设备和位置的对应数据
             mapConfigsTable = EquipmentConfigCtl.getAllMapConfigs();

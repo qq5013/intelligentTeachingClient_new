@@ -91,7 +91,7 @@ namespace Carbinet
             }
             catch (System.Exception ex)
             {
-                MessageBox.Show("年龄设置有误！");
+                MessageBox.Show("年龄设置有误！" + ex.Message);
                 return;
             }
             //DataSet myDataSet = new DataSet();
