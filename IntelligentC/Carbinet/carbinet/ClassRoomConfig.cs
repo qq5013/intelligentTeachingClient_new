@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 
@@ -44,5 +45,22 @@ namespace Carbinet
             return total;
         }
 
+        /// <summary>
+        /// 从存储教室配置信息的DataTable中获取配置信息
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public static ClassRoomConfig getClassRoomConfigFromDataTable(DataTable dt)
+        {
+            ClassRoomConfig roomConfig = new ClassRoomConfig();
+            foreach (DataRow dr in dt.Rows)
+            {
+                int index = ((int)dr["IGROUP"]);
+                int rowCount = (int)dr["IROW"];
+                int columnCount = (int)dr["ICOLUMN"];
+                roomConfig.GroupList.Add(new ClassRoomGroup(index, rowCount, columnCount));
+            }
+            return roomConfig;
+        }
     }
 }

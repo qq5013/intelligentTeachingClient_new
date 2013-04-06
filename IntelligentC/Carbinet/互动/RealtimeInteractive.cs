@@ -1,4 +1,5 @@
 ﻿using intelligentMiddleWare;
+using MetroFramework;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,7 +9,7 @@ using System.Text;
 
 namespace Carbinet
 {
-    public class RealtimeInteractive : I_event_notify, I_event_handler
+    public class RealtimeInteractive : I_event_notify, I_event_handler, I_call_back
     {
         DataTable dtAnswerRecord = null;
         I_mini_form_show_notify formToNotify;
@@ -17,10 +18,25 @@ namespace Carbinet
         Color clrB = Color.FromArgb(243, 119, 53);
         Color clrC = Color.FromArgb(209, 17, 65);
         Color clrD = Color.FromArgb(0, 174, 219);
+
+        // legend
+        List<string> textList = null;
+        List<MetroColorStyle> styleList = null;
         #endregion
         public RealtimeInteractive(I_mini_form_show_notify _notify_form)
         {
             this.formToNotify = _notify_form;
+
+            this.textList = new List<string>();
+            this.textList.Add("A 完全明白");
+            this.textList.Add("B 一知半解");
+            this.textList.Add("C 不知所云");
+            this.textList.Add("D 尚未选择");
+            this.styleList = new List<MetroColorStyle>();
+            this.styleList.Add(MetroColorStyle.Green);
+            this.styleList.Add(MetroColorStyle.Orange);
+            this.styleList.Add(MetroColorStyle.Red);
+            this.styleList.Add(MetroColorStyle.Blue);
         }
         //public void SetShowForm(I_mini_form_show_notify _notify_form)
         //{
@@ -41,7 +57,14 @@ namespace Carbinet
                 string remoteDeviceID = IEvent.remoteDeviceID;
                 string check_time = IEvent.time_stamp;
                 string studentName = string.Empty;
-                string question_value = IEvent.questionValue;
+                string question_value = IEvent.questionValue.ToUpper();;
+
+                //终端发送的答案必须符合要求 A B C 或者 D
+
+                if (question_value != "A" && question_value != "B" && question_value != "C" && question_value != "D")
+                {
+                    return;
+                }
 
                 //1 更改本地信息
                 //2 更改饼图
@@ -50,13 +73,13 @@ namespace Carbinet
                 int totalCount = MemoryTable.studentInfoTable.Rows.Count;
 
                 Person person = MemoryTable.getPersonByEpc(epcID);
-                equipmentPosition ep = MemoryTable.getEquipmentConfigMapInfo(remoteDeviceID);
+                equipmentPosition ep = MemoryTable.getEquipmentConfigMapInfoByDeviceID(remoteDeviceID);
                 if (ep != null)
                 {
                     if (IEvent.event_unit_list.IndexOf(IntelligentEventUnit.epc_on_another_device) >= 0)
                     {
                         ////这里要处理一下同一个学生用不一个设备发送答案的情况
-                        equipmentPosition ep_old = MemoryTable.getEquipmentInfoByStudentID(epcID);
+                        equipmentPosition ep_old = MemoryTable.getEquipmentInfoByEpc(epcID);
                         this.setChairState(ep_old, DocumentFileState.InitialState, "");
                         MemoryTable.clearEquipmentAndStudentCombining(epcID);
                     }
@@ -66,9 +89,9 @@ namespace Carbinet
                         studentName = person.name;
                         this.setChairState(ep, studentName);
                         MemoryTable.setEquipmentInfoCombineStudentID(ep, person.epc);
+                        this.setPersonAnswer(person.id_num, question_value);
                     }
 
-                    this.setPersonAnswer(epcID, question_value);
 
                     DocumentFileState dfs = this.getStateByAnswer(question_value);
                     this.setChairState(ep, dfs);
@@ -215,12 +238,24 @@ namespace Carbinet
         public void prepare_handler()
         {
             MiddleWareCore.set_mode(MiddleWareMode.实时互动, this);
-
+            Program.frmClassRoom.setCallBackInvoker(this);//点击座位时的回调
+            Program.frmFloat.setLegend(this.textList,this.styleList);
             initialInfoTable();
             this.setPersonAnswer("D");
             setPieToInitializeState();
 
             Program.frmClassRoom.resetClassRoomState();
+        }
+
+        public void callback()
+        {
+            int carbinetIndex = Program.frmClassRoom.carbinetIndex;
+            int floorNumber = Program.frmClassRoom.floorNumber;
+            int columnNumber = Program.frmClassRoom.columnNumber;
+            string epc = MemoryTable.getPersonEpcByPosition(carbinetIndex, floorNumber, columnNumber);
+            Person p = MemoryTable.getPersonByEpc(epc);
+            frmShowStudentInfo frm = new frmShowStudentInfo(p.id_num);
+            frm.ShowDialog();
         }
     }
 }

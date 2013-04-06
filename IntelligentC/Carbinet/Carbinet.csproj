@@ -81,6 +81,12 @@
   <ItemGroup>
     <Compile Include="carbinet\ClassRoomConfig.cs" />
     <Compile Include="carbinet\DocumentFileState.cs" />
+    <Compile Include="frmLegend.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLegend.Designer.cs">
+      <DependentUpon>frmLegend.cs</DependentUpon>
+    </Compile>
     <Compile Include="考勤\frmSelectCheckRecord.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,29 +134,17 @@
     <Compile Include="public\Configures.cs" />
     <Compile Include="考勤\CheckCtl.cs" />
     <Compile Include="课堂测验\frmQuestionMngCtl.cs" />
-    <Compile Include="系统设置\FrmRfidCheck_StudentManage.cs">
+    <Compile Include="系统设置\frmStudentManage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="系统设置\FrmRfidCheck_StudentManage.Designer.cs">
-      <DependentUpon>FrmRfidCheck_StudentManage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\frmRTTestStudent.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\frmRTTestStudent.Designer.cs">
-      <DependentUpon>frmRTTestStudent.cs</DependentUpon>
+    <Compile Include="系统设置\frmStudentManage.Designer.cs">
+      <DependentUpon>frmStudentManage.cs</DependentUpon>
     </Compile>
     <Compile Include="系统设置\frmSerialPortConfig.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="系统设置\frmSerialPortConfig.Designer.cs">
       <DependentUpon>frmSerialPortConfig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\frmInfo4Student.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\frmInfo4Student.Designer.cs">
-      <DependentUpon>frmInfo4Student.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmLogin.cs">
       <SubType>Form</SubType>
@@ -189,6 +183,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmLegend.resx">
+      <DependentUpon>frmLegend.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="考勤\frmSelectCheckRecord.resx">
       <DependentUpon>frmSelectCheckRecord.cs</DependentUpon>
     </EmbeddedResource>
@@ -209,12 +206,8 @@
       <DependentUpon>frmCheckInit.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="系统设置\FrmRfidCheck_StudentManage.resx">
-      <DependentUpon>FrmRfidCheck_StudentManage.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmRTTestStudent.resx">
-      <DependentUpon>frmRTTestStudent.cs</DependentUpon>
+    <EmbeddedResource Include="系统设置\frmStudentManage.resx">
+      <DependentUpon>frmStudentManage.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="系统设置\frmSerialPortConfig.resx">
@@ -223,10 +216,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="系统设置\frmEquipmentConfig.resx">
       <DependentUpon>frmEquipmentConfig.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmInfo4Student.resx">
-      <DependentUpon>frmInfo4Student.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmLogin.resx">
@@ -274,7 +263,7 @@
     </Compile>
     <Compile Include="public\PubDelegate.cs" />
     <Compile Include="public\CsharpSQLiteHelper.cs" />
-    <Compile Include="考勤\rfidCheck_CheckOn.cs" />
+    <Compile Include="考勤\StudentManagement.cs" />
     <Compile Include="系统设置\serialPortConfig.cs" />
     <Compile Include="系统设置\studentInfoCtl.cs" />
     <Compile Include="系统设置\roomConfigCtl.cs" />

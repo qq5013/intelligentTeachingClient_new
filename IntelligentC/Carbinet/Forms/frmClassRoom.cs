@@ -1,4 +1,5 @@
-﻿using MetroFramework.Forms;
+﻿using intelligentMiddleWare;
+using MetroFramework.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,20 +13,14 @@ namespace Carbinet
 {
     public partial class frmClassRoom : MetroForm
     {
+        I_call_back callBackInvoke = null;
         int CHAIR_HEIGHT = 38;
         List<Carbinet> groups = new List<Carbinet>();
         public frmClassRoom()
         {
             InitializeComponent();
 
-            ClassRoomConfig roomConfig = new ClassRoomConfig();
-            roomConfig.GroupList.Add(new ClassRoomGroup(0, 6, 2));
-            roomConfig.GroupList.Add(new ClassRoomGroup(1, 6, 2));
-            roomConfig.GroupList.Add(new ClassRoomGroup(2, 6, 2));
-            roomConfig.GroupList.Add(new ClassRoomGroup(3, 6, 2));
-            int blackSpace = 100;
-            this.InitialClassRoom(roomConfig, this.Width - blackSpace, 250, 40, blackSpace / 2);
-
+            this.resetClassRoomConfig();
             this.Shown += frmSelect_Shown;
             this.FormClosing += frmClassRoom_FormClosing;
         }
@@ -35,6 +30,14 @@ namespace Carbinet
             e.Cancel = true;
             this.Hide();
         }
+
+        void frmSelect_Shown(object sender, EventArgs e)
+        {
+            //测试函数
+            //this.changeChairState(0, 1, 1, DocumentFileState.Green, "文字测试");
+        }
+
+        #region 对外接口方法
         public void resetClassRoomState()
         {
             foreach (Carbinet c in groups)
@@ -42,11 +45,6 @@ namespace Carbinet
                 c.resetAllDocState();
             }
             this.Refresh();
-        }
-        void frmSelect_Shown(object sender, EventArgs e)
-        {
-            //测试函数
-            //this.changeChairState(0, 1, 1, DocumentFileState.Green, "文字测试");
         }
         /*
          对于一个本页面来说，只需要接受改变具体某个座位状态的能力即可
@@ -69,19 +67,44 @@ namespace Carbinet
         {
             Carbinet _carbinet = this.groups[_groupIndex];
             _carbinet.setColorStyle(_equipmentID, _state);
-            //switch (_state)
-            //{
-            //    case DocumentFileState.InitialState:
-            //        _carbinet.setColorStyle(_equipmentID, _state);
-            //        break;
-            //    default:
-            //        _carbinet.setColorStyle(_equipmentID, _state);
-            //        break;
-            //}
-
         }
-        #region
-        //把教室的座位定义好
+
+        /// <summary>
+        /// 重置教室座位
+        /// </summary>
+        public void resetClassRoomConfig()
+        {
+            ClassRoomConfig roomConfig = ClassRoomConfig.getClassRoomConfigFromDataTable(MemoryTable.dtRoomConfig);
+            //ClassRoomConfig roomConfig = new ClassRoomConfig();
+            //roomConfig.GroupList.Add(new ClassRoomGroup(0, 6, 2));
+            //roomConfig.GroupList.Add(new ClassRoomGroup(1, 6, 2));
+            //roomConfig.GroupList.Add(new ClassRoomGroup(2, 6, 2));
+            //roomConfig.GroupList.Add(new ClassRoomGroup(3, 6, 2));
+            int blackSpace = 100;
+            this.Controls.Clear();
+            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.metroLabel1);
+            this.InitialClassRoom(roomConfig, this.Width - blackSpace, 250, 40, blackSpace / 2);
+        }
+
+        public void setCallBackInvoker(I_call_back _I_call_back)
+        {
+            this.callBackInvoke = _I_call_back;
+        }
+        #endregion
+
+
+        #region 教室座位初始化内部方法
+
+        /// <summary>
+        /// 把教室的座位定义好
+        /// </summary>
+        /// <param name="_roomConfig"></param>
+        /// <param name="_widthOfRoom">整个教室的宽度</param>
+        /// <param name="_groupTop">离讲台最近的行与讲台之间的距离</param>
+        /// <param name="_groupGap">group之间的距离</param>
+        /// <param name="_firstGroupLeft">离教室左边的距离</param>
         private void InitialClassRoom(ClassRoomConfig _roomConfig, int _widthOfRoom, int _groupTop, int _groupGap, int _firstGroupLeft)
         {
             int heightOfDocumentFile = CHAIR_HEIGHT;
@@ -137,17 +160,26 @@ namespace Carbinet
             df.Click += handler;
             return df;
         }
+
+        public int carbinetIndex, floorNumber, columnNumber;
         void df_Click(object sender, EventArgs e)
         {
             DocumentFile df = (DocumentFile)sender;
-            string studentID = null;
-            studentID = MemoryTable.getPersonIDByPosition(df.carbinetIndex, df.floorNumber, df.columnNumber);
-            if (studentID == null || studentID.Length <= 0)
+            carbinetIndex = df.carbinetIndex;
+            floorNumber = df.floorNumber;
+            columnNumber = df.columnNumber;
+            if (this.callBackInvoke != null)
             {
-                return;
+                this.callBackInvoke.callback();
             }
-            frmShowStudentInfo frm = new frmShowStudentInfo(studentID);
-            frm.ShowDialog();
+            //string studentID = null;
+            //studentID = MemoryTable.getPersonIDByPosition(df.carbinetIndex, df.floorNumber, df.columnNumber);
+            //if (studentID == null || studentID.Length <= 0)
+            //{
+            //    return;
+            //}
+            //frmShowStudentInfo frm = new frmShowStudentInfo(studentID);
+            //frm.ShowDialog();
         }
         #endregion
     }

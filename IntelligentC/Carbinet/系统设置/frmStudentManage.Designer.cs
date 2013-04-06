@@ -1,6 +1,6 @@
 ﻿namespace Carbinet
 {
-    partial class FrmRfidCheck_StudentManage
+    partial class frmStudentManage
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmRfidCheck_StudentManage));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStudentManage));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -37,20 +37,17 @@
             this.txtName = new System.Windows.Forms.TextBox();
             this.txtAge = new System.Windows.Forms.TextBox();
             this.txtMail = new System.Windows.Forms.TextBox();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.btnUpdate = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.txtEpc = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cmbSex = new System.Windows.Forms.ComboBox();
             this.txtbj = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.cmbSex = new System.Windows.Forms.ComboBox();
+            this.btnBind = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -97,6 +94,7 @@
             this.txtId.AcceptsReturn = true;
             this.txtId.Location = new System.Drawing.Point(25, 36);
             this.txtId.Name = "txtId";
+            this.txtId.ReadOnly = true;
             this.txtId.Size = new System.Drawing.Size(166, 21);
             this.txtId.TabIndex = 4;
             // 
@@ -104,6 +102,7 @@
             // 
             this.txtName.Location = new System.Drawing.Point(272, 36);
             this.txtName.Name = "txtName";
+            this.txtName.ReadOnly = true;
             this.txtName.Size = new System.Drawing.Size(166, 21);
             this.txtName.TabIndex = 5;
             // 
@@ -111,6 +110,7 @@
             // 
             this.txtAge.Location = new System.Drawing.Point(519, 36);
             this.txtAge.Name = "txtAge";
+            this.txtAge.ReadOnly = true;
             this.txtAge.Size = new System.Drawing.Size(166, 21);
             this.txtAge.TabIndex = 6;
             // 
@@ -118,41 +118,13 @@
             // 
             this.txtMail.Location = new System.Drawing.Point(519, 81);
             this.txtMail.Name = "txtMail";
+            this.txtMail.ReadOnly = true;
             this.txtMail.Size = new System.Drawing.Size(166, 21);
             this.txtMail.TabIndex = 9;
             // 
-            // btnAdd
-            // 
-            this.btnAdd.Location = new System.Drawing.Point(756, 29);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(111, 34);
-            this.btnAdd.TabIndex = 10;
-            this.btnAdd.Text = "增加(&A)";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // btnUpdate
-            // 
-            this.btnUpdate.Location = new System.Drawing.Point(756, 83);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(111, 34);
-            this.btnUpdate.TabIndex = 11;
-            this.btnUpdate.Text = "修改(&U)";
-            this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Location = new System.Drawing.Point(756, 134);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(111, 34);
-            this.btnDelete.TabIndex = 10;
-            this.btnDelete.Text = "删除(&D)";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridView1.Location = new System.Drawing.Point(6, 17);
@@ -164,16 +136,6 @@
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(756, 522);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(111, 34);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "退出(&X)";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -181,16 +143,15 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(65, 12);
             this.label5.TabIndex = 13;
-            this.label5.Text = "设备编号：";
-            this.label5.Visible = false;
+            this.label5.Text = "学生编号：";
             // 
-            // txtDevice
+            // txtEpc
             // 
             this.txtEpc.Location = new System.Drawing.Point(25, 127);
-            this.txtEpc.Name = "txtDevice";
+            this.txtEpc.Name = "txtEpc";
+            this.txtEpc.ReadOnly = true;
             this.txtEpc.Size = new System.Drawing.Size(660, 21);
             this.txtEpc.TabIndex = 14;
-            this.txtEpc.Visible = false;
             // 
             // groupBox1
             // 
@@ -208,55 +169,12 @@
             this.groupBox1.Controls.Add(this.txtName);
             this.groupBox1.Controls.Add(this.txtAge);
             this.groupBox1.Controls.Add(this.txtMail);
-            this.groupBox1.Location = new System.Drawing.Point(12, 15);
+            this.groupBox1.Location = new System.Drawing.Point(25, 74);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(718, 164);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "编辑学生信息";
-            // 
-            // txtbj
-            // 
-            this.txtbj.Location = new System.Drawing.Point(272, 81);
-            this.txtbj.Name = "txtbj";
-            this.txtbj.Size = new System.Drawing.Size(166, 21);
-            this.txtbj.TabIndex = 8;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(269, 65);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(41, 12);
-            this.label7.TabIndex = 17;
-            this.label7.Text = "班级：";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.dataGridView1);
-            this.groupBox2.Location = new System.Drawing.Point(12, 180);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(718, 328);
-            this.groupBox2.TabIndex = 16;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "学生列表";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Location = new System.Drawing.Point(736, 498);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(200, 10);
-            this.groupBox3.TabIndex = 17;
-            this.groupBox3.TabStop = false;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(26, 65);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(41, 12);
-            this.label6.TabIndex = 17;
-            this.label6.Text = "性别：";
             // 
             // cmbSex
             // 
@@ -271,25 +189,77 @@
             this.cmbSex.Size = new System.Drawing.Size(163, 20);
             this.cmbSex.TabIndex = 18;
             // 
-            // FrmRfidCheck_StudentManage
+            // txtbj
+            // 
+            this.txtbj.Location = new System.Drawing.Point(272, 81);
+            this.txtbj.Name = "txtbj";
+            this.txtbj.ReadOnly = true;
+            this.txtbj.Size = new System.Drawing.Size(166, 21);
+            this.txtbj.TabIndex = 8;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(26, 65);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(41, 12);
+            this.label6.TabIndex = 17;
+            this.label6.Text = "性别：";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(269, 65);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(41, 12);
+            this.label7.TabIndex = 17;
+            this.label7.Text = "班级：";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.dataGridView1);
+            this.groupBox2.Location = new System.Drawing.Point(25, 239);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(718, 328);
+            this.groupBox2.TabIndex = 16;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "学生列表";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Location = new System.Drawing.Point(743, 560);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(200, 5);
+            this.groupBox3.TabIndex = 17;
+            this.groupBox3.TabStop = false;
+            // 
+            // btnBind
+            // 
+            this.btnBind.Highlight = false;
+            this.btnBind.Location = new System.Drawing.Point(769, 83);
+            this.btnBind.Name = "btnBind";
+            this.btnBind.Size = new System.Drawing.Size(104, 32);
+            this.btnBind.Style = MetroFramework.MetroColorStyle.Blue;
+            this.btnBind.StyleManager = null;
+            this.btnBind.TabIndex = 18;
+            this.btnBind.Text = "绑定(&B)";
+            this.btnBind.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.btnBind.Click += new System.EventHandler(this.btnBind_Click);
+            // 
+            // frmStudentManage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(888, 568);
+            this.ClientSize = new System.Drawing.Size(894, 598);
+            this.Controls.Add(this.btnBind);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.btnDelete);
-            this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.btnUpdate);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Location = new System.Drawing.Point(0, 0);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "FrmRfidCheck_StudentManage";
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Name = "frmStudentManage";
             this.Text = "学生管理";
             this.Load += new System.EventHandler(this.FrmRfidCheck_StudentManage_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -310,19 +280,16 @@
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.TextBox txtAge;
         private System.Windows.Forms.TextBox txtMail;
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtEpc;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtbj;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.ComboBox cmbSex;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private MetroFramework.Controls.MetroButton btnBind;
     }
 }

@@ -96,11 +96,11 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(119, 215);
+            this.button1.Location = new System.Drawing.Point(119, 208);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(99, 29);
+            this.button1.Size = new System.Drawing.Size(99, 26);
             this.button1.TabIndex = 3;
-            this.button1.Text = "保存";
+            this.button1.Text = "分配";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -111,11 +111,6 @@
             this.numLocofGroup.ReadOnly = true;
             this.numLocofGroup.Size = new System.Drawing.Size(130, 21);
             this.numLocofGroup.TabIndex = 4;
-            this.numLocofGroup.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             // 
             // txtEquipmentID
             // 
@@ -207,7 +202,6 @@
             0,
             0,
             0});
-            this.numCountofColumn.ValueChanged += new System.EventHandler(this.numCountofColumn_ValueChanged);
             // 
             // numCountofRow
             // 
@@ -230,7 +224,6 @@
             0,
             0,
             0});
-            this.numCountofRow.ValueChanged += new System.EventHandler(this.numCountofRow_ValueChanged);
             // 
             // cmbSelectedRow
             // 
@@ -239,7 +232,6 @@
             this.cmbSelectedRow.Name = "cmbSelectedRow";
             this.cmbSelectedRow.Size = new System.Drawing.Size(140, 20);
             this.cmbSelectedRow.TabIndex = 2;
-            this.cmbSelectedRow.SelectedIndexChanged += new System.EventHandler(this.cmbSelectedRow_SelectedIndexChanged);
             // 
             // label7
             // 
@@ -267,11 +259,6 @@
             0,
             0,
             0});
-            this.numCountofGroup.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.numCountofGroup.Name = "numCountofGroup";
             this.numCountofGroup.Size = new System.Drawing.Size(140, 21);
             this.numCountofGroup.TabIndex = 1;
@@ -280,7 +267,6 @@
             0,
             0,
             0});
-            this.numCountofGroup.ValueChanged += new System.EventHandler(this.numCountofGroup_ValueChanged);
             // 
             // label5
             // 

@@ -44,7 +44,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(33, 34);
+            this.label1.Location = new System.Drawing.Point(33, 75);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 12);
             this.label1.TabIndex = 0;
@@ -53,7 +53,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(33, 61);
+            this.label2.Location = new System.Drawing.Point(33, 102);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(41, 12);
             this.label2.TabIndex = 0;
@@ -62,7 +62,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(33, 89);
+            this.label3.Location = new System.Drawing.Point(33, 130);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 12);
             this.label3.TabIndex = 0;
@@ -72,9 +72,9 @@
             // 
             this.picInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picInfo.Image = ((System.Drawing.Image)(resources.GetObject("picInfo.Image")));
-            this.picInfo.Location = new System.Drawing.Point(273, 21);
+            this.picInfo.Location = new System.Drawing.Point(273, 62);
             this.picInfo.Name = "picInfo";
-            this.picInfo.Size = new System.Drawing.Size(149, 162);
+            this.picInfo.Size = new System.Drawing.Size(166, 162);
             this.picInfo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picInfo.TabIndex = 1;
             this.picInfo.TabStop = false;
@@ -82,7 +82,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(33, 171);
+            this.label4.Location = new System.Drawing.Point(33, 212);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(41, 12);
             this.label4.TabIndex = 2;
@@ -92,7 +92,7 @@
             // 
             this.lblName.AutoSize = true;
             this.lblName.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblName.Location = new System.Drawing.Point(91, 34);
+            this.lblName.Location = new System.Drawing.Point(91, 75);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(37, 14);
             this.lblName.TabIndex = 0;
@@ -102,7 +102,7 @@
             // 
             this.lblID.AutoSize = true;
             this.lblID.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblID.Location = new System.Drawing.Point(91, 61);
+            this.lblID.Location = new System.Drawing.Point(91, 102);
             this.lblID.Name = "lblID";
             this.lblID.Size = new System.Drawing.Size(31, 14);
             this.lblID.TabIndex = 0;
@@ -112,7 +112,7 @@
             // 
             this.lblClass.AutoSize = true;
             this.lblClass.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblClass.Location = new System.Drawing.Point(90, 89);
+            this.lblClass.Location = new System.Drawing.Point(90, 130);
             this.lblClass.Name = "lblClass";
             this.lblClass.Size = new System.Drawing.Size(97, 14);
             this.lblClass.TabIndex = 0;
@@ -122,7 +122,7 @@
             // 
             this.lblEmail.AutoSize = true;
             this.lblEmail.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblEmail.Location = new System.Drawing.Point(91, 171);
+            this.lblEmail.Location = new System.Drawing.Point(91, 212);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(119, 14);
             this.lblEmail.TabIndex = 0;
@@ -132,7 +132,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(458, 227);
+            this.ClientSize = new System.Drawing.Size(482, 269);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.picInfo);
             this.Controls.Add(this.label3);
@@ -142,12 +142,12 @@
             this.Controls.Add(this.lblID);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.label1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Location = new System.Drawing.Point(0, 0);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmShowStudentInfo";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Resizable = false;
             this.Text = "学生信息";
             ((System.ComponentModel.ISupportInitialize)(this.picInfo)).EndInit();
             this.ResumeLayout(false);

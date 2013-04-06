@@ -20,6 +20,10 @@ namespace intelligentMiddleWare
         学生卡绑定,
         无
     }
+    public interface I_call_back
+    {
+        void callback();
+    }
     public interface I_event_handler
     {
         void prepare_handler();

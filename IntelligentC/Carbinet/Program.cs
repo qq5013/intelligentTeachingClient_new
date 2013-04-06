@@ -14,6 +14,7 @@ namespace Carbinet
         public static frmFloat frmFloat = null;
         public static frmRTTest frmTest = null;
         public static frmClassRoom frmClassRoom = null;
+        public static frmEquipmentConfig frmClassRoomConfig = null;
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>
@@ -23,11 +24,10 @@ namespace Carbinet
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            MemoryTable.initializeTabes();
             frmClassRoom = new frmClassRoom();
-            //frmSelect = new frmSelect();
             frmFloat = new frmFloat();
             StaticDataPort.openDataPort();
-            MemoryTable.initializeTabes();
             Application.Run(frmFloat);
 
             //Application.Run(new frmTest());
@@ -46,6 +46,10 @@ namespace Carbinet
         public static void closeAllForms()
         {
             frmClassRoom.Close();
+            if (frmClassRoomConfig != null)
+            {
+                frmClassRoomConfig.Close();
+            }
             //frmSelect.Close();
         }
 

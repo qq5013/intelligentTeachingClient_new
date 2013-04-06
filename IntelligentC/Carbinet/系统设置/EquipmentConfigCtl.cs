@@ -13,10 +13,7 @@ namespace Carbinet
         static string sqlSelect_CheckConfigExist = @"select EQUIPEMNTID from T_EQUIPMENT_LOCATION_MAP where 
                     IGROUP={0} and IROW = {1} and ICOLUMN = {2}";
         static string sqlSelect_GetAllMapConfigs =
-            @"SELECT EQUIPEMNTID,IGROUP,IROW,ICOLUMN from T_EQUIPMENT_LOCATION_MAP
-                where IGROUP<=(select VVALUE from T_CONFIG where VKEY= 'group')
-                and IROW<=(select VVALUE from T_CONFIG where VKEY= 'row') 
-                and ICOLUMN<=(select VVALUE from T_CONFIG where VKEY= 'column')";
+            @"SELECT EQUIPEMNTID,IGROUP,IROW,ICOLUMN from T_EQUIPMENT_LOCATION_MAP;";
 
         static string sqlUpdate_UpdateConfig = @"update T_EQUIPMENT_LOCATION_MAP set EQUIPEMNTID = '{0}' where 
                     IGROUP={1} and IROW = {2} and ICOLUMN = {3}";

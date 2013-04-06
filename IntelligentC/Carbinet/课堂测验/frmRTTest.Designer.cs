@@ -30,10 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRTTest));
             this.groupBoxQuestion = new System.Windows.Forms.GroupBox();
+            this.editor1 = new HtmlEditor.Editor();
             this.metroBtnNext = new MetroFramework.Controls.MetroButton();
             this.metroBtnPre = new MetroFramework.Controls.MetroButton();
             this.metroBtnStart = new MetroFramework.Controls.MetroButton();
-            this.editor1 = new HtmlEditor.Editor();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.metroTile2 = new MetroFramework.Controls.MetroTile();
@@ -50,6 +50,22 @@
             this.groupBoxQuestion.TabIndex = 0;
             this.groupBoxQuestion.TabStop = false;
             this.groupBoxQuestion.Text = "题目信息";
+            // 
+            // editor1
+            // 
+            this.editor1.BodyHtml = null;
+            this.editor1.BodyText = null;
+            this.editor1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.editor1.DocumentText = resources.GetString("editor1.DocumentText");
+            this.editor1.EditorBackColor = System.Drawing.Color.White;
+            this.editor1.EditorForeColor = System.Drawing.Color.Black;
+            this.editor1.FontName = null;
+            this.editor1.FontSize = HtmlEditor.FontSize.NA;
+            this.editor1.Location = new System.Drawing.Point(3, 17);
+            this.editor1.Name = "editor1";
+            this.editor1.Size = new System.Drawing.Size(821, 411);
+            this.editor1.TabIndex = 3;
+            this.editor1.TabStop = false;
             // 
             // metroBtnNext
             // 
@@ -89,22 +105,6 @@
             this.metroBtnStart.Text = "开始(&S)";
             this.metroBtnStart.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroBtnStart.Click += new System.EventHandler(this.btnStart_Click);
-            // 
-            // editor1
-            // 
-            this.editor1.BodyHtml = null;
-            this.editor1.BodyText = null;
-            this.editor1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.editor1.DocumentText = resources.GetString("editor1.DocumentText");
-            this.editor1.EditorBackColor = System.Drawing.Color.White;
-            this.editor1.EditorForeColor = System.Drawing.Color.Black;
-            this.editor1.FontName = null;
-            this.editor1.FontSize = HtmlEditor.FontSize.NA;
-            this.editor1.Location = new System.Drawing.Point(3, 17);
-            this.editor1.Name = "editor1";
-            this.editor1.Size = new System.Drawing.Size(821, 411);
-            this.editor1.TabIndex = 3;
-            this.editor1.TabStop = false;
             // 
             // label1
             // 
@@ -168,6 +168,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmRTTest";
+            this.Resizable = false;
             this.Text = "课堂测验";
             this.groupBoxQuestion.ResumeLayout(false);
             this.ResumeLayout(false);

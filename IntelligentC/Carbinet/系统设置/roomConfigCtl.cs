@@ -9,7 +9,7 @@ namespace Carbinet
     public class roomConfigCtl
     {
         public static string sqlSelect_allRoomConfig =
-            @"SELECT IGROUP,IROW,ICOLUMN from T_ROOM_CONFIG;";
+            @"SELECT IGROUP,IROW,ICOLUMN from T_ROOM_CONFIG order by IGROUP asc;";
         public static string sqlSelect_SpecifiedRoomConfig =
             @"SELECT IGROUP,IROW,ICOLUMN from T_ROOM_CONFIG  where IGROUP = {0} ;";
 

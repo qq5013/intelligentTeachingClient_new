@@ -1,5 +1,6 @@
 ﻿using Config;
 using intelligentMiddleWare;
+using MetroFramework;
 using MetroFramework.Forms;
 using Nexus.Windows.Forms;
 using System;
@@ -27,6 +28,9 @@ namespace Carbinet
         I_event_handler event_handler;
         List<PictureBox> pblst = new List<PictureBox>();
         List<PictureBox> pblst2 = new List<PictureBox>();
+        frmLegend frmLegend = null;
+        List<string> textList = null;
+        List<MetroColorStyle> styleList = null;
         #endregion
 
         public frmFloat()
@@ -67,6 +71,9 @@ namespace Carbinet
             PieChart1.Rotation = 0.0F;
             PieChart1.ShowEdges = false;
             //PieChart1.Radius = 90F;
+
+            PieChart1.MouseHover += PieChart1_MouseHover;
+            PieChart1.MouseLeave += PieChart1_MouseLeave;
             #endregion
 
             #region 设置窗体及主要控件位置
@@ -121,6 +128,26 @@ namespace Carbinet
 
             #endregion
             this.initial_popup_menu();
+        }
+        public void setLegend(List<string> _textList, List<MetroColorStyle> _styleList)
+        {
+            this.textList = _textList;
+            this.styleList = _styleList;
+        }
+        //当鼠标离开饼图后，隐藏图例
+        void PieChart1_MouseLeave(object sender, EventArgs e)
+        {
+            if (frmLegend != null)
+
+                frmLegend.Close();
+        }
+        //当鼠标指在饼图上时，显示图例
+        void PieChart1_MouseHover(object sender, EventArgs e)
+        {
+            //frmLegend = new frmLegend();
+            frmLegend = new frmLegend(this.textList, this.styleList);
+            frmLegend.Left = this.Width;
+            frmLegend.Show();
         }
 
         //miniButton getMiniButton(PictureBox pb)
@@ -207,7 +234,7 @@ namespace Carbinet
         public void show_tip(string tip)
         {
             this.lblTip.Text = tip;
-        } 
+        }
         #endregion
 
         void resetPbYPos(int screenHeight)
@@ -241,7 +268,7 @@ namespace Carbinet
                 };
             }
 
-            
+
 
         }
 
@@ -289,15 +316,15 @@ namespace Carbinet
             //menuItemAnalysis.Index = 5;
             //menuItemAnalysis.Text = "统计分析(&S)";
 
-            //menuItemStudentMng = new System.Windows.Forms.MenuItem();
-            //menuItemStudentMng.Index = 6;
-            //menuItemStudentMng.Text = "学生管理(&T)";
-            //menuItemStudentMng.Click += new EventHandler(menuItemStudentMng_Click);
+            menuItemStudentMng = new System.Windows.Forms.MenuItem();
+            menuItemStudentMng.Index = 6;
+            menuItemStudentMng.Text = "学生管理(&T)";
+            menuItemStudentMng.Click += new EventHandler(menuItemStudentMng_Click);
 
 
 
             this.notifyContextMenu = new System.Windows.Forms.ContextMenu();
-            //this.notifyContextMenu.MenuItems.Add(menuItemStudentMng);
+            this.notifyContextMenu.MenuItems.Add(menuItemStudentMng);
             //this.notifyContextMenu.MenuItems.Add(menuItemAnalysis);
             //this.notifyContextMenu.MenuItems.Add(menuItemQuestionMng);
             this.notifyContextMenu.MenuItems.Add(menuItemEquipmentConfig);
@@ -339,13 +366,14 @@ namespace Carbinet
         }
         void menuItemStudentMng_Click(object sender, EventArgs e)
         {
-            FrmRfidCheck_StudentManage frm = new FrmRfidCheck_StudentManage();
-            frm.Show();
+            frmStudentManage frm = new frmStudentManage();
+            frm.ShowDialog();
         }
 
         void menuItemEquipmentConfig_Click(object sender, EventArgs e)
         {
             frmEquipmentConfig frm = new frmEquipmentConfig();
+            Program.frmClassRoomConfig = frm;
             Program.frmClassRoom.Show();
             frm.Left = Program.frmClassRoom.Left + Program.frmClassRoom.Width;
             frm.Top = Program.frmClassRoom.Top;

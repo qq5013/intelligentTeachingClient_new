@@ -9,10 +9,11 @@ using System.IO;
 using intelligentMiddleWare;
 using Nexus.Windows.Forms;
 using MetroFramework.Forms;
+using MetroFramework;
 
 namespace Carbinet
 {
-    public partial class frmRTTest : MetroForm, I_event_notify, I_event_handler
+    public partial class frmRTTest : MetroForm, I_event_notify, I_event_handler, I_call_back
     {
         #region 成员
         frmQuestionMngCtl ctl = new frmQuestionMngCtl();
@@ -28,6 +29,9 @@ namespace Carbinet
         #region 各个选项对应的颜色
         Color clrNotKnown = Color.FromArgb(0, 174, 219);
         Color clrAnswered = Color.FromArgb(0, 177, 89);
+
+        List<string> textList = null;
+        List<MetroColorStyle> styleList = null;
         #endregion
         I_mini_form_show_notify formToNotify;
 
@@ -41,6 +45,13 @@ namespace Carbinet
             this.formToNotify = _notify_form;
             this.test_id = string.Format("{0}{1}", "test_id", DateTime.Now.ToString("yyyyMMddHHmmss"));
             this.FormClosing += new FormClosingEventHandler(frmRTTest_FormClosing);
+
+            this.textList = new List<string>();
+            this.textList.Add("A 答题完毕");
+            this.textList.Add("B 尚未选择");
+            this.styleList = new List<MetroColorStyle>();
+            this.styleList.Add(MetroColorStyle.Green);
+            this.styleList.Add(MetroColorStyle.Blue);
         }
 
         private void frmRTTest_FormClosing(object sender, FormClosingEventArgs e)
@@ -141,7 +152,7 @@ namespace Carbinet
                     int totalCount = MemoryTable.studentInfoTable.Rows.Count;
 
                     Person person = MemoryTable.getPersonByEpc(epcID);
-                    equipmentPosition ep = MemoryTable.getEquipmentConfigMapInfo(remoteDeviceID);
+                    equipmentPosition ep = MemoryTable.getEquipmentConfigMapInfoByDeviceID(remoteDeviceID);
                     //如果只是重复发送，不需要做什么
                     if (p.event_unit_list.IndexOf(IntelligentEventUnit.repeat_epc) >= 0)
                     {
@@ -152,7 +163,7 @@ namespace Carbinet
                             {
                                 int groupIndex = ep.group;
 
-                                equipmentPosition ep_old = MemoryTable.getEquipmentInfoByStudentID(epcID);
+                                equipmentPosition ep_old = MemoryTable.getEquipmentInfoByEpc(epcID);
                                 Program.frmClassRoom.changeChairState(ep_old.group, ep_old.formatedPosition(), DocumentFileState.InitialState);
                                 Program.frmClassRoom.changeChairState(ep_old.group, ep_old.formatedPosition(), "");
                                 MemoryTable.clearEquipmentAndStudentCombining(epcID);
@@ -160,17 +171,13 @@ namespace Carbinet
                                 Program.frmClassRoom.changeChairState(groupIndex, ep.formatedPosition(), person.name);
                                 MemoryTable.setEquipmentInfoCombineStudentID(ep, person.epc);
 
-                                //MemoryTable.setPersonAnswer(epcID, question_value);
-
                                 Program.frmClassRoom.changeChairState(groupIndex, ep.formatedPosition(), DocumentFileState.Green);
                             }
                         }
                         //如果重复发送之外，还改变了问题的答案，按照设计，这里不需要更改饼图
                         if (p.event_unit_list.IndexOf(IntelligentEventUnit.change_answer) >= 0)
                         {
-                            //MemoryTable.setPersonAnswer(epcID, question_value);
-
-                            this.refreshAnswerRecord(epcID, question_value);
+                            this.refreshAnswerRecord(person, question_value);
                         }
                     }
                     else
@@ -184,8 +191,7 @@ namespace Carbinet
                                 Program.frmClassRoom.changeChairState(ep.group, ep.formatedPosition(), person.name);
                             }
 
-                            //MemoryTable.setPersonAnswer(epcID, question_value);
-                            this.refreshAnswerRecord(epcID, question_value);
+                            this.refreshAnswerRecord(person, question_value);
                             this.refreshPie();
                         }
                 };
@@ -197,11 +203,24 @@ namespace Carbinet
         {
             this.initialInfoTable();
             MiddleWareCore.set_mode(MiddleWareMode.课堂测验, this);
+            Program.frmFloat.setLegend(this.textList, this.styleList);
+            Program.frmClassRoom.setCallBackInvoker(this);//点击座位时的回调
             Program.frmClassRoom.resetClassRoomState();
             setPieToInitializeState();
 
             this.Show();
         }
+        public void callback()
+        {
+            int carbinetIndex = Program.frmClassRoom.carbinetIndex;
+            int floorNumber = Program.frmClassRoom.floorNumber;
+            int columnNumber = Program.frmClassRoom.columnNumber;
+            string epc = MemoryTable.getPersonEpcByPosition(carbinetIndex, floorNumber, columnNumber);
+            Person p = MemoryTable.getPersonByEpc(epc);
+            frmShowStudentInfo frm = new frmShowStudentInfo(p.id_num);
+            frm.ShowDialog();
+        }
+
         #endregion
 
         #region 事件处理
@@ -276,7 +295,7 @@ namespace Carbinet
             for (int i = 0; i < rows.Length; i++)
             {
                 string studentID = (string)rows[i]["student_id"];
-                equipmentPosition ep = MemoryTable.getEquipmentInfoByStudentID(studentID);
+                equipmentPosition ep = MemoryTable.getEquipmentInfoByEpc(studentID);
                 Person psn = MemoryTable.getPersonByEpc(studentID);
                 Program.frmClassRoom.changeChairState(ep.group, ep.formatedPosition(), DocumentFileState.Green);
                 Program.frmClassRoom.changeChairState(ep.group, ep.formatedPosition(), psn.name);
@@ -321,6 +340,13 @@ namespace Carbinet
             return index;
         }
 
+        private void refreshAnswerRecord(Person person, string question_value)
+        {
+            if (person != null)
+            {
+                refreshAnswerRecord(person.id_num, question_value);
+            }
+        }
         private void refreshAnswerRecord(string student_id, string question_value)
         {
             //更新答题记录
@@ -382,5 +408,7 @@ namespace Carbinet
             }
         }
         #endregion
+
+
     }
 }

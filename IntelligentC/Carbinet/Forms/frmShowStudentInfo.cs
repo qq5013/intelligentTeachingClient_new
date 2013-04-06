@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MetroFramework.Forms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,20 +9,19 @@ using System.Windows.Forms;
 
 namespace Carbinet
 {
-    public partial class frmShowStudentInfo : Form
+    public partial class frmShowStudentInfo : MetroForm
     {
         public frmShowStudentInfo(string studendID)
         {
             InitializeComponent();
-            studentInfoCtl stuCtl = new studentInfoCtl();
-            DataTable dt = stuCtl.getStudentInfo(studendID);
-            if (dt.Rows.Count > 0)
+            this.lblID.Text = studendID;
+
+            Person person = MemoryTable.getPersonByID(studendID);
+            if (person != null)
             {
-                DataRow dr = dt.Rows[0];
-                this.lblName.Text = (string)dr["NAME"];
-                this.lblID.Text = (string)dr["STUDENTID"];
-                this.lblClass.Text = (string)dr["CLASS_NAME"];
-                this.lblEmail.Text = (string)dr["EMAIL"];
+                this.lblName.Text = person.name;
+                this.lblClass.Text = person.bj;
+                this.lblEmail.Text = person.email;
             }
             else
             {

@@ -1,4 +1,5 @@
 ﻿using intelligentMiddleWare;
+using MetroFramework;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,7 +9,7 @@ using System.Text;
 
 namespace Carbinet
 {
-    public class StudentCheck : I_event_notify, I_event_handler
+    public class StudentCheck : I_event_notify, I_event_handler, I_call_back
     {
 
         #region 成员
@@ -17,6 +18,9 @@ namespace Carbinet
         #region 各个选项对应的颜色
         Color clrChecked = Color.FromArgb(243, 119, 53);
         Color clrUnchecked = Color.FromArgb(0, 174, 219);
+        // legend
+        List<string> textList = null;
+        List<MetroColorStyle> styleList = null;
         #endregion
         DataTable dtCheckRecord = null;
         #endregion
@@ -24,7 +28,14 @@ namespace Carbinet
         public StudentCheck(string _record_id)
         {
             this.record_id = _record_id;
-            this.formToNotify = Program.frmFloat;
+            this.formToNotify = Program.frmFloat;//通知主菜单显示特定信息
+
+            this.textList = new List<string>();
+            this.textList.Add("通过");
+            this.textList.Add("迟到");
+            this.styleList = new List<MetroColorStyle>();
+            this.styleList.Add(MetroColorStyle.Orange);
+            this.styleList.Add(MetroColorStyle.Blue);
         }
 
         #region 工具函数
@@ -130,33 +141,36 @@ namespace Carbinet
                 bool bRefresh_ui = false;
 
                 Person person = MemoryTable.getPersonByEpc(epcID);
-                equipmentPosition ep = MemoryTable.getEquipmentConfigMapInfo(remoteDeviceID);
-
-                if (p.event_unit_list.IndexOf(IntelligentEventUnit.epc_on_another_device) >= 0)//重复考勤
+                equipmentPosition ep = MemoryTable.getEquipmentConfigMapInfoByDeviceID(remoteDeviceID);
+                if (person != null && ep != null)
                 {
-                    ////这里要处理一下同一个学生用不一个设备发送答案的情况
-                    equipmentPosition ep_old = MemoryTable.getEquipmentInfoByStudentID(epcID);
-                    this.setChairState(ep_old, DocumentFileState.InitialState, "");
-                    MemoryTable.clearEquipmentAndStudentCombining(epcID);
-
-                    bRefresh_ui = true;
-                }
-                if (p.event_unit_list.IndexOf(IntelligentEventUnit.new_epc) >= 0)//第一次考勤 
-                {
-                    //更新考勤信息
-                    this.addStudentRecord(epcID, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-                    bRefresh_ui = true;
-                }
-                if (bRefresh_ui == true)
-                {
-                    if (person != null)
+                    if (p.event_unit_list.IndexOf(IntelligentEventUnit.epc_on_another_device) >= 0)//重复考勤
                     {
-                        studentName = person.name;
-                        this.setChairState(ep, studentName);
-                        MemoryTable.setEquipmentInfoCombineStudentID(ep, person.epc);
+                        ////这里要处理一下同一个学生用不一个设备发送答案的情况
+                        equipmentPosition ep_old = MemoryTable.getEquipmentInfoByEpc(epcID);
+                        this.setChairState(ep_old, DocumentFileState.InitialState, "");
+                        MemoryTable.clearEquipmentAndStudentCombining(epcID);
+
+                        bRefresh_ui = true;
                     }
-                    this.refreshPie();
+                    if (p.event_unit_list.IndexOf(IntelligentEventUnit.new_epc) >= 0)//第一次考勤 
+                    {
+                        //更新考勤信息
+                        this.addStudentRecord(person.id_num, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                        bRefresh_ui = true;
+                    }
+                    if (bRefresh_ui == true)
+                    {
+                        if (person != null)
+                        {
+                            studentName = person.name;
+                            this.setChairState(ep, studentName);
+                            MemoryTable.setEquipmentInfoCombineStudentID(ep, person.epc);
+                        }
+                        this.refreshPie();
+                    }
                 }
+
             }
         }
 
@@ -168,18 +182,31 @@ namespace Carbinet
             this.handle_event();
         }
 
-
+        public void callback()
+        {
+            int carbinetIndex = Program.frmClassRoom.carbinetIndex;
+            int floorNumber = Program.frmClassRoom.floorNumber;
+            int columnNumber = Program.frmClassRoom.columnNumber;
+            string epc = MemoryTable.getPersonEpcByPosition(carbinetIndex, floorNumber, columnNumber);
+            Person p = MemoryTable.getPersonByEpc(epc);
+            frmShowStudentInfo frm = new frmShowStudentInfo(p.id_num);
+            frm.ShowDialog();
+        }
         public void prepare_handler()
         {
             MiddleWareCore.set_mode(MiddleWareMode.考勤, this);
+            Program.frmFloat.setLegend(this.textList, this.styleList);
 
             initialInfoTable();
             setPieToInitializeState();
 
             Program.frmClassRoom.resetClassRoomState();
 
+            Program.frmClassRoom.setCallBackInvoker(this);//点击座位时的回调
             this.formToNotify.show_tip("正在考勤");
         }
         #endregion
+
+
     }
 }
