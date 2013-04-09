@@ -25,7 +25,59 @@ namespace Carbinet
             @"INSERT into T_STUDENT_CHECK_INFO(record_id, student_id ,check_time) VALUES('{0}','{1}','{2}');";
         public static string sqlInsert_AddClassCheckInfo =
             @"INSERT into T_CLASS_CHECK_INFO(CHECK_TIME,CLASS_NAME,PERCENTAGE) values('{0}','{1}','{2}');";
+        static string sqlDelete_clearStudentInfo = "delete from T_STUDENTINFO;";
+        static string sqlDelete_clearStudentEpcLink = "delete from T_STUDENTINFO_LINK_EPC;";
+        static string sqlInsert_addStudent = "insert into T_STUDENTINFO values('{0}','{1}','{2}',{3},'{4}','{5}');";
+        static string sqlInsert_addStudentEpcLink = "insert into T_STUDENTINFO_LINK_EPC values('{0}','{1}');";
 
+
+
+        public static void addStudentInfo(List<Person> list)
+        {
+            foreach (Person person in list)
+            {
+                addStudentInfo(person);
+            }
+        }
+        public static bool addStudentInfo(Person person)
+        {
+            return addStudentInfo(person.id_num, person.name, person.sex, person.age, person.bj, person.email, person.epc);
+        }
+        public static bool addStudentInfo(string id, string name, string sex, int age, string class_name, string email, string epc)
+        {
+            try
+            {
+                int result1 = CsharpSQLiteHelper.ExecuteNonQuery(
+                             sqlInsert_addStudent
+                             , new object[] { id, name, sex, age, class_name, email });
+                int result2 = CsharpSQLiteHelper.ExecuteNonQuery(
+                             sqlInsert_addStudentEpcLink
+                             , new object[] { id, epc });
+                if (result1 > 0 && result2 > 0)
+                {
+                    return true;
+                }
+            }
+            catch (System.Exception ex)
+            {
+
+                MessageBox.Show("添加数据时出现错误：" + ex.Message);
+            }
+            return false;
+        }
+       
+        public static void clearStudentInfo()
+        {
+            try
+            {
+                CsharpSQLiteHelper.ExecuteNonQuery(sqlDelete_clearStudentInfo, null);
+                CsharpSQLiteHelper.ExecuteNonQuery(sqlDelete_clearStudentEpcLink, null);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show("更新数据时出现错误：" + ex.Message);
+            }
+        }
 
         public bool AddClassCheckInfo(string time, string name, string percentage)
         {

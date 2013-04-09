@@ -32,6 +32,25 @@ namespace Carbinet
         static string sqlSelect_GetConfigColumnNumber =
             @"select VVALUE from T_CONFIG where VKEY= 'column'";
 
+        static string sqlDelete_clearMap = "delete from T_EQUIPMENT_LOCATION_MAP;";
+
+        public static bool clearEquipmentMapOfDB()
+        {
+            try
+            {
+                int result = (int)CsharpSQLiteHelper.ExecuteNonQuery(sqlDelete_clearMap, null);
+                if (result > 0)
+                {
+                    return true;
+                }
+            }
+            catch (System.Exception ex)
+            {
+
+                MessageBox.Show("更新数据时出现错误：" + ex.Message);
+            }
+            return false;
+        }
 
         public static DataTable getAllMapConfigs()
         {
@@ -47,40 +66,40 @@ namespace Carbinet
             return null;
         }
 
-        public int getClassroomConfig(int type)
-        {
-            string sql = null;
-            switch (type)
-            {
-                case 0:
-                    sql = sqlSelect_GetConfigGroupNumber;
-                    break;
-                case 1:
-                    sql = sqlSelect_GetConfigRowNumber;
-                    break;
-                case 2:
-                    sql = sqlSelect_GetConfigColumnNumber;
-                    break;
-            }
-            if (null == sql)
-            {
-                return 0;
-            }
-            try
-            {
-                DataTable dt = CsharpSQLiteHelper.ExecuteTable(sql, null);
-                if (dt.Rows.Count > 0)
-                {
-                    DataRow dr = dt.Rows[0];
-                    return int.Parse(dr["VVALUE"].ToString());
-                }
-            }
-            catch (System.Exception ex)
-            {
-                MessageBox.Show("查询数据库时出现错误：" + ex.Message);
-            }
-            return 0;
-        }
+        //public int getClassroomConfig(int type)
+        //{
+        //    string sql = null;
+        //    switch (type)
+        //    {
+        //        case 0:
+        //            sql = sqlSelect_GetConfigGroupNumber;
+        //            break;
+        //        case 1:
+        //            sql = sqlSelect_GetConfigRowNumber;
+        //            break;
+        //        case 2:
+        //            sql = sqlSelect_GetConfigColumnNumber;
+        //            break;
+        //    }
+        //    if (null == sql)
+        //    {
+        //        return 0;
+        //    }
+        //    try
+        //    {
+        //        DataTable dt = CsharpSQLiteHelper.ExecuteTable(sql, null);
+        //        if (dt.Rows.Count > 0)
+        //        {
+        //            DataRow dr = dt.Rows[0];
+        //            return int.Parse(dr["VVALUE"].ToString());
+        //        }
+        //    }
+        //    catch (System.Exception ex)
+        //    {
+        //        MessageBox.Show("查询数据库时出现错误：" + ex.Message);
+        //    }
+        //    return 0;
+        //}
 
         /// <summary>
         /// 更新教师的座位配置
@@ -88,40 +107,40 @@ namespace Carbinet
         /// <param name="number">数目</param>
         /// <param name="type">类型 0 group   1 row  2 column</param>
         /// <returns></returns>
-        public bool updateClassRoomConfig(int number, int type)
-        {
-            string sql = null;
-            switch (type)
-            {
-                case 0:
-                    sql = sqlUpdate_UpdateGroupNumber;
-                    break;
-                case 1:
-                    sql = sqlUpdate_UpdaterowNumber;
-                    break;
-                case 2:
-                    sql = sqlUpdate_UpdatecolumnNumber;
-                    break;
-            }
-            if (null == sql)
-            {
-                return false;
-            }
-            try
-            {
-                int result = int.Parse(CsharpSQLiteHelper.ExecuteNonQuery(sql, new object[1] { number }).ToString());
-                if (result > 0)
-                {
-                    return true;
-                }
-            }
-            catch (System.Exception ex)
-            {
+        //public bool updateClassRoomConfig(int number, int type)
+        //{
+        //    string sql = null;
+        //    switch (type)
+        //    {
+        //        case 0:
+        //            sql = sqlUpdate_UpdateGroupNumber;
+        //            break;
+        //        case 1:
+        //            sql = sqlUpdate_UpdaterowNumber;
+        //            break;
+        //        case 2:
+        //            sql = sqlUpdate_UpdatecolumnNumber;
+        //            break;
+        //    }
+        //    if (null == sql)
+        //    {
+        //        return false;
+        //    }
+        //    try
+        //    {
+        //        int result = int.Parse(CsharpSQLiteHelper.ExecuteNonQuery(sql, new object[1] { number }).ToString());
+        //        if (result > 0)
+        //        {
+        //            return true;
+        //        }
+        //    }
+        //    catch (System.Exception ex)
+        //    {
 
-                MessageBox.Show("更新数据时出现错误：" + ex.Message);
-            }
-            return false;
-        }
+        //        MessageBox.Show("更新数据时出现错误：" + ex.Message);
+        //    }
+        //    return false;
+        //}
 
         public bool updateMapConfig(string equipID, int group, int row, int column)
         {
@@ -142,7 +161,23 @@ namespace Carbinet
             }
             return false;
         }
-        public bool AddMapConfig(string equipID, int group, int row, int column)
+
+        public static void AddMapConfig(List<equipmentPosition> list)
+        {
+            foreach (equipmentPosition ep in list)
+            {
+                AddMapConfig(ep);
+            }
+        }
+        public static bool AddMapConfig(equipmentPosition ep)
+        {
+            string equipID = ep.equipmentID;
+            int group = ep.group;
+            int row = ep.row;
+            int column = ep.column;
+            return AddMapConfig(equipID, group, row, column);
+        }
+        public static bool AddMapConfig(string equipID, int group, int row, int column)
         {
             try
             {
@@ -160,6 +195,7 @@ namespace Carbinet
             }
             return false;
         }
+
         public bool CheckExists(int group, int row, int column)
         {
             try

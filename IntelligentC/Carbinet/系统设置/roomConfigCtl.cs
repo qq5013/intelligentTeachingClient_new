@@ -19,8 +19,42 @@ namespace Carbinet
              @"update T_ROOM_CONFIG set ICOLUMN = {0} where IGROUP = {1}";
         public static string sqlInsert_addConfig =
             @"insert into T_ROOM_CONFIG(IGROUP,IROW,ICOLUMN) values({0},{1},{2})";
+        public static string sql_delete = "delete FROM T_ROOM_CONFIG;";
 
-        public bool AddNewConfig(int group, int row, int column)
+        public static bool clearRoomConfigOfDB()
+        {
+            try
+            {
+                int result = (int)CsharpSQLiteHelper.ExecuteNonQuery(sql_delete, null);
+                if (result > 0)
+                {
+                    return true;
+                }
+            }
+            catch (System.Exception ex)
+            {
+
+                MessageBox.Show("更新数据时出现错误：" + ex.Message);
+            }
+            return false;
+        }
+
+
+        public static void AddNewConfig(List<RoomConfig> list)
+        {
+            foreach (RoomConfig rc in list)
+            {
+                AddNewConfig(rc);
+            }
+        }
+        public static bool AddNewConfig(RoomConfig rc)
+        {
+            int group = rc.group;
+            int row = rc.row;
+            int column = rc.column;
+            return AddNewConfig(group, row, column);
+        }
+        public static bool AddNewConfig(int group, int row, int column)
         {
             try
             {
@@ -40,7 +74,7 @@ namespace Carbinet
             return false;
         }
 
-        public bool ConfigExists(int group)
+        public static bool ConfigExists(int group)
         {
             try
             {
@@ -63,7 +97,7 @@ namespace Carbinet
         /// <param name="value"></param>
         /// <param name="type">0，row   1 column</param>
         /// <returns></returns>
-        public bool updateRoomConfig(int group, int value, int type)
+        public static bool updateRoomConfig(int group, int value, int type)
         {
             string sql = null;
             switch (type)

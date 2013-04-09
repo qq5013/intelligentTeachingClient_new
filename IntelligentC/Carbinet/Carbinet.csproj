@@ -55,10 +55,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BarChart, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dll\BarChart.dll</HintPath>
-    </Reference>
     <Reference Include="Community.CsharpSqlite, Version=3.7.7.1, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dll\Community.CsharpSqlite.dll</HintPath>
@@ -68,6 +64,9 @@
       <HintPath>..\Dll\Community.CsharpSqlite.SQLiteClient.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Dll\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -87,6 +86,7 @@
     <Compile Include="frmLegend.Designer.cs">
       <DependentUpon>frmLegend.cs</DependentUpon>
     </Compile>
+    <Compile Include="public\RoomConfig.cs" />
     <Compile Include="考勤\frmSelectCheckRecord.cs">
       <SubType>Form</SubType>
     </Compile>

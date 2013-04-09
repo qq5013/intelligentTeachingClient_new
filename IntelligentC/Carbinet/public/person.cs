@@ -47,6 +47,6 @@ namespace Carbinet
         {
             this.id_num = _id;
         }
-
+        public Person() { }
     }
 }

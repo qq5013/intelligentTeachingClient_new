@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Data;
+using Newtonsoft.Json;
 
 namespace Carbinet
 {
@@ -202,6 +203,43 @@ namespace Carbinet
             }
             isInitialized = true;
         }
+        public static string getStudentInfoJson()
+        {
+            List<Person> list = new List<Person>();
+            int totalCount = studentInfoTable.Rows.Count;
+            for (int i = 0; i < totalCount; i++)
+            {
+                DataRow dr = studentInfoTable.Rows[i];
+                Person person = 
+                    new Person((string)dr["STUDENTID"],(string)dr["NAME"],(string)dr["SEX"],(int)dr["AGE"],(string)dr["EMAIL"],(string)dr["CLASS_NAME"],(string)dr["epc"]);
+                list.Add(person);
+            }
+            return JsonConvert.SerializeObject(list);
+        }
+        public static string getEquipmentMapJson()
+        {
+            List<equipmentPosition> list = new List<equipmentPosition>();
+            int totalCount = mapConfigsTable.Rows.Count;
+            for (int i = 0; i < totalCount; i++)
+            {
+                DataRow dr = mapConfigsTable.Rows[i];
+                equipmentPosition ep = new equipmentPosition((string)dr["EQUIPEMNTID"], (int)dr["IGROUP"], (int)dr["IROW"], (int)dr["ICOLUMN"]);
+                list.Add(ep);
+            }
+            return JsonConvert.SerializeObject(list);
+        }
+        public static string getRoomConfigJson()
+        {
+            List<RoomConfig> list = new List<RoomConfig>();
+            int totalCount = dtRoomConfig.Rows.Count;
+            for (int i = 0; i < totalCount; i++)
+            {
+                DataRow dr = dtRoomConfig.Rows[i];
+                RoomConfig rc = new RoomConfig((int)dr["IGROUP"], (int)dr["IROW"], (int)dr["ICOLUMN"]);
+                list.Add(rc);
+            }
 
+            return JsonConvert.SerializeObject(list);
+        }
     }
 }
