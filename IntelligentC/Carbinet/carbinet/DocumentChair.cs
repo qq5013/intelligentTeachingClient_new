@@ -1,4 +1,4 @@
-﻿#define _debug_documentchair
+﻿//#define _debug_documentchair
 using System.Diagnostics;
 
 namespace Carbinet

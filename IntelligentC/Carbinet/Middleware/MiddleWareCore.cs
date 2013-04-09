@@ -27,6 +27,7 @@ namespace intelligentMiddleWare
     public interface I_event_handler
     {
         void prepare_handler();
+        void closeHandler();
     }
     public interface I_mini_form_show_notify
     {

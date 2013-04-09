@@ -62,6 +62,8 @@ namespace Carbinet
             //    dr["answer"] = "";
             //}
             this.save_answer_info();
+
+            Program.frmFloat.setDefaultHandler();
         }
 
         private void initialInfoTable()
@@ -221,6 +223,10 @@ namespace Carbinet
             frm.ShowDialog();
         }
 
+        public void closeHandler()
+        {
+            this.Close();
+        }
         #endregion
 
         #region 事件处理
@@ -408,6 +414,9 @@ namespace Carbinet
             }
         }
         #endregion
+
+
+
 
 
     }

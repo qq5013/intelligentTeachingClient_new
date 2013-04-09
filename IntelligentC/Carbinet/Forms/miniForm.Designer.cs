@@ -172,7 +172,7 @@
             this.lblTip.FontSize = MetroFramework.MetroLabelSize.Medium;
             this.lblTip.FontWeight = MetroFramework.MetroLabelWeight.Light;
             this.lblTip.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
-            this.lblTip.Location = new System.Drawing.Point(0, 37);
+            this.lblTip.Location = new System.Drawing.Point(-20, 37);
             this.lblTip.Name = "lblTip";
             this.lblTip.Size = new System.Drawing.Size(81, 19);
             this.lblTip.Style = MetroFramework.MetroColorStyle.Blue;
@@ -186,7 +186,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(65, 818);
+            this.ClientSize = new System.Drawing.Size(60, 818);
+            this.ControlBox = false;
             this.Controls.Add(this.lblTip);
             this.Controls.Add(this.pictureBox1_1);
             this.Controls.Add(this.pictureBox2_1);
@@ -206,7 +207,7 @@
             this.Movable = false;
             this.Name = "frmFloat";
             this.Opacity = 0.85D;
-            this.Padding = new System.Windows.Forms.Padding(20, 60, 0, 20);
+            this.Padding = new System.Windows.Forms.Padding(0, 60, 0, 20);
             this.Resizable = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;

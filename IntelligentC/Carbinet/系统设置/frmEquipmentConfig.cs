@@ -23,7 +23,7 @@ namespace Carbinet
 
             Program.frmClassRoom.resetClassRoomState();
 
-            this.refreshChairEquipmentID();
+            //this.refreshChairEquipmentID();
 
             this.Shown += new EventHandler(frmEquipmentConfig_Shown);
             this.FormClosing += new FormClosingEventHandler(frmEquipmentConfig_FormClosing);
@@ -45,6 +45,7 @@ namespace Carbinet
                 Program.frmClassRoom.changeChairState(ep.group, ep.formatedPosition(), ep.equipmentID);
             }
             Program.frmClassRoom.Refresh();
+            //Program.frmClassRoom.Show();
         }
         void frmEquipmentConfig_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -150,6 +151,7 @@ namespace Carbinet
             //当总数减少时，则要删除值最大的一行数据
             MemoryTable.refreshGroupCount(groupNumber);
             this.NotifyClassRoomToRefresh();
+            this.refreshChairEquipmentID();
         }
         //row数目发生变化
         private void numCountofRow_ValueChanged(object sender, EventArgs e)
@@ -187,7 +189,11 @@ namespace Carbinet
                 //this.numCountofColumn.Value = (decimal)column;
                 //this.numCountofRow.Value = (decimal)row;
             }
+            this.NotifyClassRoomToRefresh();
         }
+
+
+        #region 接口函数
         public void receive_a_new_event()
         {
             this.handle_event();
@@ -231,5 +237,13 @@ namespace Carbinet
                 this.txtEquipmentID.Text = string.Empty;
             }
         }
+        #endregion
+
+        private void btnShowEquipMap_Click(object sender, EventArgs e)
+        {
+            Program.frmClassRoom.resetClassRoomState();
+            refreshChairEquipmentID();
+        }
+
     }
 }

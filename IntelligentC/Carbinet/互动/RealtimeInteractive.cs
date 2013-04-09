@@ -57,7 +57,7 @@ namespace Carbinet
                 string remoteDeviceID = IEvent.remoteDeviceID;
                 string check_time = IEvent.time_stamp;
                 string studentName = string.Empty;
-                string question_value = IEvent.questionValue.ToUpper();;
+                string question_value = IEvent.questionValue.ToUpper(); ;
 
                 //终端发送的答案必须符合要求 A B C 或者 D
 
@@ -153,10 +153,23 @@ namespace Carbinet
             }
         }
         #endregion
+        private void initialInfoTable()
+        {
+            this.dtAnswerRecord = new DataTable();
+            this.dtAnswerRecord.Columns.Add("studenID", typeof(string));
+            this.dtAnswerRecord.Columns.Add("answer", typeof(string));
+
+            int totalCount = MemoryTable.studentInfoTable.Rows.Count;
+            for (int i = 0; i < totalCount; i++)
+            {
+                this.dtAnswerRecord.Rows.Add(new object[] { MemoryTable.studentInfoTable.Rows[i]["STUDENTID"], "" });
+            }
+        }
 
         private void setPieToInitializeState()
         {
             List<int> valueList = this.getValueList(1, 1, 1, 1);
+            //NotifyFormToRefreshPie(valueList, true);
             NotifyFormToRefreshPie(valueList, false);
         }
 
@@ -222,24 +235,13 @@ namespace Carbinet
         }
         #endregion
 
-        private void initialInfoTable()
-        {
-            this.dtAnswerRecord = new DataTable();
-            this.dtAnswerRecord.Columns.Add("studenID", typeof(string));
-            this.dtAnswerRecord.Columns.Add("answer", typeof(string));
 
-            int totalCount = MemoryTable.studentInfoTable.Rows.Count;
-            for (int i = 0; i < totalCount; i++)
-            {
-                this.dtAnswerRecord.Rows.Add(new object[] { MemoryTable.studentInfoTable.Rows[i]["STUDENTID"], "" });
-            }
-        }
-
+        #region 接口函数
         public void prepare_handler()
         {
             MiddleWareCore.set_mode(MiddleWareMode.实时互动, this);
             Program.frmClassRoom.setCallBackInvoker(this);//点击座位时的回调
-            Program.frmFloat.setLegend(this.textList,this.styleList);
+            Program.frmFloat.setLegend(this.textList, this.styleList);
             initialInfoTable();
             this.setPersonAnswer("D");
             setPieToInitializeState();
@@ -257,5 +259,11 @@ namespace Carbinet
             frmShowStudentInfo frm = new frmShowStudentInfo(p.id_num);
             frm.ShowDialog();
         }
+
+
+        public void closeHandler()
+        {
+        }
+        #endregion
     }
 }

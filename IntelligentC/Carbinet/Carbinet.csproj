@@ -86,6 +86,7 @@
     <Compile Include="frmLegend.Designer.cs">
       <DependentUpon>frmLegend.cs</DependentUpon>
     </Compile>
+    <Compile Include="LoginManager.cs" />
     <Compile Include="public\RoomConfig.cs" />
     <Compile Include="考勤\frmSelectCheckRecord.cs">
       <SubType>Form</SubType>

@@ -30,7 +30,10 @@ namespace Carbinet
             MemoryTable.initializeTabes();
             frmClassRoom = new frmClassRoom();
             frmFloat = new frmFloat();
-            StaticDataPort.openDataPort();
+            StaticDataPort.openDataPort(5000);//普通的系统数据交互端口
+            LoginManager.StartRFID_UDPServer(5001);//读卡器传送数据端口
+            LoginManager.StartLogin_UDPServer(5002);//登陆端口
+
             Application.Run(frmFloat);
 
             //Application.Run(new frmTest());
@@ -76,7 +79,7 @@ namespace Carbinet
         static void importData()
         { 
             roomConfigCtl.clearRoomConfigOfDB();
-
+            //教室配置
             string strReadFilePath1 = @"./config/roomConfig.txt";
             StreamReader srReadFile1 = new StreamReader(strReadFilePath1);
             string roomConfig = srReadFile1.ReadToEnd();
@@ -86,7 +89,7 @@ namespace Carbinet
             roomConfigCtl.AddNewConfig(list);
 
             EquipmentConfigCtl.clearEquipmentMapOfDB();
-
+            //设备位置映射
             string strReadFilePath2 = @"./config/equipmentMaps.txt";
             StreamReader srReadFile2 = new StreamReader(strReadFilePath2);
             string equipmentMaps = srReadFile2.ReadToEnd();
@@ -94,6 +97,7 @@ namespace Carbinet
             List<equipmentPosition> listMap = (List<equipmentPosition>)JsonConvert.DeserializeObject<List<equipmentPosition>>(equipmentMaps);
             EquipmentConfigCtl.AddMapConfig(listMap);
 
+            //学生基本信息，客户端支持更改的只有绑定的学生卡
             studentInfoCtl.clearStudentInfo();
             string strReadFilePath3 = @"./config/Person.txt";
             StreamReader srReadFile3 = new StreamReader(strReadFilePath3);
@@ -102,7 +106,30 @@ namespace Carbinet
             List<Person> personList = (List<Person>)JsonConvert.DeserializeObject<List<Person>>(Person);
             studentInfoCtl.addStudentInfo(personList);        
         }
+        public static void exportData()
+        {
+            //教室配置
+            string roomConfig = MemoryTable.getRoomConfigJson();
+            string strReadFilePath1 = @"./config/roomConfig.txt";
+            StreamWriter srWriteFile1 = new StreamWriter(strReadFilePath1);
+            srWriteFile1.Write(roomConfig);
+            srWriteFile1.Close();
 
+            //设备位置映射
+            EquipmentConfigCtl.clearEquipmentMapOfDB();
+            string strReadFilePath2 = @"./config/equipmentMaps.txt";
+            string equiMap = MemoryTable.getEquipmentMapJson();
+            StreamWriter srWriteFile2 = new StreamWriter(strReadFilePath2);
+            srWriteFile2.Write(equiMap);
+            srWriteFile2.Close();
+
+            //学生基本信息，客户端支持更改的只有绑定的学生卡
+            string strReadFilePath3 = @"./config/Person.txt";
+            string studentInfo = MemoryTable.getStudentInfoJson();
+            StreamWriter srWriteFile3 = new StreamWriter(strReadFilePath3);
+            srWriteFile3.Write(studentInfo);
+            srWriteFile3.Close();
+        }
         public static void testJson()
         {
             //string roomConfig = MemoryTable.getRoomConfigJson();

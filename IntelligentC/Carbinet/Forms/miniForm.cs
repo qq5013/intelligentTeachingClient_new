@@ -5,6 +5,7 @@ using MetroFramework.Forms;
 using Nexus.Windows.Forms;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -37,6 +38,10 @@ namespace Carbinet
         {
             #region 控件初始化
             InitializeComponent();
+
+            //this.Width = 50;
+            //this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+
             pblst.Add(pictureBox5);
             pblst.Add(pictureBox4);
             pblst.Add(pictureBox3);
@@ -72,7 +77,7 @@ namespace Carbinet
             PieChart1.ShowEdges = false;
             //PieChart1.Radius = 90F;
 
-            PieChart1.MouseHover += PieChart1_MouseHover;
+            PieChart1.MouseEnter += PieChart1_MouseEnter;
             PieChart1.MouseLeave += PieChart1_MouseLeave;
             #endregion
 
@@ -112,8 +117,7 @@ namespace Carbinet
                 };
             pictureBox3_1.Click += (sender, e) =>
             {
-                event_handler = new RealtimeInteractive(this);
-                event_handler.prepare_handler();
+                this.setDefaultHandler();
             };
             pictureBox4_1.Click += (sender, e) =>
             {
@@ -128,7 +132,32 @@ namespace Carbinet
 
             #endregion
             this.initial_popup_menu();
+
+            this.Shown += frmFloat_Shown;
+            this.FormClosing += frmFloat_FormClosing;
         }
+
+        void frmFloat_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Program.exportData();
+            if (event_handler != null)
+            {
+                event_handler.closeHandler();
+            }
+        }
+
+        void frmFloat_Shown(object sender, EventArgs e)
+        {
+            this.setDefaultHandler();
+        }
+
+        //设置默认模式，一般为实时互动
+        public void setDefaultHandler()
+        {
+            event_handler = new RealtimeInteractive(this);
+            event_handler.prepare_handler();
+        }
+
         public void setLegend(List<string> _textList, List<MetroColorStyle> _styleList)
         {
             this.textList = _textList;
@@ -137,19 +166,18 @@ namespace Carbinet
         //当鼠标离开饼图后，隐藏图例
         void PieChart1_MouseLeave(object sender, EventArgs e)
         {
+            Debug.WriteLine("=> PieChart1_MouseLeave");
             if (frmLegend != null)
 
                 frmLegend.Close();
         }
-        //当鼠标指在饼图上时，显示图例
-        void PieChart1_MouseHover(object sender, EventArgs e)
+        void PieChart1_MouseEnter(object sender, EventArgs e)
         {
-            //frmLegend = new frmLegend();
+            Debug.WriteLine("=> PieChart1_MouseEnter");
             frmLegend = new frmLegend(this.textList, this.styleList);
             frmLegend.Left = this.Width;
             frmLegend.Show();
         }
-
         //miniButton getMiniButton(PictureBox pb)
         //{
         //    miniButton button = miniButton.显示座位;
@@ -216,8 +244,10 @@ namespace Carbinet
                 }
             }
             else return;
-
-            PieChart1.Items.Clear();
+            if (PieChart1.Items.Count > 0)
+            {
+                PieChart1.Items.Clear();
+            }
             for (int i = 0; i < valueList.Count; i++)
             {
                 if (b)

@@ -25,7 +25,6 @@ namespace intelligentMiddleWare
     public class StaticDataPort
     {
         static bool bDataPortOpen = false;
-        static int udp_server_port = 5000;
         static StringBuilder sbuilder = new StringBuilder();
 #if UDP_TRANSE
         public static Socket serverSocket;
@@ -46,14 +45,14 @@ namespace intelligentMiddleWare
             try
             {
 #if UDP_TRANSE
-                initial_udp_server();
-                IPEndPoint ipeSender = new IPEndPoint(IPAddress.Any, 0);
-                //The epSender identifies the incoming clients
-                EndPoint epSender = (EndPoint)ipeSender;
+                //initial_udp_server();
+                //IPEndPoint ipeSender = new IPEndPoint(IPAddress.Any, 0);
+                ////The epSender identifies the incoming clients
+                //EndPoint epSender = (EndPoint)ipeSender;
 
-                //Start receiving data
-                serverSocket.BeginReceiveFrom(byteData, 0, byteData.Length,
-                    SocketFlags.None, ref epSender, new AsyncCallback(OnReceive), epSender);
+                ////Start receiving data
+                //serverSocket.BeginReceiveFrom(byteData, 0, byteData.Length,
+                //    SocketFlags.None, ref epSender, new AsyncCallback(OnReceive), epSender);
 
 #endif
 
@@ -71,7 +70,7 @@ namespace intelligentMiddleWare
             }
             bDataPortOpen = true;
         }
-        public static void openDataPort()
+        public static void openDataPort(int port)
         {
             if (bDataPortOpen == true)
             {
@@ -80,7 +79,7 @@ namespace intelligentMiddleWare
             try
             {
 #if UDP_TRANSE
-                initial_udp_server();
+                initial_udp_server(port);
                 IPEndPoint ipeSender = new IPEndPoint(IPAddress.Any, 0);
                 //The epSender identifies the incoming clients
                 EndPoint epSender = (EndPoint)ipeSender;
@@ -250,7 +249,7 @@ namespace intelligentMiddleWare
         }
         #endregion
 
-        public static void initial_udp_server()
+        public static void initial_udp_server(int port)
         {
 #if UDP_TRANSE
 
@@ -261,7 +260,7 @@ namespace intelligentMiddleWare
             serverSocket = new Socket(AddressFamily.InterNetwork,
                         SocketType.Dgram, ProtocolType.Udp);
             IPAddress ip = IPAddress.Parse("127.0.0.1");
-            IPEndPoint ipEndPoint = new IPEndPoint(ip, udp_server_port);
+            IPEndPoint ipEndPoint = new IPEndPoint(ip, port);
             //Bind this address to the server
             serverSocket.Bind(ipEndPoint);
             //防止客户端强行中断造成的异常

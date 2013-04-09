@@ -88,7 +88,17 @@ namespace Carbinet
                 dr["epc"] = epc;
             }
         }
-
+        //public static equipmentPosition getEquipmentInfoNotUsed()
+        //{
+        //    DataRow[] rowsMap = mapConfigsTable.Select("epc = ''");
+        //    if (rowsMap.Length > 0)
+        //    {
+        //        DataRow dr = rowsMap[0];
+        //        equipmentPosition ep = new equipmentPosition((string)dr["EQUIPEMNTID"], (int)dr["IGROUP"], (int)dr["IROW"], (int)dr["ICOLUMN"]);
+        //        return ep;
+        //    }
+        //    return null;
+        //}
         #region 获取设备与位置绑定信息
         public static equipmentPosition getEquipmentInfoByEpc(string epc)
         {

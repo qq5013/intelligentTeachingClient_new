@@ -81,10 +81,16 @@ namespace Carbinet
             //roomConfig.GroupList.Add(new ClassRoomGroup(2, 6, 2));
             //roomConfig.GroupList.Add(new ClassRoomGroup(3, 6, 2));
             int blackSpace = 100;
-            this.Controls.Clear();
-            this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.metroLabel1);
+            //this.Controls.Clear();
+            //this.Controls.Add(this.pictureBox2);
+            //this.Controls.Add(this.pictureBox1);
+            //this.Controls.Add(this.metroLabel1);
+            foreach (Carbinet c in this.groups)
+            {
+                c.clearDocFiles();
+            }
+            this.groups.Clear();
+
             this.InitialClassRoom(roomConfig, this.Width - blackSpace, 250, 40, blackSpace / 2);
         }
 

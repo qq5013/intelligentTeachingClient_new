@@ -205,7 +205,13 @@ namespace Carbinet
             Program.frmClassRoom.setCallBackInvoker(this);//点击座位时的回调
             this.formToNotify.show_tip("正在考勤");
         }
+        public void closeHandler()
+        {
+        }
         #endregion
+
+
+
 
 
     }

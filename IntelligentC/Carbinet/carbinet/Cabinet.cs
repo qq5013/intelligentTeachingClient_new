@@ -1,4 +1,4 @@
-﻿#define _debug_carbinet
+﻿//#define _debug_carbinet
 using System.Collections.Generic;
 using System.Diagnostics;
 using System;
@@ -221,7 +221,7 @@ namespace Carbinet
                 {
                     if (cf.documentList[i].name == docName)
                     {
-                        cf.RemoveDoc(cf.documentList[i], i);
+                        cf.RemoveDoc(cf.documentList[i]);
                         bFinded = true;
                         break;
                     }
@@ -235,6 +235,17 @@ namespace Carbinet
             Debug.WriteLine("RemoveDocFile <-");
 #endif
 
+        }
+        public void clearDocFiles()
+        {
+            foreach (CarbinetFloor cf in this.floors)
+            {
+                int total = cf.documentList.Count;
+                for (int i = 0; i < total; i++)
+                {
+                    cf.RemoveDoc(cf.documentList[0]);
+                }
+            }
         }
         public void resetAllDocState()
         {

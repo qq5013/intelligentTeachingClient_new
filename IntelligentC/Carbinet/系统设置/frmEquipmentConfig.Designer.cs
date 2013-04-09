@@ -48,6 +48,7 @@
             this.numCountofGroup = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnShowEquipMap = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numLocofGroup)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLocofRow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLocofColumn)).BeginInit();
@@ -96,9 +97,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(119, 208);
+            this.button1.Location = new System.Drawing.Point(88, 208);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(99, 26);
+            this.button1.Size = new System.Drawing.Size(130, 26);
             this.button1.TabIndex = 3;
             this.button1.Text = "分配";
             this.button1.UseVisualStyleBackColor = true;
@@ -279,6 +280,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnShowEquipMap);
             this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.label2);
@@ -294,6 +296,16 @@
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "设置学生端设备位置";
+            // 
+            // btnShowEquipMap
+            // 
+            this.btnShowEquipMap.Location = new System.Drawing.Point(88, 252);
+            this.btnShowEquipMap.Name = "btnShowEquipMap";
+            this.btnShowEquipMap.Size = new System.Drawing.Size(130, 26);
+            this.btnShowEquipMap.TabIndex = 5;
+            this.btnShowEquipMap.Text = "显示设备映射";
+            this.btnShowEquipMap.UseVisualStyleBackColor = true;
+            this.btnShowEquipMap.Click += new System.EventHandler(this.btnShowEquipMap_Click);
             // 
             // frmEquipmentConfig
             // 
@@ -344,5 +356,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ComboBox cmbSelectedRow;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button btnShowEquipMap;
     }
 }

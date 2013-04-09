@@ -1,4 +1,4 @@
-﻿#define _debug_carbinetfloor
+﻿//#define _debug_carbinetfloor
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -200,7 +200,7 @@ namespace Carbinet
         }
 
 
-        public void RemoveDoc(DocumentFile doc, int i)
+        public void RemoveDoc(DocumentFile doc)
         {
 #if _debug_carbinetfloor
             Debug.WriteLine("footprint -> CarbinetFloor.RemoveDoc");
