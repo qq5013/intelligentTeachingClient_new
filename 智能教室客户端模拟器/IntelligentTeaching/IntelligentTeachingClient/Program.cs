@@ -4,12 +4,17 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using IntelligentTeachingClient;
 
-namespace IntelligentTeaching
+namespace IntelligentTeachingClient
 {
     public class GlobalPara
     {
-        public static string dest_IP = "127.0.0.1";
-        public static string dest_port = "5000";
+        public static string dest_IP = string.Empty;
+        public static string dest_port = string.Empty;
+        public static string client_epc = string.Empty;
+        public static string dest_login_port = string.Empty;
+
+        public static string clientID = string.Empty;
+        public static string equipmentID = string.Empty;
     }
     static class Program
     {
@@ -23,20 +28,21 @@ namespace IntelligentTeaching
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new frmParent());
             //Application.Run(new SGSClient());
-            Application.Run(new main_form());
+            frmLogin = new frmLogin();
+            Application.Run(frmLogin);
 
 
-           //frmParent fp = new frmParent();
-            
-           // login frmLogin = new login(fp);
+            //frmParent fp = new frmParent();
+
+            // login frmLogin = new login(fp);
             //fp._frm = frmLogin;
 
-           // Application.Run(fp);
+            // Application.Run(fp);
 
 
             //Program.Test1();
         }
-
+        public static frmLogin frmLogin = null;
         static void Test1()
         {
             string s1 = "dc";

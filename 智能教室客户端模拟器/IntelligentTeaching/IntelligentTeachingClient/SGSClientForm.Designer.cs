@@ -1,4 +1,4 @@
-namespace IntelligentTeaching
+namespace IntelligentTeachingClient
 {
     partial class SGSClient
     {
@@ -90,7 +90,7 @@ namespace IntelligentTeaching
             // 
             // txtMessage
             // 
-            this.txtMessage.BackColor = System.Drawing.SystemColors.Control;
+            this.txtMessage.BackColor = System.Drawing.Color.White;
             this.txtMessage.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.txtMessage, "txtMessage");
             this.txtMessage.Name = "txtMessage";
@@ -155,10 +155,8 @@ namespace IntelligentTeaching
             this.groupBox2.Controls.Add(this.btnF);
             this.groupBox2.Controls.Add(this.groupBox4);
             this.groupBox2.Controls.Add(this.btnPower);
-            this.groupBox2.Controls.Add(this.textBox1);
             this.groupBox2.Controls.Add(this.buttonDown);
             this.groupBox2.Controls.Add(this.buttonUP);
-            this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.buttonE);
             this.groupBox2.Controls.Add(this.btnRight);
             this.groupBox2.Controls.Add(this.btnLeft);
@@ -208,7 +206,7 @@ namespace IntelligentTeaching
             // 
             // groupBox4
             // 
-            this.groupBox4.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox4.BackColor = System.Drawing.Color.Transparent;
             this.groupBox4.Controls.Add(this.txtMessage);
             this.groupBox4.Controls.Add(this.txtQuestionIndex);
             this.groupBox4.Controls.Add(this.txtInfo);
@@ -218,6 +216,7 @@ namespace IntelligentTeaching
             // 
             // txtQuestionIndex
             // 
+            this.txtQuestionIndex.BackColor = System.Drawing.Color.White;
             this.txtQuestionIndex.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.txtQuestionIndex, "txtQuestionIndex");
             this.txtQuestionIndex.Name = "txtQuestionIndex";
@@ -225,6 +224,7 @@ namespace IntelligentTeaching
             // 
             // txtInfo
             // 
+            this.txtInfo.BackColor = System.Drawing.Color.White;
             this.txtInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.txtInfo, "txtInfo");
             this.txtInfo.Name = "txtInfo";
@@ -241,6 +241,7 @@ namespace IntelligentTeaching
             // 
             resources.ApplyResources(this.textBox1, "textBox1");
             this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
             // 
             // buttonDown
             // 
@@ -335,6 +336,7 @@ namespace IntelligentTeaching
             // 
             resources.ApplyResources(this.textBox2, "textBox2");
             this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
             // 
             // label4
             // 
@@ -344,7 +346,9 @@ namespace IntelligentTeaching
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.textBox2);
+            this.groupBox5.Controls.Add(this.textBox1);
             this.groupBox5.Controls.Add(this.label4);
+            this.groupBox5.Controls.Add(this.label3);
             resources.ApplyResources(this.groupBox5, "groupBox5");
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
@@ -364,15 +368,13 @@ namespace IntelligentTeaching
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "SGSClient";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SGSClient_FormClosing);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);

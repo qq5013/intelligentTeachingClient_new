@@ -88,17 +88,7 @@ namespace Carbinet
                 dr["epc"] = epc;
             }
         }
-        //public static equipmentPosition getEquipmentInfoNotUsed()
-        //{
-        //    DataRow[] rowsMap = mapConfigsTable.Select("epc = ''");
-        //    if (rowsMap.Length > 0)
-        //    {
-        //        DataRow dr = rowsMap[0];
-        //        equipmentPosition ep = new equipmentPosition((string)dr["EQUIPEMNTID"], (int)dr["IGROUP"], (int)dr["IROW"], (int)dr["ICOLUMN"]);
-        //        return ep;
-        //    }
-        //    return null;
-        //}
+
         #region 获取设备与位置绑定信息
         public static equipmentPosition getEquipmentInfoByEpc(string epc)
         {
@@ -111,7 +101,17 @@ namespace Carbinet
             }
             return null;
         }
-
+        public static equipmentPosition getEquipmentInfoNotUsed()
+        {
+            DataRow[] rowsMap = mapConfigsTable.Select("epc = ''");
+            if (rowsMap.Length > 0)
+            {
+                DataRow dr = rowsMap[0];
+                equipmentPosition ep = new equipmentPosition((string)dr["EQUIPEMNTID"], (int)dr["IGROUP"], (int)dr["IROW"], (int)dr["ICOLUMN"]);
+                return ep;
+            }
+            return null;
+        }
         public static equipmentPosition getEquipmentConfigMapInfoByPos(int group, int row, int column)
         {
             DataRow[] rowsMap = mapConfigsTable.Select(string.Format("IGROUP = {0} and IROW = {1} and ICOLUMN = {2}", group, row, column));
@@ -220,8 +220,8 @@ namespace Carbinet
             for (int i = 0; i < totalCount; i++)
             {
                 DataRow dr = studentInfoTable.Rows[i];
-                Person person = 
-                    new Person((string)dr["STUDENTID"],(string)dr["NAME"],(string)dr["SEX"],(int)dr["AGE"],(string)dr["EMAIL"],(string)dr["CLASS_NAME"],(string)dr["epc"]);
+                Person person =
+                    new Person((string)dr["STUDENTID"], (string)dr["NAME"], (string)dr["SEX"], (int)dr["AGE"], (string)dr["EMAIL"], (string)dr["CLASS_NAME"], (string)dr["epc"]);
                 list.Add(person);
             }
             return JsonConvert.SerializeObject(list);

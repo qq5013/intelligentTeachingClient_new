@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace IntelligentTeaching
+namespace IntelligentTeachingClient
 {
     /*
  * 	[select,主节点地址,子节点地址,rfid卡号,问题序号,子节点的选择]

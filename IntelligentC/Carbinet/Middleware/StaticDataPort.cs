@@ -259,7 +259,7 @@ namespace intelligentMiddleWare
             }
             serverSocket = new Socket(AddressFamily.InterNetwork,
                         SocketType.Dgram, ProtocolType.Udp);
-            IPAddress ip = IPAddress.Parse("127.0.0.1");
+            IPAddress ip = IPAddress.Parse(GetLocalIP4());
             IPEndPoint ipEndPoint = new IPEndPoint(ip, port);
             //Bind this address to the server
             serverSocket.Bind(ipEndPoint);
@@ -343,5 +343,29 @@ namespace intelligentMiddleWare
                 MessageBox.Show("设置串口时出现异常错误！" + ex.Message);
             }
         }
+
+        static string GetLocalIP4()
+        {
+            IPAddress ipAddress = null;
+            IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());
+            for (int i = 0; i < ipHostInfo.AddressList.Length; i++)
+            {
+                ipAddress = ipHostInfo.AddressList[i];
+                if (ipAddress.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    break;
+                }
+                else
+                {
+                    ipAddress = null;
+                }
+            }
+            if (null == ipAddress)
+            {
+                return null;
+            }
+            return ipAddress.ToString();
+        }
+
     }
 }

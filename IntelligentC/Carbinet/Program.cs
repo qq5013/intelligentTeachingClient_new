@@ -33,6 +33,7 @@ namespace Carbinet
             StaticDataPort.openDataPort(5000);//普通的系统数据交互端口
             LoginManager.StartRFID_UDPServer(5001);//读卡器传送数据端口
             LoginManager.StartLogin_UDPServer(5002);//登陆端口
+            LoginManager.start_broadcasting_config(5000, 5002);
 
             Application.Run(frmFloat);
 

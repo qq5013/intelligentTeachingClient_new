@@ -8,17 +8,17 @@ using System.Windows.Forms;
 using System.Net;
 using System.Net.Sockets;
 using System.Diagnostics;
+using MetroFramework.Forms;
 
 
-namespace IntelligentTeaching
+namespace IntelligentTeachingClient
 {
 
-    public partial class SGSClient : Form
+    public partial class SGSClient : MetroForm
     {
         public Socket clientSocket; //The main client socket
         public EndPoint epServer;   //The EndPoint of the server
         public string strName;      //Name by which the user logs into the room
-
         private byte[] byteData = new byte[1024];
 
         int question_index = 1;
@@ -31,6 +31,7 @@ namespace IntelligentTeaching
         {
             InitializeComponent();
             this.initialSocket();
+            this.FormClosing += (sender, e) => { Program.frmLogin.Close(); };
         }
         public SGSClient(string rfid, string equip)
             : this()

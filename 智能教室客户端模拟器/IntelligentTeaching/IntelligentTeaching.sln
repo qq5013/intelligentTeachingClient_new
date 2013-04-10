@@ -2,11 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntelligentTeachingClient", "IntelligentTeachingClient\IntelligentTeachingClient.csproj", "{F8E2E821-E7D9-40B6-A8DB-1FD046585450}"
-	ProjectSection(ProjectDependencies) = postProject
-		{416632B7-CD2B-4D33-8002-8E920894B0B3} = {416632B7-CD2B-4D33-8002-8E920894B0B3}
-	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntelligentTeachingData", "IntelligentTeachingData\IntelligentTeachingData.csproj", "{416632B7-CD2B-4D33-8002-8E920894B0B3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroFramework", "..\..\MetroFramework\MetroFramework.csproj", "{BB41AC8B-CBED-4387-A7E0-4567EDB3F57F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,10 +15,10 @@ Global
 		{F8E2E821-E7D9-40B6-A8DB-1FD046585450}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8E2E821-E7D9-40B6-A8DB-1FD046585450}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8E2E821-E7D9-40B6-A8DB-1FD046585450}.Release|Any CPU.Build.0 = Release|Any CPU
-		{416632B7-CD2B-4D33-8002-8E920894B0B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{416632B7-CD2B-4D33-8002-8E920894B0B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{416632B7-CD2B-4D33-8002-8E920894B0B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{416632B7-CD2B-4D33-8002-8E920894B0B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB41AC8B-CBED-4387-A7E0-4567EDB3F57F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB41AC8B-CBED-4387-A7E0-4567EDB3F57F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB41AC8B-CBED-4387-A7E0-4567EDB3F57F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB41AC8B-CBED-4387-A7E0-4567EDB3F57F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Net;
-using IntelligentTeaching;
+using IntelligentTeachingClient;
 
 namespace IntelligentTeachingClient
 {

@@ -1,0 +1,1 @@
+[{"id_num":"xh001","name":"张三","sex":"男","email":"111","age":11,"bj":"1","epc":"stu000002"},{"id_num":"xh002","name":"李四","sex":"","email":"111","age":1,"bj":"11","epc":"stu000001"}]

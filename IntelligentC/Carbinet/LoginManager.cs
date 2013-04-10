@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace Carbinet
 {
@@ -15,6 +16,20 @@ namespace Carbinet
         static Socket RFID_ServerSocket;
         static Socket Login_ServerSocket;
         static byte[] byteData = new byte[1024];
+        static Timer broadcast_timer = new Timer();
+
+        public static void start_broadcasting_config(int port, int port_login)
+        {
+            broadcast_timer.Interval = 3000;
+            string data = string.Format("[ip,{0},port,{1},port_login,{2}]", GetLocalIP4(), port, port_login);
+            broadcast_timer.Tick += (sender, e) =>
+            {
+                Broadcast(data);
+            };
+            broadcast_timer.Enabled = true;
+        }
+
+
 
         public static void Broadcast(string data)
         {
@@ -57,37 +72,6 @@ namespace Carbinet
         public static void StartRFID_UDPServer(int port)
         {
             RFID_ServerSocket = createUDPServer(port, new AsyncCallback(OnReceiveRFID));
-            //try
-            //{
-            //    //We are using UDP sockets
-            //    serverSocket = new Socket(AddressFamily.InterNetwork,
-            //        SocketType.Dgram, ProtocolType.Udp);
-            //    IPAddress ip = IPAddress.Parse(GetLocalIP4());
-            //    IPEndPoint ipEndPoint = new IPEndPoint(ip, port);
-            //    serverSocket.Bind(ipEndPoint);
-            //    //防止客户端强行中断造成的异常
-            //    long IOC_IN = 0x80000000;
-            //    long IOC_VENDOR = 0x18000000;
-            //    long SIO_UDP_CONNRESET = IOC_IN | IOC_VENDOR | 12;
-
-            //    byte[] optionInValue = { Convert.ToByte(false) };
-            //    byte[] optionOutValue = new byte[4];
-            //    serverSocket.IOControl((int)SIO_UDP_CONNRESET, optionInValue, optionOutValue);
-
-            //    IPEndPoint ipeSender = new IPEndPoint(IPAddress.Any, 0);
-            //    //The epSender identifies the incoming clients
-            //    EndPoint epSender = (EndPoint)ipeSender;
-
-            //    //Start receiving data
-            //    serverSocket.BeginReceiveFrom(byteData, 0, byteData.Length,
-            //        SocketFlags.None, ref epSender, new AsyncCallback(OnReceiveRFID), epSender);
-
-            //    Debug.WriteLine("UDP " + ip.ToString() + ":" + port.ToString() + " Listening...");
-            //}
-            //catch (Exception ex)
-            //{
-            //    Debug.WriteLine("StartUDPServer => " + ex.Message);
-            //}
         }
         static void OnReceiveLoginRequest(IAsyncResult ar)
         {
@@ -117,21 +101,29 @@ namespace Carbinet
                     string epc_match = mc.Groups["epc"].Value;
                     string id_match = mc.Groups["id"].Value;
                     Debug.WriteLine(string.Format("Match => epc = {0}   student ID = {1}", epc_match, id_match));
-                    //查找是否已经读取到卡号
-                    if (epcList.Contains(epc_match))
+                    //根据接收到的id查找绑定的卡号
+                    Person person = MemoryTable.getPersonByID(id_match);
+                    if (person != null)
                     {
-                        Person person = MemoryTable.getPersonByEpc(epc_match);
-                        if (person != null)
+                        string epc = person.epc;
+                        //查找是否已经读取到卡号
+                        if (epcList.Contains(epc))
                         {
-                            strToBroadcast = string.Format("[id,{0},epc,{1}]", person.id_num, epc_match);
+                            string equipmentID = string.Empty;
+                            equipmentPosition ep = MemoryTable.getEquipmentInfoByEpc(epc);
+                            if (ep == null)
+                            {
+                                ep = MemoryTable.getEquipmentInfoNotUsed();
+                            }
+                            if (ep != null)
+                            {
+                                equipmentID = ep.equipmentID;
+                            }
+                            strToBroadcast = string.Format("[id,{0},epc,{1},equipmentID,{2}]", person.id_num, epc, equipmentID);
                             Broadcast(strToBroadcast);
                         }
                     }
                 }
-
-                //先假设接收到的都是卡号
-                //查找学生信息里面有没有该卡号，如果有的话，广播卡号和学号，可以附带未使用的设备号
-                //格式为 [epc,id,equipmentID]
 
                 //Start listening to the message send by the user
                 Login_ServerSocket.BeginReceiveFrom(byteData, 0, byteData.Length, SocketFlags.None, ref epSender,
@@ -166,7 +158,18 @@ namespace Carbinet
                 Person person = MemoryTable.getPersonByEpc(epc);
                 if (person != null)
                 {
-                    strToBroadcast = string.Format("[id,{0},epc,{1}]", person.id_num, epc);
+                    string equipmentID = string.Empty;
+                    equipmentPosition ep = MemoryTable.getEquipmentInfoByEpc(epc);
+                    if (ep == null)
+                    {
+                        ep = MemoryTable.getEquipmentInfoNotUsed();
+                    }
+                    if (ep != null)
+                    {
+                        equipmentID = ep.equipmentID;
+                    }
+                    strToBroadcast = string.Format("[id,{0},epc,{1},equipmentID,{2}]", person.id_num, epc, equipmentID);
+                    //strToBroadcast = string.Format("[id,{0},epc,{1}]", person.id_num, epc);
                     Broadcast(strToBroadcast);
 
                     //Regex regex = new Regex(@"\[(?<epc>\w+),(?<id>\w+)\]");
