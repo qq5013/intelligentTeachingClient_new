@@ -41,7 +41,7 @@
             // textBox1
             // 
             this.textBox1.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.textBox1.Location = new System.Drawing.Point(172, 79);
+            this.textBox1.Location = new System.Drawing.Point(161, 79);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(173, 21);
             this.textBox1.TabIndex = 1;
@@ -49,7 +49,7 @@
             // btnLogin
             // 
             this.btnLogin.Highlight = false;
-            this.btnLogin.Location = new System.Drawing.Point(189, 212);
+            this.btnLogin.Location = new System.Drawing.Point(178, 212);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(129, 28);
             this.btnLogin.Style = MetroFramework.MetroColorStyle.Blue;
@@ -66,7 +66,7 @@
             this.metroLabel1.FontSize = MetroFramework.MetroLabelSize.Medium;
             this.metroLabel1.FontWeight = MetroFramework.MetroLabelWeight.Light;
             this.metroLabel1.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
-            this.metroLabel1.Location = new System.Drawing.Point(101, 79);
+            this.metroLabel1.Location = new System.Drawing.Point(90, 79);
             this.metroLabel1.Name = "metroLabel1";
             this.metroLabel1.Size = new System.Drawing.Size(51, 19);
             this.metroLabel1.Style = MetroFramework.MetroColorStyle.Blue;
@@ -83,7 +83,7 @@
             this.metroLabel2.FontSize = MetroFramework.MetroLabelSize.Medium;
             this.metroLabel2.FontWeight = MetroFramework.MetroLabelWeight.Light;
             this.metroLabel2.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
-            this.metroLabel2.Location = new System.Drawing.Point(101, 112);
+            this.metroLabel2.Location = new System.Drawing.Point(90, 112);
             this.metroLabel2.Name = "metroLabel2";
             this.metroLabel2.Size = new System.Drawing.Size(76, 19);
             this.metroLabel2.Style = MetroFramework.MetroColorStyle.Blue;
@@ -95,11 +95,12 @@
             // 
             // txtIP
             // 
-            this.txtIP.Location = new System.Drawing.Point(172, 112);
+            this.txtIP.Location = new System.Drawing.Point(161, 112);
             this.txtIP.Name = "txtIP";
             this.txtIP.ReadOnly = true;
             this.txtIP.Size = new System.Drawing.Size(111, 21);
             this.txtIP.TabIndex = 5;
+            this.txtIP.TabStop = false;
             // 
             // metroLabel3
             // 
@@ -108,7 +109,7 @@
             this.metroLabel3.FontSize = MetroFramework.MetroLabelSize.Medium;
             this.metroLabel3.FontWeight = MetroFramework.MetroLabelWeight.Light;
             this.metroLabel3.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
-            this.metroLabel3.Location = new System.Drawing.Point(283, 112);
+            this.metroLabel3.Location = new System.Drawing.Point(272, 112);
             this.metroLabel3.Name = "metroLabel3";
             this.metroLabel3.Size = new System.Drawing.Size(12, 19);
             this.metroLabel3.Style = MetroFramework.MetroColorStyle.Blue;
@@ -120,11 +121,12 @@
             // 
             // txtPort
             // 
-            this.txtPort.Location = new System.Drawing.Point(294, 112);
+            this.txtPort.Location = new System.Drawing.Point(283, 112);
             this.txtPort.Name = "txtPort";
             this.txtPort.ReadOnly = true;
             this.txtPort.Size = new System.Drawing.Size(51, 21);
             this.txtPort.TabIndex = 7;
+            this.txtPort.TabStop = false;
             // 
             // lblStatus
             // 
@@ -133,7 +135,7 @@
             this.lblStatus.FontSize = MetroFramework.MetroLabelSize.Medium;
             this.lblStatus.FontWeight = MetroFramework.MetroLabelWeight.Light;
             this.lblStatus.LabelMode = MetroFramework.Controls.MetroLabelMode.Default;
-            this.lblStatus.Location = new System.Drawing.Point(172, 158);
+            this.lblStatus.Location = new System.Drawing.Point(161, 158);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(83, 19);
             this.lblStatus.Style = MetroFramework.MetroColorStyle.Blue;
@@ -161,6 +163,7 @@
             this.Movable = false;
             this.Name = "frmLogin";
             this.Resizable = false;
+            this.Text = "互动教学登陆";
             this.ResumeLayout(false);
             this.PerformLayout();
 

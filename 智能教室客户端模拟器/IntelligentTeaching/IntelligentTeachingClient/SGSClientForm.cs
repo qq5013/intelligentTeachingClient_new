@@ -18,7 +18,6 @@ namespace IntelligentTeachingClient
     {
         public Socket clientSocket; //The main client socket
         public EndPoint epServer;   //The EndPoint of the server
-        public string strName;      //Name by which the user logs into the room
         private byte[] byteData = new byte[1024];
 
         int question_index = 1;
@@ -41,10 +40,8 @@ namespace IntelligentTeachingClient
         }
         private void initialSocket()
         {
-
             try
             {
-
                 //IP address of the server machine
                 IPAddress ipAddress = IPAddress.Parse(GlobalPara.dest_IP);
                 int port = int.Parse(GlobalPara.dest_port);
@@ -53,16 +50,6 @@ namespace IntelligentTeachingClient
                 //Using UDP sockets
                 clientSocket = new Socket(AddressFamily.InterNetwork,
                     SocketType.Dgram, ProtocolType.Udp);
-
-                //this.clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-
-                //IPAddress ipAddress = IPAddress.Parse(this.txtip.Text);
-                //int port = int.Parse(this.txtPort.Text);
-                ////Server is listening on port 1000
-                //IPEndPoint ipEndPoint = new IPEndPoint(ipAddress, port);
-
-                ////Connect to the server
-                //this.clientSocket.BeginConnect(ipEndPoint, new AsyncCallback(OnConnect), null);
             }
             catch (Exception ex)
             {
@@ -152,7 +139,6 @@ namespace IntelligentTeachingClient
             { }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "客户端： " + strName, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -163,26 +149,6 @@ namespace IntelligentTeachingClient
                 clientSocket.EndReceive(ar);
 
                 Data msgReceived = new Data(byteData);
-                //Accordingly process the message received
-                switch (msgReceived.cmdCommand)
-                {
-                    case Command.Login:
-                        //lstChatters.Items.Add(msgReceived.strName);
-                        break;
-
-                    case Command.Logout:
-                        // lstChatters.Items.Remove(msgReceived.strName);
-                        break;
-
-                    case Command.Message:
-                        break;
-
-                    case Command.List:
-                        //lstChatters.Items.AddRange(msgReceived.strMessage.Split('*'));
-                        //lstChatters.Items.RemoveAt(lstChatters.Items.Count - 1);
-                        txtChatBox.Text += strName + " 加入到聊天室\r\n";
-                        break;
-                }
 
                 if (msgReceived.strMessage != null && msgReceived.cmdCommand != Command.List)
                     txtChatBox.Text += msgReceived.strMessage + "\r\n";
@@ -201,7 +167,6 @@ namespace IntelligentTeachingClient
             { }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "客户端： " + strName, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -269,7 +234,6 @@ namespace IntelligentTeachingClient
             { }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "客户端： " + strName, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -369,7 +333,6 @@ namespace IntelligentTeachingClient
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show("无法向服务端发送信息  " + e.Message, "客户端： " + strName, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
 

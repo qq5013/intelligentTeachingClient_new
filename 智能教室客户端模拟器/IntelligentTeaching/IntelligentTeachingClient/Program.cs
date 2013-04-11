@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Diagnostics;
 using IntelligentTeachingClient;
+using MetroFramework;
 
 namespace IntelligentTeachingClient
 {
@@ -26,10 +27,9 @@ namespace IntelligentTeachingClient
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new frmParent());
-            //Application.Run(new SGSClient());
             frmLogin = new frmLogin();
             Application.Run(frmLogin);
+            //Application.Run(new MainForm());
 
 
             //frmParent fp = new frmParent();

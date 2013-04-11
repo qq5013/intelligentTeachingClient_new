@@ -1,4 +1,5 @@
-﻿using MetroFramework.Forms;
+﻿using MetroFramework;
+using MetroFramework.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,6 +34,7 @@ namespace IntelligentTeachingClient
             //开始收听广播
             UDPHelper.StartLogin_UDPServer(15000);
             UDPHelper.handler = this;
+            this.Activate();
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -72,7 +74,8 @@ namespace IntelligentTeachingClient
             Action action = delegate()
             {
                 this.Hide();
-                SGSClient frm = new SGSClient(GlobalPara.client_epc, GlobalPara.equipmentID);
+                //SGSClient frm = new SGSClient(GlobalPara.client_epc, GlobalPara.equipmentID);
+                MainForm frm = new MainForm();
                 frm.Show();
             };
             this.Invoke(action);
